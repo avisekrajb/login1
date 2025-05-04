@@ -1,244 +1,2963 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auth System</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            border-radius: 8px;
-            color: white;
-            font-weight: 500;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transform: translateX(200%);
-            transition: transform 0.3s ease-in-out;
-            z-index: 1000;
-        }
-        
-        .toast.show {
-            transform: translateX(0);
-        }
-        
-        .toast.success {
-            background-color: #10B981;
-        }
-        
-        .toast.error {
-            background-color: #EF4444;
-        }
-        
-        .auth-container {
-            transition: all 0.3s ease;
-        }
-        
-        .hidden {
-            display: none;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Rajbanshi Family Website</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+   rel="stylesheet"
+  />
+  <link
+   href="https://fonts.googleapis.com/css2?family=Jokerman&display=swap"
+   rel="stylesheet"
+  />
+  <link
+   href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap"
+   rel="stylesheet"
+  />
+  <link
+   href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+   rel="stylesheet"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    emailjs.init("_3mBgareTH6uRd8Jz");
+  </script>
+  <style>
+    body {
+     font-family: "Roboto", sans-serif;
+    }
+    #welcomeHeading {
+     font-family: "Jokerman", cursive;
+     text-align: left;
+     margin-left: 0 !important;
+    }
+    #sidebar {
+     transition: transform 0.3s ease-in-out;
+    }
+    #sidebar.closed {
+     transform: translateX(-100%);
+    }
+    /* Toast styles */
+    .toast {
+     position: fixed;
+     top: 20px;
+     right: 20px;
+     padding: 15px 25px;
+     border-radius: 4px;
+     color: white;
+     font-weight: 500;
+     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+     z-index: 1000;
+     transform: translateX(150%);
+     transition: transform 0.3s ease-in-out;
+    }
+    .toast.show {
+     transform: translateX(0);
+    }
+    .toast.success {
+     background-color: #48BB78;
+    }
+    .toast.error {
+     background-color: #F56565;
+    }
+    .toast.info {
+     background-color: #4299E1;
+    }
+    /* Modal styles */
+    .modal {
+     display: none;
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0,0,0,0.5);
+     z-index: 1000;
+     justify-content: center;
+     align-items: center;
+    }
+    .modal-content {
+     background-color: white;
+     padding: 25px;
+     border-radius: 8px;
+     width: 90%;
+     max-width: 400px;
+     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+     position: relative;
+    }
+    .close-modal {
+     position: absolute;
+     top: 10px;
+     right: 10px;
+     background: none;
+     border: none;
+     font-size: 20px;
+     cursor: pointer;
+     color: #666;
+    }
+    .form-group {
+     margin-bottom: 15px;
+    }
+    .form-group label {
+     display: block;
+     margin-bottom: 5px;
+     font-weight: 500;
+     color: #4A5568;
+    }
+    .form-group input {
+     width: 100%;
+     padding: 10px;
+     border: 1px solid #E2E8F0;
+     border-radius: 4px;
+     font-size: 16px;
+    }
+    .form-group input:focus {
+     outline: none;
+     border-color: #667EEA;
+     box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+    }
+    .form-actions {
+     display: flex;
+     justify-content: space-between;
+     margin-top: 20px;
+    }
+    .btn {
+     padding: 10px 20px;
+     border-radius: 4px;
+     font-weight: 500;
+     cursor: pointer;
+     border: none;
+    }
+    .btn-primary {
+     background-color: #667EEA;
+     color: white;
+    }
+    .btn-secondary {
+     background-color: #E2E8F0;
+     color: #4A5568;
+    }
+    .btn-link {
+     background: none;
+     color: #667EEA;
+     text-decoration: underline;
+     padding: 0;
+    }
+    .btn-danger {
+     background-color: #F56565;
+     color: white;
+    }
+    .photo-upload {
+     display: flex;
+     align-items: center;
+     margin-top: 10px;
+    }
+    .photo-preview {
+     width: 50px;
+     height: 50px;
+     border-radius: 50%;
+     object-fit: cover;
+     margin-right: 15px;
+     border: 2px solid #E2E8F0;
+    }
+    /* Profile table */
+    .profile-table {
+     width: 100%;
+     border-collapse: collapse;
+     margin-top: 20px;
+    }
+    .profile-table th, .profile-table td {
+     padding: 12px 15px;
+     text-align: left;
+     border-bottom: 1px solid #E2E8F0;
+    }
+    .profile-table th {
+     background-color: #F7FAFC;
+     font-weight: 600;
+     color: #4A5568;
+    }
+    .profile-table input {
+     width: 100%;
+     padding: 8px;
+     border: 1px solid #E2E8F0;
+     border-radius: 4px;
+    }
+    /* Notification dot */
+    .notification-dot {
+     position: absolute;
+     top: 0;
+     right: 0;
+     width: 12px;
+     height: 12px;
+     background-color: #F56565;
+     border-radius: 50%;
+     border: 2px solid white;
+    }
+    /* Notification modal */
+    .notification-item {
+     padding: 10px;
+     border-bottom: 1px solid #E2E8F0;
+     cursor: pointer;
+    }
+    .notification-item:hover {
+     background-color: #F7FAFC;
+    }
+    .notification-item.unread {
+     background-color: #EBF8FF;
+    }
+    /* Dashboard styles */
+    .dashboard-card {
+     background-color: white;
+     padding: 20px;
+     border-radius: 8px;
+     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+     margin-bottom: 20px;
+    }
+    .dashboard-card h3 {
+     font-size: 18px;
+     font-weight: 600;
+     margin-bottom: 15px;
+     color: #4A5568;
+    }
+    .contacts-modal {
+     max-height: 400px;
+     overflow-y: auto;
+    }
+    /* Dropdown styles */
+    .dropdown-menu {
+     position: absolute;
+     right: 0;
+     top: 100%;
+     margin-top: 10px;
+     background: white;
+     border-radius: 8px;
+     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+     width: 220px;
+     z-index: 100;
+     transform-origin: top right;
+     transform: scale(0.95);
+     opacity: 0;
+     visibility: hidden;
+     transition: all 0.2s ease;
+    }
+    .dropdown-menu.show {
+     transform: scale(1);
+     opacity: 1;
+     visibility: visible;
+    }
+    .dropdown-item {
+     padding: 10px 15px;
+     display: flex;
+     align-items: center;
+     color: #4A5568;
+     transition: all 0.2s;
+    }
+    .dropdown-item:hover {
+     background: #F7FAFC;
+     color: #667EEA;
+    }
+    .dropdown-item i {
+     margin-right: 10px;
+     width: 20px;
+     text-align: center;
+    }
+    .dropdown-divider {
+     height: 1px;
+     background: #E2E8F0;
+     margin: 5px 0;
+    }
+    /* Active sessions */
+    .session-item {
+     display: flex;
+     align-items: center;
+     padding: 10px;
+     border-bottom: 1px solid #E2E8F0;
+    }
+    .session-info {
+     flex: 1;
+    }
+    .session-current {
+     color: #48BB78;
+     font-weight: 600;
+    }
+    /* File size indicator */
+    .file-size {
+     font-size: 12px;
+     color: #718096;
+     margin-top: 5px;
+    }
+    /* Confirmation modal */
+    .confirmation-modal {
+     text-align: center;
+    }
+    .confirmation-buttons {
+     display: flex;
+     justify-content: center;
+     gap: 15px;
+     margin-top: 20px;
+    }
+    /* News section styles */
+    .mini-photo {
+     width: 80px;
+     height: 64px;
+     object-fit: cover;
+     border-radius: 0.125rem;
+     flex-shrink: 0;
+    }
+    .comment-grid {
+     display: grid;
+     grid-template-columns: repeat(3, 1fr);
+     gap: 0.5rem;
+    }
+    .comment-box {
+     padding: 0.5rem;
+     border-radius: 0.375rem;
+     color: #1a202c;
+     font-size: 0.875rem;
+     word-break: break-word;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+    }
+    /* Members section styles */
+    #photoCarousel {
+     scroll-behavior: smooth;
+    }
+    #photoCarousel::-webkit-scrollbar {
+     display: none;
+    }
+    #photoCarousel {
+     -ms-overflow-style: none;
+     scrollbar-width: none;
+    }
+    /* Popup modal */
+    #popupModal {
+     display: none;
+     position: fixed;
+     inset: 0;
+     background-color: rgba(0,0,0,0.5);
+     z-index: 1050;
+     align-items: center;
+     justify-content: center;
+    }
+    #popupModal.show {
+     display: flex;
+    }
+    /* Image slider styles */
+    .mySlides {
+      display: none;
+    }
+    /* Fading animation */
+    .fade {
+      animation-name: fade;
+      animation-duration: 2s;
+    }
+    @keyframes fade {
+      from {
+        opacity: 0.4;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    .mySlides img {
+      width: 800px;
+      height: 400px;
+      object-fit: cover;
+      object-position: center bottom;
+    }
+    @media (max-width: 640px) {
+      .mySlides img {
+        width: 100% !important;
+        height: auto !important;
+        object-position: center bottom;
+      }
+    }
+    .circle-image img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .circle-image:hover img {
+      transform: scale(1.05);
+    }
+    .dot {
+      transition: background-color 0.3s ease;
+    }
+    .dot:hover {
+      background-color: #b91c1c; /* darker red on hover */
+    }
+    /* Calendar styles */
+    .calendar-container {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .calendar-header {
+      background-color: #667EEA;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .calendar-nav {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 5px 10px;
+    }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      background-color: #E2E8F0;
+    }
+    .calendar-day-header {
+      background-color: #F7FAFC;
+      padding: 8px;
+      text-align: center;
+      font-weight: 600;
+      color: #4A5568;
+    }
+    .calendar-day {
+      background-color: white;
+      padding: 8px;
+      min-height: 60px;
+      border: 1px solid #E2E8F0;
+      position: relative;
+    }
+    .calendar-day.empty {
+      background-color: #F7FAFC;
+    }
+    .calendar-day.today {
+      background-color: #EBF8FF;
+      font-weight: bold;
+    }
+    .calendar-day.birthday {
+      background-color: #FEFCBF;
+    }
+    .calendar-day.festival {
+      background-color: #FEB2B2;
+    }
+    .day-number {
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+    .event-indicator {
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 10px;
+    }
+    .birthday-indicator {
+      color: #D69E2E;
+    }
+    .festival-indicator {
+      color: #E53E3E;
+    }
+    /* Birthday table styles */
+    .birthday-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .birthday-table th, .birthday-table td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .birthday-table th {
+      background-color: #F7FAFC;
+      font-weight: 600;
+      color: #4A5568;
+    }
+    /* Download app button */
+    .download-app-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+      color: white;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      margin: 15px 0;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .download-app-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .download-app-btn i {
+      margin-right: 8px;
+      font-size: 18px;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
-    <!-- Toast Notification -->
-    <div id="toast" class="toast hidden"></div>
-    
-    <div class="w-full max-w-md">
-        <!-- Login Form -->
-        <div id="login-container" class="auth-container bg-white rounded-lg shadow-lg overflow-hidden p-8">
-            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
-            <form id="login-form" class="space-y-6">
-                <div>
-                    <label for="login-email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input type="email" id="login-email" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div>
-                    <label for="login-password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                    <input type="password" id="login-password" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <button type="submit"
-                    class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                    Login
-                </button>
-            </form>
-            <p class="mt-4 text-center text-gray-600">
-                Don't have an account? 
-                <button id="show-signup" class="text-blue-600 hover:text-blue-800 font-medium">Sign up</button>
-            </p>
-        </div>
-        
-        <!-- Signup Form -->
-        <div id="signup-container" class="auth-container bg-white rounded-lg shadow-lg overflow-hidden p-8 hidden">
-            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Create Account</h2>
-            <form id="signup-form" class="space-y-4">
-                <div>
-                    <label for="signup-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                    <input type="text" id="signup-name" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div>
-                    <label for="signup-email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input type="email" id="signup-email" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div>
-                    <label for="signup-phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                    <input type="tel" id="signup-phone" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div>
-                    <label for="signup-address" class="block text-sm font-medium text-gray-700 mb-1">Address</label>
-                    <textarea id="signup-address" rows="2" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                </div>
-                <div>
-                    <label for="signup-password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                    <input type="password" id="signup-password" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div>
-                    <label for="signup-confirm-password" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
-                    <input type="password" id="signup-confirm-password" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <button type="submit"
-                    class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
-                    Sign Up
-                </button>
-            </form>
-            <p class="mt-4 text-center text-gray-600">
-                Already have an account? 
-                <button id="show-login" class="text-blue-600 hover:text-blue-800 font-medium">Login</button>
-            </p>
-        </div>
+<body class="flex flex-col min-h-screen bg-gray-50 overflow-x-hidden">
+  <!-- Toast container -->
+  <div id="toastContainer"></div>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+   <div class="modal-content">
+    <button class="close-modal" id="closeLoginModal">&times;</button>
+    <h2 class="text-2xl font-semibold text-indigo-800 mb-6">Login to Your Account</h2>
+    <form id="loginForm">
+     <div class="form-group">
+      <label for="loginEmail">Email</label>
+      <input type="email" id="loginEmail" required placeholder="Enter your email">
+     </div>
+     <div class="form-group">
+      <label for="loginPassword">Password</label>
+      <input type="password" id="loginPassword" required placeholder="Enter your password">
+     </div>
+     <div class="form-actions">
+      <button type="button" class="btn btn-secondary" id="cancelLoginBtn">Cancel</button>
+      <button type="submit" class="btn btn-primary">Login</button>
+     </div>
+     <div class="mt-4 text-center">
+      <span class="text-gray-600">Don't have an account? </span>
+      <button type="button" class="btn-link" id="showSignupBtn">Sign up</button>
+     </div>
+    </form>
+   </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div id="signupModal" class="modal">
+   <div class="modal-content">
+    <button class="close-modal" id="closeSignupModal">&times;</button>
+    <h2 class="text-2xl font-semibold text-indigo-800 mb-6">Create Your Account</h2>
+    <form id="signupForm">
+     <div class="form-group">
+      <label for="signupName">Full Name</label>
+      <input type="text" id="signupName" required placeholder="Enter your full name">
+     </div>
+     <div class="form-group">
+      <label for="signupEmail">Email</label>
+      <input type="email" id="signupEmail" required placeholder="Enter your email">
+     </div>
+     <div class="form-group">
+      <label for="signupPhone">Phone Number</label>
+      <input type="tel" id="signupPhone" placeholder="Enter your phone number">
+     </div>
+     <div class="form-group">
+      <label>Profile Photo (Max 2MB)</label>
+      <div class="photo-upload">
+       <img id="photoPreview" class="photo-preview" src="https://via.placeholder.com/50" alt="Profile preview">
+       <input type="file" id="photoUpload" accept="image/*" style="display: none;">
+       <button type="button" class="btn btn-secondary" id="uploadBtn">Upload Photo</button>
+      </div>
+      <div class="file-size" id="fileSizeInfo"></div>
+     </div>
+     <div class="form-group">
+      <label for="signupPassword">Password</label>
+      <input type="password" id="signupPassword" required placeholder="Create a password">
+     </div>
+     <div class="form-actions">
+      <button type="button" class="btn btn-secondary" id="cancelSignupBtn">Cancel</button>
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+     </div>
+     <div class="mt-4 text-center">
+      <span class="text-gray-600">Already have an account? </span>
+      <button type="button" class="btn-link" id="showLoginBtn">Login</button>
+     </div>
+    </form>
+   </div>
+  </div>
+
+  <!-- Notification Modal -->
+  <div id="notificationModal" class="modal">
+   <div class="modal-content">
+    <button class="close-modal" id="closeNotificationModal">&times;</button>
+    <div class="flex justify-between items-center mb-4">
+     <h2 class="text-2xl font-semibold text-indigo-800">Notifications</h2>
+     <button id="clearNotificationsBtn" class="btn btn-danger">Clear All</button>
     </div>
+    <div id="notificationList" class="max-h-80 overflow-y-auto">
+     <!-- Notifications will be inserted here -->
+    </div>
+   </div>
+  </div>
 
-    <script>
-        // DOM Elements
-        const loginContainer = document.getElementById('login-container');
-        const signupContainer = document.getElementById('signup-container');
-        const showSignupBtn = document.getElementById('show-signup');
-        const showLoginBtn = document.getElementById('show-login');
-        const loginForm = document.getElementById('login-form');
-        const signupForm = document.getElementById('signup-form');
-        const toast = document.getElementById('toast');
+  <!-- Contacts Modal -->
+  <div id="contactsModal" class="modal">
+   <div class="modal-content contacts-modal">
+    <button class="close-modal" id="closeContactsModal">&times;</button>
+    <h2 class="text-2xl font-semibold text-indigo-800 mb-4">Family Contacts</h2>
+    <table class="w-full">
+     <thead>
+      <tr>
+       <th class="text-left py-2">Name</th>
+       <th class="text-left py-2">Phone</th>
+      </tr>
+     </thead>
+     <tbody id="contactsList">
+      <!-- Contacts will be inserted here -->
+     </tbody>
+    </table>
+   </div>
+  </div>
 
-        // Toggle between login and signup forms
-        showSignupBtn.addEventListener('click', () => {
-            loginContainer.classList.add('hidden');
-            signupContainer.classList.remove('hidden');
-        });
+  <!-- Sessions Modal -->
+  <div id="sessionsModal" class="modal">
+   <div class="modal-content">
+    <button class="close-modal" id="closeSessionsModal">&times;</button>
+    <h2 class="text-2xl font-semibold text-indigo-800 mb-4">Active Sessions</h2>
+    <div id="sessionsList" class="max-h-80 overflow-y-auto">
+     <!-- Sessions will be inserted here -->
+    </div>
+    <div class="mt-4">
+     <button id="logoutOtherSessionsBtn" class="btn btn-danger w-full">Logout Other Devices</button>
+    </div>
+   </div>
+  </div>
 
-        showLoginBtn.addEventListener('click', () => {
-            signupContainer.classList.add('hidden');
-            loginContainer.classList.remove('hidden');
-        });
+  <!-- Confirmation Modal -->
+  <div id="confirmationModal" class="modal">
+    <div class="modal-content confirmation-modal">
+      <button class="close-modal" id="closeConfirmationModal">&times;</button>
+      <h2 class="text-2xl font-semibold text-indigo-800 mb-4">Are you sure?</h2>
+      <p>Do you want to logout?</p>
+      <div class="confirmation-buttons">
+        <button id="confirmLogoutBtn" class="btn btn-danger">Yes, Logout</button>
+        <button id="cancelLogoutBtn" class="btn btn-secondary">No, Stay</button>
+      </div>
+    </div>
+  </div>
 
-        // Show toast notification
-        function showToast(message, type = 'success') {
-            toast.textContent = message;
-            toast.className = `toast ${type} show`;
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+  <!-- Member Popup Modal -->
+  <div id="popupModal" class="modal">
+    <div class="modal-content">
+      <button class="close-modal" id="closePopupModal">&times;</button>
+      <h3 id="popupTitle" class="text-xl font-semibold mb-4 text-indigo-800"></h3>
+      <p class="mb-2"><strong>Age:</strong> <span id="popupAge"></span></p>
+      <p class="mb-2"><strong>Phone:</strong> <span id="popupPhone"></span></p>
+      <p class="mb-4"><strong>Email:</strong> <span id="popupEmail"></span></p>
+      <p id="popupBio" class="mb-4 hidden text-gray-700"></p>
+      <button
+        id="readMoreBtn"
+        class="btn btn-primary"
+        onclick="toggleReadMore()"
+      >
+        Read More
+      </button>
+    </div>
+  </div>
+
+  <header
+   class="flex items-center justify-between px-6 py-4 bg-white shadow-md relative z-50"
+  >
+   <div>
+    <h1 class="text-xl font-semibold text-gray-900">Rajbanshi</h1>
+   </div>
+   <div class="flex items-center space-x-4 relative">
+    <div class="text-right -mb-1">
+     <h1 class="text-sm font-semibold text-gray-900" id="headerUserName" title=""></h1>
+    </div>
+    <div
+     aria-expanded="false"
+     aria-haspopup="true"
+     aria-label="User profile menu"
+     class="w-10 h-10 rounded-full overflow-hidden border-2 border-indigo-600 cursor-pointer relative"
+     id="profileBtn"
+     tabindex="0"
+    >
+     <img
+      id="headerProfileImage"
+      alt="Profile picture"
+      class="w-full h-full object-cover"
+      height="64"
+      src="https://via.placeholder.com/64"
+      width="64"
+     />
+     <div id="notificationDot" class="notification-dot" style="display: none;"></div>
+    </div>
+    <div class="dropdown-menu" id="dropdownMenu">
+     <a href="#profileSection" class="dropdown-item" id="profileDropdownBtn" style="display: none;">
+      <i class="fas fa-user"></i> Profile
+     </a>
+     <div class="dropdown-item relative" id="notificationDropdownBtn" style="display: none;">
+      <i class="fas fa-bell"></i> Notifications
+      <span id="notificationCountBadge" class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full" style="display: none;"></span>
+     </div>
+     <a href="#dashboardSection" class="dropdown-item" id="dashboardDropdownBtn" style="display: none;">
+      <i class="fas fa-tachometer-alt"></i> Dashboard
+     </a>
+     <a href="#calendarSection" class="dropdown-item" id="calendarDropdownBtn" style="display: none;">
+      <i class="fas fa-calendar"></i> Calendar
+     </a>
+     <a href="#" class="dropdown-item" id="sessionsDropdownBtn" style="display: none;">
+      <i class="fas fa-laptop"></i> Active Sessions
+     </a>
+     <div class="dropdown-divider"></div>
+     <a href="#" class="dropdown-item text-red-600 hover:text-red-700" id="logoutDropdownBtn" style="display: none;">
+      <i class="fas fa-sign-out-alt"></i> Logout
+     </a>
+     <a href="#" class="dropdown-item" id="loginLink">
+      <i class="fas fa-sign-in-alt"></i> Login
+     </a>
+     <a href="#" class="dropdown-item" id="signupLink">
+      <i class="fas fa-user-plus"></i> Sign Up
+     </a>
+    </div>
+   </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside
+   id="sidebar"
+   class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg border-r border-gray-300 transform -translate-x-full z-50 flex flex-col"
+  >
+   <div class="flex flex-col h-full">
+    <div class="px-6 py-5 border-b border-gray-300 flex items-center justify-between">
+     <h2 class="text-2xl font-bold text-indigo-700 font-jokerman">Rajbanshi</h2>
+     <button
+      id="sidebarCloseBtn"
+      aria-label="Close sidebar"
+      class="text-gray-600 hover:text-indigo-700 focus:outline-none"
+     >
+      <i class="fas fa-times fa-lg"></i>
+     </button>
+    </div>
+    <nav id="sidebarNav" class="flex-grow px-6 py-4 space-y-4 overflow-y-auto">
+     <!-- Links will be inserted here dynamically -->
+    </nav>
+    <div class="px-6 py-4 border-t border-gray-300">
+     <a href="#" class="download-app-btn" id="downloadAppBtn">
+      <i class="fas fa-download"></i>
+      <span>Download App</span>
+     </a>
+     <button
+      id="sidebarAuthLink"
+      class="flex items-center space-x-3 text-red-600 hover:bg-red-600 hover:text-white font-semibold w-full px-4 py-2 rounded"
+      style="display:none"
+     >
+      <i class="fas fa-sign-out-alt fa-lg"></i><span>Logout</span>
+     </button>
+    </div>
+   </div>
+  </aside>
+
+  <nav
+   class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-300 shadow-inner z-40"
+  >
+   <ul class="flex justify-between max-w-md mx-auto px-4">
+    <li>
+     <button
+      aria-label="Show Home section"
+      class="flex flex-col items-center justify-center py-2 text-indigo-600 hover:text-indigo-800 focus:outline-none"
+      data-section="homeSection"
+      type="button"
+     >
+      <i class="fas fa-home fa-lg"></i>
+      <span class="text-xs mt-1 font-medium">Home</span>
+     </button>
+    </li>
+    <li>
+     <button
+      aria-label="Show Events section"
+      class="flex flex-col items-center justify-center py-2 text-gray-600 hover:text-indigo-800 focus:outline-none"
+      data-section="eventsSection"
+      type="button"
+     >
+      <i class="fas fa-calendar-alt fa-lg"></i>
+      <span class="text-xs mt-1 font-medium">Events</span>
+     </button>
+    </li>
+    <li>
+     <button
+      aria-label="Show Members section"
+      class="flex flex-col items-center justify-center py-2 text-gray-600 hover:text-indigo-800 focus:outline-none"
+      data-section="membersSection"
+      type="button"
+     >
+      <i class="fas fa-users fa-lg"></i>
+      <span class="text-xs mt-1 font-medium">Members</span>
+     </button>
+    </li>
+    <li>
+     <button
+      aria-label="Show Dashboard section"
+      class="flex flex-col items-center justify-center py-2 text-gray-600 hover:text-indigo-800 focus:outline-none"
+      data-section="dashboardSection"
+      type="button"
+     >
+      <i class="fas fa-tachometer-alt fa-lg"></i>
+      <span class="text-xs mt-1 font-medium">Dashboard</span>
+     </button>
+    </li>
+    <li>
+     <button
+      aria-label="Open menu"
+      class="flex flex-col items-center justify-center py-2 text-gray-600 hover:text-indigo-800 focus:outline-none"
+      id="menuBtn"
+      type="button"
+     >
+      <i class="fas fa-bars fa-lg"></i>
+      <span class="text-xs mt-1 font-medium">Menu</span>
+     </button>
+    </li>
+   </ul>
+  </nav>
+
+  <main class="flex-grow pt-6 pb-20 px-6 max-w-4xl mx-auto space-y-12">
+    <section class="mb-12" id="homeSection">
+      <h2 class="text-3xl font-bold text-indigo-700 mb-4" id="welcomeHeading">
+        Welcome Guest !!
+      </h2>
+      <!-- Image slider -->
+      <div class="relative h-64 mb-6 overflow-hidden rounded-lg">
+        <div class="slideshow-container h-full">
+          <div class="mySlides fade h-full">
+            <img
+              alt="A warm family gathering in a cozy living room with smiles and laughter"
+              class="w-full h-full"
+              height="400"
+              src="https://storage.googleapis.com/a1aa/image/ff725114-5fb8-46fa-f988-97e7585e5709.jpg"
+              style=""
+              width="800"
+            />
+          </div>
+          <div class="mySlides fade h-full">
+            <img
+              alt="Family enjoying a sunny picnic outdoors with children playing and adults chatting"
+              class="w-full h-full"
+              height="400"
+              src="https://storage.googleapis.com/a1aa/image/d44ef087-3f5c-4477-ddb6-d3a785299083.jpg"
+              style=""
+              width="800"
+            />
+          </div>
+          <div class="mySlides fade h-full">
+            <img
+              alt="Formal family portrait with multiple generations smiling in a garden setting"
+              class="w-full h-full"
+              height="400"
+              src="https://storage.googleapis.com/a1aa/image/a36034d3-3457-4653-511d-dc08e8ce3489.jpg"
+              style=""
+              width="800"
+            />
+          </div>
+          <div class="mySlides fade h-full">
+            <img
+              alt="Family cooking together in a bright kitchen, sharing joyful moments"
+              class="w-full h-full"
+              height="400"
+              src="https://storage.googleapis.com/a1aa/image/f710f90b-93b0-490c-fc09-a06d032fed1c.jpg"
+              style=""
+              width="800"
+            />
+          </div>
+          <div class="mySlides fade h-full">
+            <img
+              alt="Family on vacation at the beach, children building sandcastles and parents relaxing"
+              class="w-full h-full"
+              height="400"
+              src="https://storage.googleapis.com/a1aa/image/6d1d2aee-e03e-4f21-e9f1-ddc856e09f74.jpg"
+              style=""
+              width="800"
+            />
+          </div>
+        </div>
+        <!-- Dots -->
+        <div class="flex justify-center space-x-2 mt-2">
+          <span aria-label="Slide 1" class="dot h-3 w-3 rounded-full bg-red-500 cursor-pointer"></span>
+          <span aria-label="Slide 2" class="dot h-3 w-3 rounded-full bg-red-500 cursor-pointer"></span>
+          <span aria-label="Slide 3" class="dot h-3 w-3 rounded-full bg-red-700 cursor-pointer"></span>
+          <span aria-label="Slide 4" class="dot h-3 w-3 rounded-full bg-red-500 cursor-pointer"></span>
+          <span aria-label="Slide 5" class="dot h-3 w-3 rounded-full bg-red-500 cursor-pointer"></span>
+        </div>
+      </div>
+      <!-- Marquee -->
+      <div class="bg-yellow-200 p-2 mb-6">
+        <marquee behavior="scroll" class="text-lg font-semibold" direction="left" id="marqueeText">
+          Hello family how are you
+        </marquee>
+      </div>
+      <!-- Circle images with first names 4 per row -->
+      <div class="grid grid-cols-4 gap-6 mb-6" style="">
+        <div class="flex flex-col items-center space-y-1">
+          <div class="rounded-full overflow-hidden h-20 w-20 circle-image shadow-lg">
+            <img
+              alt="Portrait of a smiling young woman with long brown hair and green eyes"
+              src="https://storage.googleapis.com/a1aa/image/dbc46861-8019-45a8-95da-25d6581b9329.jpg"
+              style=""
+            />
+          </div>
+          <span class="text-center text-gray-700 font-medium text-sm">Emily</span>
+        </div>
+        <div class="flex flex-col items-center space-y-1">
+          <div class="rounded-full overflow-hidden h-20 w-20 circle-image shadow-lg">
+            <img
+              alt="Portrait of a middle-aged man with glasses and a friendly smile"
+              src="https://storage.googleapis.com/a1aa/image/c30694c7-6765-49a7-18d6-3cbfd7854e04.jpg"
+              style=""
+            />
+          </div>
+          <span class="text-center text-gray-700 font-medium text-sm">Michael</span>
+        </div>
+        <div class="flex flex-col items-center space-y-1">
+          <div class="rounded-full overflow-hidden h-20 w-20 circle-image shadow-lg">
+            <img
+              alt="Portrait of a young boy with curly hair and bright eyes"
+              src="https://storage.googleapis.com/a1aa/image/df09939a-ab25-458a-35a0-0e5ad0679ab7.jpg"
+              style=""
+            />
+          </div>
+          <span class="text-center text-gray-700 font-medium text-sm">Liam</span>
+        </div>
+        <div class="flex flex-col items-center space-y-1">
+          <div class="rounded-full overflow-hidden h-20 w-20 circle-image shadow-lg">
+            <img
+              alt="Portrait of an elderly woman with silver hair and a warm smile"
+              src="https://storage.googleapis.com/a1aa/image/47800ca3-e9a1-4e0e-09be-8c5e2aaf644b.jpg"
+              style=""
+            />
+          </div>
+          <span class="text-center text-gray-700 font-medium text-sm">Grace</span>
+        </div>
+        <div class="flex flex-col items-center space-y-1">
+          <div class="rounded-full overflow-hidden h-20 w-20 circle-image shadow-lg">
+            <img
+              alt="Portrait of a smiling young woman with short black hair and bright eyes"
+              height="200"
+              src="https://storage.googleapis.com/a1aa/image/c193c423-1eca-4edd-9680-1e640d578890.jpg"
+              style=""
+              width="200"
+            />
+          </div>
+          <span class="text-center text-gray-700 font-medium text-sm">Anna</span>
+        </div>
+        <div class="flex flex-col items-center space-y-1">
+          <div class="rounded-full overflow-hidden h-20 w-20 circle-image shadow-lg">
+            <img
+              alt="Portrait of a cheerful man with short brown hair and glasses"
+              height="200"
+              src="https://storage.googleapis.com/a1aa/image/8e74485a-af03-4b79-297f-e63b26ba3e56.jpg"
+              style=""
+              width="200"
+            />
+          </div>
+          <span class="text-center text-gray-700 font-medium text-sm">David</span>
+        </div>
+        <div class="flex flex-col items-center space-y-1">
+          <div class="rounded-full overflow-hidden h-20 w-20 circle-image shadow-lg">
+            <img
+              alt="Portrait of a young girl with blonde hair and blue eyes"
+              height="200"
+              src="https://storage.googleapis.com/a1aa/image/4d6f89d2-b8ae-46af-39b7-571b40721249.jpg"
+              style=""
+              width="200"
+            />
+          </div>
+          <span class="text-center text-gray-700 font-medium text-sm">Sophia</span>
+        </div>
+        <div class="flex flex-col items-center space-y-1">
+          <div class="rounded-full overflow-hidden h-20 w-20 circle-image shadow-lg">
+            <img
+              alt="Portrait of an elderly man with white hair and a kind smile"
+              height="200"
+              src="https://storage.googleapis.com/a1aa/image/982818c7-3393-47e0-2718-507e2fe35387.jpg"
+              style=""
+              width="200"
+            />
+          </div>
+          <span class="text-center text-gray-700 font-medium text-sm">James</span>
+        </div>
+      </div>
+      <!-- Family paragraph with each sentence different color -->
+      <p class="mb-6 text-lg leading-relaxed tracking-wide font-serif" style="">
+        <span class="text-red-600">Family is where life begins and love never ends.</span>
+        <span class="text-green-600">A happy family is but an earlier heaven.</span>
+        <span class="text-blue-600">The love of a family is life's greatest blessing.</span>
+        <span class="text-purple-600">Families are the compass that guides us.</span>
+      </p>
+    </section>
+   
+   <section class="mb-12 hidden" id="profileSection">
+    <h2 class="text-2xl font-semibold text-indigo-700 mb-4">Profile</h2>
+    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+     <div class="flex flex-col items-center mb-6">
+      <img id="profileImage" alt="Profile picture" class="w-32 h-32 rounded-full object-cover border-4 border-indigo-600 mb-4" height="128" src="https://via.placeholder.com/128" width="128" />
+      <button id="changeProfileImageBtn" class="btn btn-secondary">Change Photo</button>
+      <input type="file" id="profileImageUpload" accept="image/*" style="display: none;">
+     </div>
+     
+     <table class="profile-table">
+      <thead>
+       <tr>
+        <th>Field</th>
+        <th>Value</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+        <td>Full Name</td>
+        <td><input type="text" id="profileName" class="editable-field" value=""></td>
+       </tr>
+       <tr>
+        <td>Email</td>
+        <td><input type="email" id="profileEmail" class="editable-field" value=""></td>
+       </tr>
+       <tr>
+        <td>Phone</td>
+        <td><input type="tel" id="profilePhone" class="editable-field" value=""></td>
+       </tr>
+       <tr>
+        <td>Password</td>
+        <td><input type="password" id="profilePassword" class="editable-field" placeholder="Enter new password"></td>
+       </tr>
+      </tbody>
+     </table>
+     
+     <div class="mt-6 flex justify-end">
+      <button id="saveProfileBtn" class="btn btn-primary">Save Changes</button>
+     </div>
+    </div>
+   </section>
+   
+   <section class="mb-12 hidden" id="gallerySection">
+    <h2 class="text-2xl font-semibold text-indigo-700 mb-4">Gallery</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+     <img alt="Family picnic in a sunny park with smiling members sitting on a blanket with food" class="rounded-lg object-cover w-full h-40" height="300" src="https://storage.googleapis.com/a1aa/image/09947c4d-c150-4843-16a7-61fc336ab95b.jpg" width="400" />
+     <img alt="Children playing traditional games outdoors on a bright day with trees in background" class="rounded-lg object-cover w-full h-40" height="300" src="https://storage.googleapis.com/a1aa/image/e5553b7f-ceb9-4989-ec7e-2842dbc9de49.jpg" width="400" />
+     <img alt="Family group photo with multiple generations smiling and posing in a garden" class="rounded-lg object-cover w-full h-40" height="300" src="https://storage.googleapis.com/a1aa/image/3ecc000b-9a7e-499d-559f-6c89d4618f93.jpg" width="400" />
+     <img alt="Cultural festival with family members dressed in traditional attire performing dance" class="rounded-lg object-cover w-full h-40" height="300" src="https://storage.googleapis.com/a1aa/image/cd9b4d6b-cb7e-4589-4107-5009204664fb.jpg" width="400" />
+     <img alt="Family cooking together in a kitchen preparing traditional dishes" class="rounded-lg object-cover w-full h-40" height="300" src="https://storage.googleapis.com/a1aa/image/b1b7ef91-421a-4309-d3b8-a2fe703b93e9.jpg" width="400" />
+     <img alt="Outdoor barbecue party with family members enjoying food and drinks" class="rounded-lg object-cover w-full h-40" height="300" src="https://storage.googleapis.com/a1aa/image/d0fe5862-13ce-4141-040a-549a49e35b82.jpg" width="400" />
+    </div>
+   </section>
+   
+   <section class="mb-12 hidden" id="newsSection">
+    <h2 class="text-2xl font-semibold text-indigo-700 mb-4">News</h2>
+    <ul class="space-y-6 text-gray-700" id="newsList">
+      <li class="bg-white p-4 rounded-lg shadow-md border border-gray-200 relative" data-id="1" style="">
+        <h3 class="font-semibold text-lg text-indigo-800 mb-1 flex justify-between items-start">
+          Family Reunion Recap
+          <img alt="Square mini photo of a joyful family reunion outdoors with multiple generations smiling and interacting" class="mini-photo ml-4" src="https://storage.googleapis.com/a1aa/image/d735fa41-59db-4904-6abb-0c5c66727818.jpg" width="80" height="64">
+        </h3>
+        <p class="text-sm mb-4 text-indigo-600">August 15, 2024</p>
+        <p class="italic font-serif">
+          वार्षिक पारिवारिक भेटघाट ठूलो सफल रह्यो जहाँ ५० भन्दा बढी सदस्यहरू सहभागी भए। मुख्य आकर्षणहरूमा खेलहरू, साझा भोजन, र कथावाचन समावेश थिए।
+        </p>
+        <div class="mt-4 flex space-x-6 text-indigo-600 items-center">
+          <button aria-label="Like" class="like-btn flex items-center space-x-2 hover:text-indigo-800 focus:outline-none cursor-pointer">
+            <i class="fas fa-heart text-gray-600"></i>
+            <span class="text-sm">Like</span>
+            <span class="ml-1 like-count text-sm">0</span>
+          </button>
+          <button aria-label="Comment" class="comment-btn flex items-center space-x-2 hover:text-indigo-800 focus:outline-none cursor-pointer">
+            <i class="fas fa-comment text-gray-600"></i>
+            <span class="text-sm">Comment</span>
+            <span class="ml-1 comment-count text-sm">0</span>
+          </button>
+          <button aria-label="Share" class="share-btn flex items-center space-x-2 hover:text-indigo-800 focus:outline-none cursor-pointer">
+            <i class="fas fa-share text-gray-600"></i>
+            <span class="text-sm">Share</span>
+          </button>
+        </div>
+        <div class="comment-section mt-4 hidden">
+          <textarea rows="3" maxlength="10" class="w-full p-2 border border-gray-300 rounded-md resize-none" placeholder="Write a comment (max 10 chars)"></textarea>
+          <div class="mt-2 flex justify-between items-center">
+            <button class="send-comment-btn bg-indigo-600 text-white px-4 py-1 rounded hover:bg-indigo-700 focus:outline-none">
+              Send
+            </button>
+            <button class="hide-comment-section-btn text-indigo-600 hover:underline focus:outline-none">
+              Hide Comments
+            </button>
+          </div>
+          <ul class="comments-list comment-grid mt-3"></ul>
+        </div>
+      </li>
+
+      <li class="bg-white p-4 rounded-lg shadow-md border border-gray-200 relative" data-id="2">
+        <h3 class="font-semibold text-lg text-indigo-800 mb-1 flex justify-between items-start">
+          Sarah Graduates High School
+          <img alt="Square mini photo of a young woman in graduation cap and gown smiling proudly holding diploma" class="mini-photo ml-4" src="https://storage.googleapis.com/a1aa/image/f8c3af32-6b86-4660-542f-b3c641ef451d.jpg" width="80" height="64">
+        </h3>
+        <p class="text-sm mb-4 text-indigo-600">June 16, 2024</p>
+        <p>
+          Congratulations to Sarah Smith on her graduation! The family celebrated with a party full of music and BBQ.
+        </p>
+        <div class="mt-4 flex space-x-6 text-indigo-600 items-center">
+          <button aria-label="Like" class="like-btn flex items-center space-x-2 hover:text-indigo-800 focus:outline-none cursor-pointer">
+            <i class="fas fa-heart text-gray-600"></i>
+            <span class="text-sm">Like</span>
+            <span class="ml-1 like-count text-sm">0</span>
+          </button>
+          <button aria-label="Comment" class="comment-btn flex items-center space-x-2 hover:text-indigo-800 focus:outline-none cursor-pointer">
+            <i class="fas fa-comment text-gray-600"></i>
+            <span class="text-sm">Comment</span>
+            <span class="ml-1 comment-count text-sm">0</span>
+          </button>
+          <button aria-label="Share" class="share-btn flex items-center space-x-2 hover:text-indigo-800 focus:outline-none cursor-pointer">
+            <i class="fas fa-share text-gray-600"></i>
+            <span class="text-sm">Share</span>
+          </button>
+        </div>
+        <div class="comment-section mt-4 hidden">
+          <textarea rows="3" maxlength="10" class="w-full p-2 border border-gray-300 rounded-md resize-none" placeholder="Write a comment (max 10 chars)"></textarea>
+          <div class="mt-2 flex justify-between items-center">
+            <button class="send-comment-btn bg-indigo-600 text-white px-4 py-1 rounded hover:bg-indigo-700 focus:outline-none">
+              Send
+            </button>
+            <button class="hide-comment-section-btn text-indigo-600 hover:underline focus:outline-none">
+              Hide Comments
+            </button>
+          </div>
+          <ul class="comments-list comment-grid mt-3"></ul>
+        </div>
+      </li>
+
+      <li class="bg-white p-4 rounded-lg shadow-md border border-gray-200 relative" data-id="3">
+        <h3 class="font-semibold text-lg text-indigo-800 mb-1 flex justify-between items-start">
+          Winter Holiday Gathering Plans
+          <img alt="Square mini photo of a cozy winter holiday gathering with people around a fireplace and festive decorations" class="mini-photo ml-4" src="https://storage.googleapis.com/a1aa/image/9e16d1b7-4a06-4aa5-f484-9ee81b9a1e3a.jpg" width="80" height="64">
+        </h3>
+        <p class="text-sm mb-4 text-indigo-600">November 30, 2024</p>
+        <p class="italic font-serif">
+          जाडो छुट्टी के भेला खातिर तैयारी चलि रहल अछि। गरम कोको, गीत गाबय, आर उपहार आदान-प्रदान के उम्मीद राखू।
+        </p>
+        <div class="mt-4 flex space-x-6 text-indigo-600 items-center">
+          <button aria-label="Like" class="like-btn flex items-center space-x-2 hover:text-indigo-800 focus:outline-none cursor-pointer">
+            <i class="fas fa-heart text-gray-600"></i>
+            <span class="text-sm">Like</span>
+            <span class="ml-1 like-count text-sm">0</span>
+          </button>
+          <button aria-label="Comment" class="comment-btn flex items-center space-x-2 hover:text-indigo-800 focus:outline-none cursor-pointer">
+            <i class="fas fa-comment text-gray-600"></i>
+            <span class="text-sm">Comment</span>
+            <span class="ml-1 comment-count text-sm">0</span>
+          </button>
+          <button aria-label="Share" class="share-btn flex items-center space-x-2 hover:text-indigo-800 focus:outline-none cursor-pointer">
+            <i class="fas fa-share text-gray-600"></i>
+            <span class="text-sm">Share</span>
+          </button>
+        </div>
+        <div class="comment-section mt-4 hidden">
+          <textarea rows="3" maxlength="10" class="w-full p-2 border border-gray-300 rounded-md resize-none" placeholder="Write a comment (max 10 chars)"></textarea>
+          <div class="mt-2 flex justify-between items-center">
+            <button class="send-comment-btn bg-indigo-600 text-white px-4 py-1 rounded hover:bg-indigo-700 focus:outline-none">
+              Send
+            </button>
+            <button class="hide-comment-section-btn text-indigo-600 hover:underline focus:outline-none">
+              Hide Comments
+            </button>
+          </div>
+          <ul class="comments-list comment-grid mt-3"></ul>
+        </div>
+      </li>
+    </ul>
+   </section>
+   
+   <section class="mb-12 hidden" id="eventsSection">
+    <h2 class="text-2xl font-semibold text-indigo-700 mb-6">
+        Upcoming Family Events
+       </h2>
+       <ul class="space-y-6 text-gray-700 max-w-3xl mx-auto">
+        <li class="p-6 bg-white rounded-lg shadow-md border border-gray-200">
+         <div class="flex justify-between items-center">
+          <h3 class="font-semibold text-lg text-indigo-800">
+           Annual Family Reunion
+          </h3>
+          <button aria-label="Download Annual Family Reunion details as PDF" class="text-indigo-600 hover:text-indigo-800 focus:outline-none" type="button" onclick="downloadPDF('Annual Family Reunion', 'Date: August 12, 2024', 'Location: Riverside Park, Portland, OR', 'हामीसँग रमाइलो, खाना र पारिवारिक खेलहरूको दिन मनाउन आउनुहोस्! कृपया आफ्नो मनपर्ने परिकार ल्याउनुहोस्।')">
+           <i class="fas fa-download fa-lg"></i>
+          </button>
+         </div>
+         <p class="text-sm mt-1">
+          <i class="fas fa-calendar-alt mr-2 text-indigo-600">
+          </i>
+          Date: August 12, 2024
+         </p>
+         <p class="mt-1">
+          <i class="fas fa-map-marker-alt mr-2 text-indigo-600">
+          </i>
+          Location: Riverside Park, Portland, OR
+         </p>
+         <p class="mt-3 leading-relaxed font-bold">
+          हामीसँग रमाइलो, खाना र पारिवारिक खेलहरूको दिन मनाउन आउनुहोस्! कृपया आफ्नो मनपर्ने परिकार ल्याउनुहोस्।
+         </p>
+        </li>
+        <li class="p-6 bg-white rounded-lg shadow-md border border-gray-200">
+         <div class="flex justify-between items-center">
+          <h3 class="font-semibold text-lg text-indigo-800">
+           Sarah's Graduation Party
+          </h3>
+          <button aria-label="Download Sarah's Graduation Party details as PDF" class="text-indigo-600 hover:text-indigo-800 focus:outline-none" type="button" onclick="downloadPDF('Sarah\'s Graduation Party', 'Date: June 15, 2024', 'Location: Rajbanshi Family Home', 'Celebrate Sarah\'s high school graduation with us! BBQ and music included.')">
+           <i class="fas fa-download fa-lg"></i>
+          </button>
+         </div>
+         <p class="text-sm mt-1">
+          <i class="fas fa-calendar-alt mr-2 text-indigo-600">
+          </i>
+          Date: June 15, 2024
+         </p>
+         <p class="mt-1">
+          <i class="fas fa-map-marker-alt mr-2 text-indigo-600">
+          </i>
+          Location: Rajbanshi Family Home
+         </p>
+         <p class="mt-3 leading-relaxed">
+          Celebrate Sarah's high school graduation with us! BBQ and music included.
+         </p>
+        </li>
+        <li class="p-6 bg-white rounded-lg shadow-md border border-gray-200">
+         <div class="flex justify-between items-center">
+          <h3 class="font-semibold text-lg text-indigo-800">
+           Winter Holiday Gathering
+          </h3>
+          <button aria-label="Download Winter Holiday Gathering details as PDF" class="text-indigo-600 hover:text-indigo-800 focus:outline-none" type="button" onclick="downloadPDF('Winter Holiday Gathering', 'Date: December 20, 2024', 'Location: Community Center Hall', 'A cozy evening with hot cocoa, caroling, and gift exchange. All family members welcome.')">
+           <i class="fas fa-download fa-lg"></i>
+          </button>
+         </div>
+         <p class="text-sm mt-1">
+          <i class="fas fa-calendar-alt mr-2 text-indigo-600">
+          </i>
+          Date: December 20, 2024
+         </p>
+         <p class="mt-1">
+          <i class="fas fa-map-marker-alt mr-2 text-indigo-600">
+          </i>
+          Location: Community Center Hall
+         </p>
+         <p class="mt-3 leading-relaxed">
+          A cozy evening with hot cocoa, caroling, and gift exchange. All family members welcome.
+         </p>
+        </li>
+       </ul>
+      </section>
+   
+   <section class="mb-12 hidden" id="membersSection">
+    <h2 class="text-2xl font-semibold text-indigo-700 mb-4 border-b-4 border-red-600">Family Members</h2>
+    <ul
+      id="photoCarousel"
+      class="flex gap-4 overflow-x-auto scrollbar-thin scrollbar-thumb-indigo-400 scrollbar-track-indigo-100"
+      style="scroll-behavior: smooth;"
+    >
+      <li class="flex-shrink-0 cursor-pointer" tabindex="0" role="button" aria-label="John Smith" onclick="openPopup('John Smith', 45, '555-123-4567', 'john.smith@example.com', 'John is a passionate hiker and gardener who enjoys spending time outdoors with his family.')" onkeydown="if(event.key==='Enter'){openPopup('John Smith', 45, '555-123-4567', 'john.smith@example.com', 'John is a passionate hiker and gardener who enjoys spending time outdoors with his family.')}" >
+        <img
+          alt="Portrait of John Smith, middle-aged man with short brown hair and glasses, wearing a blue shirt"
+          class="w-16 h-16 rounded-full object-cover border-4 border-indigo-600"
+          height="64"
+          src="https://storage.googleapis.com/a1aa/image/24f9c984-0b1b-4589-716e-927044bd226b.jpg"
+          width="64"
+        />
+      </li>
+      <li class="flex-shrink-0 cursor-pointer" tabindex="0" role="button" aria-label="Mary Smith" onclick="openPopup('Mary Smith', 43, '555-234-5678', 'mary.smith@example.com', 'Mary is a talented cook and avid reader who loves sharing stories with her family.')" onkeydown="if(event.key==='Enter'){openPopup('Mary Smith', 43, '555-234-5678', 'mary.smith@example.com', 'Mary is a talented cook and avid reader who loves sharing stories with her family.')}" >
+        <img
+          alt="Portrait of Mary Smith, middle-aged woman with long brown hair, smiling, wearing a red sweater"
+          class="w-16 h-16 rounded-full object-cover border-4 border-indigo-600"
+          height="64"
+          src="https://storage.googleapis.com/a1aa/image/07b68121-bfc4-4c51-70c5-95f549594ab9.jpg"
+          width="64"
+        />
+      </li>
+      <li class="flex-shrink-0 cursor-pointer" tabindex="0" role="button" aria-label="Emily Smith" onclick="openPopup('Emily Smith', 18, '555-345-6789', 'emily.smith@example.com', 'Emily is an artistic soul who enjoys painting and playing music in her free time.')" onkeydown="if(event.key==='Enter'){openPopup('Emily Smith', 18, '555-345-6789', 'emily.smith@example.com', 'Emily is an artistic soul who enjoys painting and playing music in her free time.')}" >
+        <img
+          alt="Portrait of Emily Smith, teenage girl with curly brown hair, smiling, wearing a green shirt"
+          class="w-16 h-16 rounded-full object-cover border-4 border-indigo-600"
+          height="64"
+          src="https://storage.googleapis.com/a1aa/image/ef4c6a7b-da86-4c82-fd9c-2e366ffb9a4f.jpg"
+          width="64"
+        />
+      </li>
+      <li class="flex-shrink-0 cursor-pointer" tabindex="0" role="button" aria-label="Michael Smith" onclick="openPopup('Michael Smith', 16, '555-456-7890', 'michael.smith@example.com', 'Michael is energetic and loves sports and video games.')" onkeydown="if(event.key==='Enter'){openPopup('Michael Smith', 16, '555-456-7890', 'michael.smith@example.com', 'Michael is energetic and loves sports and video games.')}" >
+        <img
+          alt="Portrait of Michael Smith, teenage boy with short dark hair, smiling, wearing a gray hoodie"
+          class="w-16 h-16 rounded-full object-cover border-4 border-indigo-600"
+          height="64"
+          src="https://storage.googleapis.com/a1aa/image/dd3d2e97-975d-45a5-0ac8-70fd4c139fa6.jpg"
+          width="64"
+        />
+      </li>
+      <li class="flex-shrink-0 cursor-pointer" tabindex="0" role="button" aria-label="Sarah Smith" onclick="openPopup('Sarah Smith', 12, '555-567-8901', 'sarah.smith@example.com', 'Sarah enjoys dancing and reading, always full of energy and curiosity.')" onkeydown="if(event.key==='Enter'){openPopup('Sarah Smith', 12, '555-567-8901', 'sarah.smith@example.com', 'Sarah enjoys dancing and reading, always full of energy and curiosity.')}" >
+        <img
+          alt="Portrait of Sarah Smith, young girl with long blonde hair, smiling, wearing a pink shirt"
+          class="w-16 h-16 rounded-full object-cover border-4 border-indigo-600"
+          height="64"
+          src="https://storage.googleapis.com/a1aa/image/0c2f6ae3-6328-4158-fe34-b75695743309.jpg"
+          width="64"
+        />
+      </li>
+      <li class="flex-shrink-0 cursor-pointer" tabindex="0" role="button" aria-label="David Smith" onclick="openPopup('David Smith', 75, '555-678-9012', 'david.smith@example.com', 'David is a skilled woodworker and storyteller who loves sharing family history.')" onkeydown="if(event.key==='Enter'){openPopup('David Smith', 75, '555-678-9012', 'david.smith@example.com', 'David is a skilled woodworker and storyteller who loves sharing family history.')}" >
+        <img
+          alt="Portrait of David Smith, elderly man with white hair and beard, wearing a beige sweater, smiling warmly"
+          class="w-16 h-16 rounded-full object-cover border-4 border-indigo-600"
+          height="64"
+          src="https://storage.googleapis.com/a1aa/image/9bf6bf9f-2758-476c-d900-7c4192977906.jpg"
+          width="64"
+        />
+      </li>
+      <li class="flex-shrink-0 cursor-pointer" tabindex="0" role="button" aria-label="Laura Smith" onclick="openPopup('Laura Smith', 40, '555-789-0123', 'laura.smith@example.com', 'Laura enjoys gardening and photography, capturing beautiful moments.')"
+        onkeydown="if(event.key==='Enter'){openPopup('Laura Smith', 40, '555-789-0123', 'laura.smith@example.com', 'Laura enjoys gardening and photography, capturing beautiful moments.')}"
+      >
+        <img
+          alt="Portrait of Laura Smith, middle-aged woman with shoulder-length blonde hair, smiling, wearing a blue blouse"
+          class="w-16 h-16 rounded-full object-cover border-4 border-indigo-600"
+          height="64"
+          src="https://storage.googleapis.com/a1aa/image/65d682da-5053-4137-b622-29482e3a6ac5.jpg"
+          width="64"
+        />
+      </li>
+      <li class="flex-shrink-0 cursor-pointer" tabindex="0" role="button" aria-label="James Smith" onclick="openPopup('James Smith', 10, '555-890-1234', 'james.smith@example.com', 'James is a curious and playful boy who loves sports and cartoons.')" onkeydown="if(event.key==='Enter'){openPopup('James Smith', 10, '555-890-1234', 'james.smith@example.com', 'James is a curious and playful boy who loves sports and cartoons.')}" >
+        <img
+          alt="Portrait of James Smith, young boy with short brown hair, smiling, wearing a yellow t-shirt"
+          class="w-16 h-16 rounded-full object-cover border-4 border-indigo-600"
+          height="64"
+          src="https://storage.googleapis.com/a1aa/image/363faf8b-bb58-48d1-6743-28ecf53419b6.jpg"
+          width="64"
+        />
+      </li>
+    </ul>
+    
+    <ul class="space-y-6 text-gray-700 mt-8">
+      <li class="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-md border border-gray-200 border-b-2 border-b-indigo-600 cursor-pointer"
+        onclick="openPopup('John Smith', 45, '555-123-4567', 'john.smith@example.com', 'John is a passionate hiker and gardener who enjoys spending time outdoors with his family.')"
+        role="button"
+        tabindex="0"
+        onkeydown="if(event.key==='Enter'){openPopup('John Smith', 45, '555-123-4567', 'john.smith@example.com', 'John is a passionate hiker and gardener who enjoys spending time outdoors with his family.')}"
+      >
+        <img
+          alt="Portrait of John Smith, middle-aged man with short brown hair and glasses, wearing a blue shirt"
+          class="w-16 h-16 rounded-full object-cover border-2 border-indigo-600"
+          height="64"
+          src="https://storage.googleapis.com/a1aa/image/24f9c984-0b1b-4589-716e-927044bd226b.jpg"
+          width="64"
+        />
+        <div>
+          <h3 class="font-semibold text-lg text-indigo-800">John Smith</h3>
+          <p>Father, loves hiking and gardening.</p>
+        </div>
+      </li>
+      <li class="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-md border border-gray-200 border-b-2 border-b-indigo-600">
+        <img
+          alt="Portrait of Mary Smith, middle-aged woman with long brown hair, smiling, wearing a red sweater"
+          class="w-16 h-16 rounded-full object-cover border-2 border-indigo-600"
+          height="64"
+          src="https://storage.googleapis.com/a1aa/image/07b68121-bfc4-4c51-70c5-95f549594ab9.jpg"
+          width="64"
+        />
+        <div>
+          <h3 class="font-semibold text-lg text-indigo-800">Mary Smith</h3>
+          <p>Mother, passionate about cooking and reading.</p>
+        </div>
+      </li>
+      <li class="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-md border border-gray-200 border-b-2 border-b-indigo-600">
+        <img
+          alt="Portrait of Emily Smith, teenage girl with curly brown hair, smiling, wearing a green shirt"
+          class="w-16 h-16 rounded-full object-cover border-2 border-indigo-600"
+          height="64"
+          src="https://storage.googleapis.com/a1aa/image/ef4c6a7b-da86-4c82-fd9c-2e366ffb9a4f.jpg"
+          width="64"
+        />
+        <div>
+          <h3 class="font-semibold text-lg text-indigo-800">Emily Smith</h3>
+          <p>Oldest daughter, enjoys painting and music.</p>
+        </div>
+      </li>
+      <li class="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-md border border-gray-200 border-b-2 border-b-indigo-600">
+        <img
+          alt="Portrait of Michael Smith, teenage boy with short dark hair, smiling, wearing a gray hoodie"
+          class="w-16 h-16 rounded-full object-cover border-2 border-indigo-600"
+          height="64"
+          src="https://storage.googleapis.com/a1aa/image/dd3d2e97-975d-45a5-0ac8-70fd4c139fa6.jpg"
+          width="64"
+        />
+        <div>
+          <h3 class="font-semibold text-lg text-indigo-800">Michael Smith</h3>
+          <p>Middle child, loves sports and video games.</p>
+        </div>
+      </li>
+      <li class="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-md border border-gray-200 border-b-2 border-b-indigo-600">
+        <img
+          alt="Portrait of Sarah Smith, young girl with long blonde hair, smiling, wearing a pink shirt"
+          class="w-16 h-16 rounded-full object-cover border-2 border-indigo-600"
+          height="64"
+          src="https://storage.googleapis.com/a1aa/image/0c2f6ae3-6328-4158-fe34-b75695743309.jpg"
+          width="64"
+        />
+        <div>
+          <h3 class="font-semibold text-lg text-indigo-800">Sarah Smith</h3>
+          <p>Youngest daughter, enjoys dancing and reading.</p>
+        </div>
+      </li>
+      <li class="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-md border border-gray-200">
+        <img
+          alt="Portrait of David Smith, elderly man with white hair and beard, wearing a beige sweater, smiling warmly"
+          class="w-16 h-16 rounded-full object-cover border-2 border-indigo-600"
+          height="64"
+          src="https://storage.googleapis.com/a1aa/image/9bf6bf9f-2758-476c-d900-7c4192977906.jpg"
+          width="64"
+        />
+        <div>
+          <h3 class="font-semibold text-lg text-indigo-800">David Smith</h3>
+          <p>Grandfather, enjoys woodworking and storytelling.</p>
+        </div>
+      </li>
+    </ul>
+   </section>
+   
+   <section class="mb-12 hidden" id="dashboardSection">
+    <h2 class="text-2xl font-semibold text-indigo-700 mb-4">Dashboard</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+     <div class="dashboard-card">
+      <h3>Family Statistics</h3>
+      <div class="space-y-4">
+       <div>
+        <p class="text-gray-600">Total Members</p>
+        <p class="text-3xl font-bold text-indigo-700" id="totalMembersCount">5</p>
+       </div>
+       <button id="viewContactsBtn" class="btn btn-primary w-full">View Contacts</button>
+       <button id="viewSessionsBtn" class="btn btn-secondary w-full">View Active Sessions</button>
+      </div>
+     </div>
+     <div class="dashboard-card">
+      <h3>Recent Activity</h3>
+      <ul class="space-y-3">
+       <li class="flex items-center">
+        <div class="bg-indigo-100 p-2 rounded-full mr-3">
+         <i class="fas fa-calendar-check text-indigo-600"></i>
+        </div>
+        <div>
+         <p class="font-medium">Family Reunion</p>
+         <p class="text-sm text-gray-500">August 12, 2024</p>
+        </div>
+       </li>
+       <li class="flex items-center">
+        <div class="bg-indigo-100 p-2 rounded-full mr-3">
+         <i class="fas fa-graduation-cap text-indigo-600"></i>
+        </div>
+        <div>
+         <p class="font-medium">Sarah's Graduation</p>
+         <p class="text-sm text-gray-500">June 15, 2024</p>
+        </div>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </section>
+   
+   <section class="mb-12 hidden" id="calendarSection">
+    <h2 class="text-2xl font-semibold text-indigo-700 mb-4">Family Calendar</h2>
+    
+    <div class="calendar-container">
+      <div class="calendar-header">
+        <button id="prevMonth" class="calendar-nav"><i class="fas fa-chevron-left"></i></button>
+        <h3 id="currentMonthYear">Month Year</h3>
+        <button id="nextMonth" class="calendar-nav"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <div class="calendar-grid" id="calendarDaysHeader">
+        <div class="calendar-day-header">Sun</div>
+        <div class="calendar-day-header">Mon</div>
+        <div class="calendar-day-header">Tue</div>
+        <div class="calendar-day-header">Wed</div>
+        <div class="calendar-day-header">Thu</div>
+        <div class="calendar-day-header">Fri</div>
+        <div class="calendar-day-header">Sat</div>
+      </div>
+      <div class="calendar-grid" id="calendarDays">
+        <!-- Calendar days will be inserted here -->
+      </div>
+    </div>
+    
+    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 mt-6">
+      <h3 class="text-xl font-semibold text-indigo-800 mb-4">Birthdays & Anniversaries</h3>
+      <table class="birthday-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>Phone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John Smith</td>
+            <td>May 15</td>
+            <td>555-123-4567</td>
+          </tr>
+          <tr>
+            <td>Mary Smith</td>
+            <td>October 22</td>
+            <td>555-234-5678</td>
+          </tr>
+          <tr>
+            <td>Emily Smith</td>
+            <td>March 5</td>
+            <td>555-345-6789</td>
+          </tr>
+          <tr>
+            <td>Michael Smith</td>
+            <td>July 30</td>
+            <td>555-456-7890</td>
+          </tr>
+          <tr>
+            <td>Sarah Smith</td>
+            <td>December 10</td>
+            <td>555-567-8901</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+   </section>
+  </main>
+
+  <script>
+   // DOM Elements
+   const profileBtn = document.getElementById("profileBtn");
+   const dropdownMenu = document.getElementById("dropdownMenu");
+   const menuBtn = document.getElementById("menuBtn");
+   const sidebar = document.getElementById("sidebar");
+   const sidebarCloseBtn = document.getElementById("sidebarCloseBtn");
+   const sidebarNav = document.getElementById("sidebarNav");
+   const sidebarAuthLink = document.getElementById("sidebarAuthLink");
+   const loginLink = document.getElementById("loginLink");
+   const signupLink = document.getElementById("signupLink");
+   const loginModal = document.getElementById("loginModal");
+   const signupModal = document.getElementById("signupModal");
+   const cancelLoginBtn = document.getElementById("cancelLoginBtn");
+   const cancelSignupBtn = document.getElementById("cancelSignupBtn");
+   const showSignupBtn = document.getElementById("showSignupBtn");
+   const showLoginBtn = document.getElementById("showLoginBtn");
+   const loginForm = document.getElementById("loginForm");
+   const signupForm = document.getElementById("signupForm");
+   const uploadBtn = document.getElementById("uploadBtn");
+   const photoUpload = document.getElementById("photoUpload");
+   const photoPreview = document.getElementById("photoPreview");
+   const fileSizeInfo = document.getElementById("fileSizeInfo");
+   const toastContainer = document.getElementById("toastContainer");
+   const notificationModal = document.getElementById("notificationModal");
+   const notificationList = document.getElementById("notificationList");
+   const clearNotificationsBtn = document.getElementById("clearNotificationsBtn");
+   const notificationDot = document.getElementById("notificationDot");
+   const notificationCountBadge = document.getElementById("notificationCountBadge");
+   const headerProfileImage = document.getElementById("headerProfileImage");
+   const headerUserName = document.getElementById("headerUserName");
+   const profileDropdownBtn = document.getElementById("profileDropdownBtn");
+   const notificationDropdownBtn = document.getElementById("notificationDropdownBtn");
+   const dashboardDropdownBtn = document.getElementById("dashboardDropdownBtn");
+   const calendarDropdownBtn = document.getElementById("calendarDropdownBtn");
+   const sessionsDropdownBtn = document.getElementById("sessionsDropdownBtn");
+   const logoutDropdownBtn = document.getElementById("logoutDropdownBtn");
+   const profileImage = document.getElementById("profileImage");
+   const changeProfileImageBtn = document.getElementById("changeProfileImageBtn");
+   const profileImageUpload = document.getElementById("profileImageUpload");
+   const profileName = document.getElementById("profileName");
+   const profileEmail = document.getElementById("profileEmail");
+   const profilePhone = document.getElementById("profilePhone");
+   const profilePassword = document.getElementById("profilePassword");
+   const saveProfileBtn = document.getElementById("saveProfileBtn");
+   const contactsModal = document.getElementById("contactsModal");
+   const contactsList = document.getElementById("contactsList");
+   const viewContactsBtn = document.getElementById("viewContactsBtn");
+   const sessionsModal = document.getElementById("sessionsModal");
+   const sessionsList = document.getElementById("sessionsList");
+   const viewSessionsBtn = document.getElementById("viewSessionsBtn");
+   const logoutOtherSessionsBtn = document.getElementById("logoutOtherSessionsBtn");
+   const totalMembersCount = document.getElementById("totalMembersCount");
+   const closeLoginModal = document.getElementById("closeLoginModal");
+   const closeSignupModal = document.getElementById("closeSignupModal");
+   const closeNotificationModal = document.getElementById("closeNotificationModal");
+   const closeContactsModal = document.getElementById("closeContactsModal");
+   const closeSessionsModal = document.getElementById("closeSessionsModal");
+   const confirmationModal = document.getElementById("confirmationModal");
+   const confirmLogoutBtn = document.getElementById("confirmLogoutBtn");
+   const cancelLogoutBtn = document.getElementById("cancelLogoutBtn");
+   const closeConfirmationModal = document.getElementById("closeConfirmationModal");
+   const popupModal = document.getElementById("popupModal");
+   const closePopupModal = document.getElementById("closePopupModal");
+   const marqueeText = document.getElementById("marqueeText");
+   const downloadAppBtn = document.getElementById("downloadAppBtn");
+   const prevMonthBtn = document.getElementById("prevMonth");
+   const nextMonthBtn = document.getElementById("nextMonth");
+   const currentMonthYear = document.getElementById("currentMonthYear");
+   const calendarDays = document.getElementById("calendarDays");
+
+   // Constants
+   const USER_DATA_KEY = 'rajbanshi_user_data';
+   const USERS_KEY = 'rajbanshi_users';
+   const NOTIFICATIONS_KEY = 'rajbanshi_notifications';
+   const SESSIONS_KEY = 'rajbanshi_sessions';
+   const SESSION_EXPIRY_DAYS = 150;
+   const MAX_NAME_DISPLAY_LENGTH = 8;
+   const MAX_FILE_SIZE_MB = 2; // 2MB max file size
+   const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+
+   // State
+   let currentUser = null;
+   let notifications = [];
+   let sessions = [];
+   let isLoggedIn = false;
+   let currentSessionId = null;
+   let currentDate = new Date();
+   let currentMonth = currentDate.getMonth();
+   let currentYear = currentDate.getFullYear();
+   
+   // Family data
+   const familyMembers = [
+     { name: "John Smith", dob: "05-15", phone: "555-123-4567" },
+     { name: "Mary Smith", dob: "10-22", phone: "555-234-5678" },
+     { name: "Emily Smith", dob: "03-05", phone: "555-345-6789" },
+     { name: "Michael Smith", dob: "07-30", phone: "555-456-7890" },
+     { name: "Sarah Smith", dob: "12-10", phone: "555-567-8901" }
+   ];
+   
+   const festivals = [
+     { name: "Dashain", date: "10-05" }, // Example date - should be actual festival date
+     { name: "Tihar", date: "10-20" },   // Example date
+     { name: "New Year", date: "01-01" }
+   ];
+
+   // Initialize the app
+   function initApp() {
+    loadUserData();
+    loadUsers();
+    loadNotifications();
+    loadSessions();
+    renderSidebarLinks();
+    updateAuthUI();
+    showSection("homeSection");
+    checkSession();
+    setupEventListeners();
+    setupNewsSection();
+    setupMembersSection();
+    showSlides(); // Initialize the slideshow
+    generateCalendar(currentMonth, currentYear);
+    checkSpecialDates();
+   }
+
+   // Image slideshow functionality
+   let slideIndex = 0;
+   function showSlides() {
+     let i;
+     let slides = document.getElementsByClassName("mySlides");
+     let dots = document.getElementsByClassName("dot");
+     for (i = 0; i < slides.length; i++) {
+       slides[i].style.display = "none";  
+     }
+     slideIndex++;
+     if (slideIndex > slides.length) {slideIndex = 1}    
+     for (i = 0; i < dots.length; i++) {
+       dots[i].className = dots[i].className.replace(" bg-red-700", "");
+     }
+     slides[slideIndex-1].style.display = "block";  
+     dots[slideIndex-1].className += " bg-red-700";
+     setTimeout(showSlides, 2000); // Change image every 2 seconds
+   }
+
+   // Calendar functions
+   function generateCalendar(month, year) {
+     // Clear previous calendar
+     calendarDays.innerHTML = '';
+     
+     // Set the month and year in the header
+     const monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+     currentMonthYear.textContent = `${monthNames[month]} ${year}`;
+     
+     // Get the first day of the month and total days in month
+     const firstDay = new Date(year, month, 1).getDay();
+     const daysInMonth = new Date(year, month + 1, 0).getDate();
+     
+     // Get today's date for comparison
+     const today = new Date();
+     const isCurrentMonth = month === today.getMonth() && year === today.getFullYear();
+     
+     // Create empty cells for days before the first day of the month
+     for (let i = 0; i < firstDay; i++) {
+       const emptyDay = document.createElement('div');
+       emptyDay.className = 'calendar-day empty';
+       calendarDays.appendChild(emptyDay);
+     }
+     
+     // Create cells for each day of the month
+     for (let day = 1; day <= daysInMonth; day++) {
+       const dayElement = document.createElement('div');
+       dayElement.className = 'calendar-day';
+       
+       // Check if this is today
+       if (isCurrentMonth && day === today.getDate()) {
+         dayElement.classList.add('today');
+       }
+       
+       // Format day as MM-DD for comparison
+       const formattedDay = `${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+       
+       // Check for birthdays
+       const birthdayMember = familyMembers.find(member => member.dob === formattedDay);
+       if (birthdayMember) {
+         dayElement.classList.add('birthday');
+       }
+       
+       // Check for festivals
+       const festival = festivals.find(fest => fest.date === formattedDay);
+       if (festival) {
+         dayElement.classList.add('festival');
+       }
+       
+       // Add day number
+       const dayNumber = document.createElement('div');
+       dayNumber.className = 'day-number';
+       dayNumber.textContent = day;
+       dayElement.appendChild(dayNumber);
+       
+       // Add event indicators
+       if (birthdayMember || festival) {
+         const eventIndicator = document.createElement('div');
+         eventIndicator.className = 'event-indicator';
+         
+         if (birthdayMember) {
+           const birthdayIndicator = document.createElement('span');
+           birthdayIndicator.className = 'birthday-indicator';
+           birthdayIndicator.innerHTML = '<i class="fas fa-birthday-cake"></i>';
+           eventIndicator.appendChild(birthdayIndicator);
+         }
+         
+         if (festival) {
+           const festivalIndicator = document.createElement('span');
+           festivalIndicator.className = 'festival-indicator';
+           festivalIndicator.innerHTML = '<i class="fas fa-star"></i>';
+           eventIndicator.appendChild(festivalIndicator);
+         }
+         
+         dayElement.appendChild(eventIndicator);
+       }
+       
+       calendarDays.appendChild(dayElement);
+     }
+   }
+   
+   function navigateMonth(direction) {
+     if (direction === 'prev') {
+       currentMonth--;
+       if (currentMonth < 0) {
+         currentMonth = 11;
+         currentYear--;
+       }
+     } else {
+       currentMonth++;
+       if (currentMonth > 11) {
+         currentMonth = 0;
+         currentYear++;
+       }
+     }
+     generateCalendar(currentMonth, currentYear);
+   }
+   
+   function checkSpecialDates() {
+     const today = new Date();
+     const formattedToday = `${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+     
+     // Check for birthdays
+     const birthdayMember = familyMembers.find(member => member.dob === formattedToday);
+     if (birthdayMember) {
+       marqueeText.textContent = `Happy Birthday ${birthdayMember.name}! Wishing you a wonderful day!`;
+       marqueeText.parentElement.classList.add('bg-pink-200');
+       addNotification(`Today is ${birthdayMember.name}'s birthday!`, 'info');
+     }
+     
+     // Check for festivals
+     const festivalToday = festivals.find(fest => fest.date === formattedToday);
+     if (festivalToday) {
+       marqueeText.textContent = `Happy ${festivalToday.name} to all family members!`;
+       marqueeText.parentElement.classList.add('bg-green-200');
+       addNotification(`Happy ${festivalToday.name} to all family members!`, 'info');
+     }
+     
+     // Reset marquee after 24 hours
+     setTimeout(() => {
+       marqueeText.textContent = "Hello family how are you";
+       marqueeText.parentElement.classList.remove('bg-pink-200', 'bg-green-200');
+     }, 24 * 60 * 60 * 1000);
+   }
+
+   // Load user data from storage
+   function loadUserData() {
+    const userData = localStorage.getItem(USER_DATA_KEY);
+    if (userData) {
+     currentUser = JSON.parse(userData);
+     isLoggedIn = true;
+    }
+   }
+
+   // Load all users from storage
+   function loadUsers() {
+    return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+   }
+
+   // Save all users to storage
+   function saveUsers(users) {
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+   }
+
+   // Save user data to storage
+   function saveUserData() {
+    if (currentUser) {
+     localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
+     // Set cookie for session management (150 days expiry)
+     const expiryDate = new Date();
+     expiryDate.setDate(expiryDate.getDate() + SESSION_EXPIRY_DAYS);
+     document.cookie = `rajbanshi_user_session=true; expires=${expiryDate.toUTCString()}; path=/`;
+     
+     // Create or update session
+     createOrUpdateSession();
+    }
+   }
+
+   // Load notifications from storage
+   function loadNotifications() {
+    const storedNotifications = localStorage.getItem(NOTIFICATIONS_KEY);
+    if (storedNotifications) {
+     notifications = JSON.parse(storedNotifications);
+     updateNotificationBadge();
+    }
+   }
+
+   // Save notifications to storage
+   function saveNotifications() {
+    localStorage.setItem(NOTIFICATIONS_KEY, JSON.stringify(notifications));
+    updateNotificationBadge();
+   }
+
+   // Load sessions from storage
+   function loadSessions() {
+    const storedSessions = localStorage.getItem(SESSIONS_KEY);
+    if (storedSessions) {
+     sessions = JSON.parse(storedSessions);
+    }
+   }
+
+   // Save sessions to storage
+   function saveSessions() {
+    localStorage.setItem(SESSIONS_KEY, JSON.stringify(sessions));
+   }
+
+   // Create or update session
+   function createOrUpdateSession() {
+    if (!currentUser) return;
+    
+    // Generate a unique session ID
+    if (!currentSessionId) {
+     currentSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    }
+    
+    // Get device info
+    const deviceInfo = {
+     userAgent: navigator.userAgent,
+     platform: navigator.platform,
+     screenWidth: window.screen.width,
+     screenHeight: window.screen.height,
+     ip: 'unknown' // In a real app, you would get this from the server
+    };
+    
+    // Create new session or update existing one
+    const existingSessionIndex = sessions.findIndex(s => s.id === currentSessionId && s.userEmail === currentUser.email);
+    
+    if (existingSessionIndex >= 0) {
+     // Update existing session
+     sessions[existingSessionIndex] = {
+      ...sessions[existingSessionIndex],
+      lastActive: new Date().toISOString(),
+      isCurrent: true
+     };
+    } else {
+     // Create new session
+     sessions.push({
+      id: currentSessionId,
+      userEmail: currentUser.email,
+      deviceInfo,
+      createdAt: new Date().toISOString(),
+      lastActive: new Date().toISOString(),
+      isCurrent: true
+     });
+    }
+    
+    // Mark other sessions as not current
+    sessions.forEach(session => {
+     if (session.id !== currentSessionId && session.userEmail === currentUser.email) {
+      session.isCurrent = false;
+     }
+    });
+    
+    saveSessions();
+   }
+
+   // Add a new notification
+   function addNotification(message, type = 'info') {
+    const newNotification = {
+     id: Date.now(),
+     message,
+     type,
+     timestamp: new Date().toISOString(),
+     read: false
+    };
+    notifications.unshift(newNotification);
+    saveNotifications();
+   }
+
+   // Mark notification as read
+   function markNotificationAsRead(id) {
+    const notification = notifications.find(n => n.id === id);
+    if (notification && !notification.read) {
+     notification.read = true;
+     saveNotifications();
+    }
+   }
+
+   // Clear all notifications
+   function clearNotifications() {
+    notifications = [];
+    saveNotifications();
+    renderNotifications();
+   }
+
+   // Update notification badge
+   function updateNotificationBadge() {
+    const unreadCount = notifications.filter(n => !n.read).length;
+    if (unreadCount > 0) {
+     notificationDot.style.display = 'block';
+     notificationCountBadge.textContent = unreadCount;
+     notificationCountBadge.style.display = 'inline-block';
+    } else {
+     notificationDot.style.display = 'none';
+     notificationCountBadge.style.display = 'none';
+    }
+   }
+
+   // Render notifications
+   function renderNotifications() {
+    notificationList.innerHTML = '';
+    if (notifications.length === 0) {
+     notificationList.innerHTML = '<p class="text-gray-500 text-center py-4">No notifications</p>';
+     return;
+    }
+    
+    notifications.forEach(notification => {
+     const notificationItem = document.createElement('div');
+     notificationItem.className = `notification-item ${!notification.read ? 'unread' : ''}`;
+     notificationItem.innerHTML = `
+      <p class="font-medium">${notification.message}</p>
+      <p class="text-sm text-gray-500">${new Date(notification.timestamp).toLocaleString()}</p>
+     `;
+     notificationItem.addEventListener('click', () => {
+      markNotificationAsRead(notification.id);
+      renderNotifications();
+     });
+     notificationList.appendChild(notificationItem);
+    });
+   }
+
+   // Render active sessions
+   function renderSessions() {
+    sessionsList.innerHTML = '';
+    if (!currentUser) return;
+    
+    const userSessions = sessions.filter(s => s.userEmail === currentUser.email);
+    
+    if (userSessions.length === 0) {
+     sessionsList.innerHTML = '<p class="text-gray-500 text-center py-4">No active sessions</p>';
+     return;
+    }
+    
+    userSessions.forEach(session => {
+     const sessionItem = document.createElement('div');
+     sessionItem.className = 'session-item';
+     
+     const deviceType = session.deviceInfo.userAgent.includes('Mobile') ? 'Mobile' : 'Desktop';
+     const isCurrent = session.id === currentSessionId;
+     
+     sessionItem.innerHTML = `
+      <div class="session-info">
+       <p class="${isCurrent ? 'session-current' : ''}">${deviceType} Device</p>
+       <p class="text-sm text-gray-500">Last active: ${new Date(session.lastActive).toLocaleString()}</p>
+      </div>
+      ${isCurrent ? '<span class="text-green-500 text-sm">Current</span>' : ''}
+     `;
+     
+     sessionsList.appendChild(sessionItem);
+    });
+   }
+
+   // Logout from other devices
+   function logoutOtherDevices() {
+    if (!currentUser) return;
+    
+    sessions = sessions.filter(s => s.id === currentSessionId || s.userEmail !== currentUser.email);
+    saveSessions();
+    renderSessions();
+    showToast("Logged out from other devices", "success");
+   }
+
+   // Check session
+   function checkSession() {
+    const cookies = document.cookie.split(';');
+    const sessionCookie = cookies.find(c => c.trim().startsWith('rajbanshi_user_session='));
+    if (sessionCookie) {
+     // Session exists
+     if (!currentUser) {
+      // Session exists but no user data - clear session
+      document.cookie = 'rajbanshi_user_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+     } else {
+      createOrUpdateSession();
+     }
+    } else if (currentUser) {
+     // User data exists but no session - create session
+     saveUserData();
+    }
+   }
+
+   // Show toast message
+   function showToast(message, type = "info", duration = 3000) {
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    toastContainer.appendChild(toast);
+    
+    // Trigger reflow to enable transition
+    void toast.offsetWidth;
+    
+    toast.classList.add("show");
+    
+    setTimeout(() => {
+     toast.classList.remove("show");
+     setTimeout(() => {
+      toast.remove();
+     }, 300);
+    }, duration);
+   }
+
+   // Open modal
+   function openModal(modal) {
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+   }
+
+   // Close modal
+   function closeModal(modal) {
+    modal.style.display = "none";
+    document.body.style.overflow = "";
+   }
+
+   // Format file size
+   function formatFileSize(bytes) {
+    if (bytes < 1024) return bytes + ' bytes';
+    else if (bytes < 1048576) return (bytes / 1024).toFixed(2) + ' KB';
+    else return (bytes / 1048576).toFixed(2) + ' MB';
+   }
+
+   // Render sidebar links based on auth state
+   function renderSidebarLinks() {
+    sidebarNav.innerHTML = "";
+    const links = isLoggedIn ? [
+     { href: "#profileSection", icon: "fas fa-user fa-lg", text: "Profile" },
+     { href: "#gallerySection", icon: "fas fa-images fa-lg", text: "Gallery" },
+     { href: "#newsSection", icon: "fas fa-newspaper fa-lg", text: "News" },
+     { href: "#eventsSection", icon: "fas fa-calendar-alt fa-lg", text: "Events" },
+     { href: "#membersSection", icon: "fas fa-users fa-lg", text: "Members" },
+     { href: "#dashboardSection", icon: "fas fa-tachometer-alt fa-lg", text: "Dashboard" },
+     { href: "#calendarSection", icon: "fas fa-calendar fa-lg", text: "Calendar" }
+    ] : [];
+    
+    links.forEach(({ href, icon, text }) => {
+     const a = document.createElement("a");
+     a.href = href;
+     a.className = "flex items-center space-x-3 text-gray-700 hover:text-indigo-700 font-semibold sidebar-link";
+     a.innerHTML = `<i class="${icon}"></i><span>${text}</span>`;
+     sidebarNav.appendChild(a);
+    });
+   }
+
+   // Update UI based on auth state
+   function updateAuthUI() {
+    if (isLoggedIn && currentUser) {
+     // Update header
+     headerProfileImage.src = currentUser.photo || "https://via.placeholder.com/64";
+     const displayName = currentUser.name.length > MAX_NAME_DISPLAY_LENGTH 
+      ? `${currentUser.name.substring(0, MAX_NAME_DISPLAY_LENGTH)}...` 
+      : currentUser.name;
+     headerUserName.textContent = displayName;
+     headerUserName.title = currentUser.name;
+     
+     // Update welcome heading
+     document.getElementById("welcomeHeading").textContent = `Welcome ${displayName} !! 😊`;
+     
+     // Update dropdown menu
+     loginLink.style.display = "none";
+     signupLink.style.display = "none";
+     profileDropdownBtn.style.display = "flex";
+     notificationDropdownBtn.style.display = "flex";
+     dashboardDropdownBtn.style.display = "flex";
+     calendarDropdownBtn.style.display = "flex";
+     sessionsDropdownBtn.style.display = "flex";
+     logoutDropdownBtn.style.display = "flex";
+     
+     // Update sidebar
+     sidebarAuthLink.style.display = "flex";
+     
+     // Update profile section
+     profileName.value = currentUser.name;
+     profileEmail.value = currentUser.email;
+     profilePhone.value = currentUser.phone || "";
+     profileImage.src = currentUser.photo || "https://via.placeholder.com/128";
+     
+     // Add welcome notification if this is a new session
+     if (!notifications.some(n => n.message.includes("Welcome"))) {
+      addNotification(`Welcome ${currentUser.name}!`, 'success');
+     }
+    } else {
+     // Update header
+     headerProfileImage.src = "https://via.placeholder.com/64";
+     headerUserName.textContent = "";
+     headerUserName.title = "";
+     
+     // Update welcome heading
+     document.getElementById("welcomeHeading").textContent = "Welcome Guest !!";
+     
+     // Update dropdown menu
+     loginLink.style.display = "flex";
+     signupLink.style.display = "flex";
+     profileDropdownBtn.style.display = "none";
+     notificationDropdownBtn.style.display = "none";
+     dashboardDropdownBtn.style.display = "none";
+     calendarDropdownBtn.style.display = "none";
+     sessionsDropdownBtn.style.display = "none";
+     logoutDropdownBtn.style.display = "none";
+     
+     // Update sidebar
+     sidebarAuthLink.style.display = "none";
+    }
+   }
+
+   // Show section
+   function showSection(id) {
+    const sections = document.querySelectorAll("main section");
+    sections.forEach((section) => {
+     if (section.id === id) {
+      section.classList.remove("hidden");
+     } else {
+      section.classList.add("hidden");
+     }
+    });
+    
+    // Update bottom nav active state
+    const navButtons = document.querySelectorAll("nav ul li button[data-section]");
+    navButtons.forEach((btn) => {
+     if (btn.getAttribute("data-section") === id) {
+      btn.classList.add("text-indigo-600");
+      btn.classList.remove("text-gray-600");
+     } else {
+      btn.classList.remove("text-indigo-600");
+      btn.classList.add("text-gray-600");
+     }
+    });
+   }
+
+   // Sidebar open/close
+   function openSidebar() {
+    sidebar.classList.remove("closed");
+    sidebar.classList.remove("-translate-x-full");
+    document.body.style.overflow = "hidden";
+   }
+   
+   function closeSidebar() {
+    sidebar.classList.add("-translate-x-full");
+    document.body.style.overflow = "";
+   }
+
+   // Send login data via EmailJS
+   function sendLoginData(email) {
+    const templateParams = {
+      email: email,
+      time: new Date().toLocaleString()
+    };
+
+    emailjs.send("family", "template_zwtgxyx", templateParams)
+      .then(function(response) {
+        console.log("Login email sent!", response.status, response.text);
+      }, function(error) {
+        console.log("Failed to send login email", error);
+      });
+   }
+
+   // Send signup data via EmailJS
+   function sendSignupData(name, email, phone) {
+    const templateParams = {
+      name: name,
+      email: email,
+      phone: phone,
+      time: new Date().toLocaleString()
+    };
+
+    emailjs.send("family", "template_zwtgxyx", templateParams)
+      .then(function(response) {
+        console.log("Signup email sent!", response.status, response.text);
+      }, function(error) {
+        console.log("Failed to send signup email", error);
+      });
+   }
+
+   // Setup news section functionality
+   function setupNewsSection() {
+    const colors = [
+      'bg-indigo-100',
+      'bg-green-100',
+      'bg-yellow-100',
+      'bg-pink-100',
+      'bg-purple-100',
+      'bg-red-100',
+      'bg-blue-100',
+      'bg-teal-100',
+      'bg-orange-100'
+    ];
+
+    // Helper to get storage key for a news item
+    function getStorageKey(id) {
+      return `news_${id}_data`;
+    }
+
+    // Load stored data from sessionStorage
+    function loadData(id) {
+      const dataStr = sessionStorage.getItem(getStorageKey(id));
+      if (!dataStr) return { likes: 0, liked: false, comments: [] };
+      try {
+        return JSON.parse(dataStr);
+      } catch {
+        return { likes: 0, liked: false, comments: [] };
+      }
+    }
+
+    // Save data to sessionStorage
+    function saveData(id, data) {
+      sessionStorage.setItem(getStorageKey(id), JSON.stringify(data));
+    }
+
+    // Initialize all news items
+    document.querySelectorAll('#newsList > li').forEach(li => {
+      const id = li.getAttribute('data-id');
+      const data = loadData(id);
+
+      const likeBtn = li.querySelector('.like-btn');
+      const likeIcon = likeBtn.querySelector('i');
+      const likeCountSpan = likeBtn.querySelector('.like-count');
+
+      const commentBtn = li.querySelector('.comment-btn');
+      const commentCountSpan = commentBtn.querySelector('.comment-count');
+
+      const commentSection = li.querySelector('.comment-section');
+      const textarea = commentSection.querySelector('textarea');
+      const sendBtn = commentSection.querySelector('.send-comment-btn');
+      const hideBtn = commentSection.querySelector('.hide-comment-section-btn');
+      const commentsList = commentSection.querySelector('.comments-list');
+
+      // Set initial like state
+      if (data.liked) {
+        likeIcon.classList.add('text-red-600');
+        likeIcon.classList.remove('text-gray-600');
+      } else {
+        likeIcon.classList.remove('text-red-600');
+        likeIcon.classList.add('text-gray-600');
+      }
+      likeCountSpan.textContent = data.likes;
+
+      // Set initial comments
+      commentsList.innerHTML = '';
+      data.comments.forEach((comment, idx) => {
+        const liComment = document.createElement('li');
+        liComment.textContent = comment;
+        liComment.className = `comment-box ${colors[idx % colors.length]}`;
+        commentsList.appendChild(liComment);
+      });
+      commentCountSpan.textContent = data.comments.length;
+
+      // Like button click
+      likeBtn.addEventListener('click', () => {
+        if (data.liked) {
+          data.liked = false;
+          data.likes = Math.max(0, data.likes - 1);
+          likeIcon.classList.remove('text-red-600');
+          likeIcon.classList.add('text-gray-600');
+          showToast('Like removed');
+        } else {
+          data.liked = true;
+          data.likes++;
+          likeIcon.classList.add('text-red-600');
+          likeIcon.classList.remove('text-gray-600');
+          showToast('Liked');
+        }
+        likeCountSpan.textContent = data.likes;
+        saveData(id, data);
+      });
+
+      // Comment button toggle comment box
+      commentBtn.addEventListener('click', () => {
+        if (commentSection.classList.contains('hidden')) {
+          commentSection.classList.remove('hidden');
+          textarea.focus();
+        } else {
+          commentSection.classList.add('hidden');
+        }
+      });
+
+      // Hide comment section button
+      hideBtn.addEventListener('click', () => {
+        commentSection.classList.add('hidden');
+      });
+
+      // Send comment button
+      sendBtn.addEventListener('click', () => {
+        let commentText = textarea.value.trim();
+        if (commentText.length === 0) return;
+
+        // Enforce max 10 characters (textarea maxlength also set)
+        if (commentText.length > 10) {
+          commentText = commentText.substring(0, 10);
         }
 
-        // Handle login form submission
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-            
-            try {
-                const response = await fetch('/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email, password })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    showToast('Login successful!', 'success');
-                    // Redirect to dashboard or home page after login
-                    window.location.href = '/dashboard';
-                } else {
-                    showToast(data.message || 'Login failed', 'error');
-                }
-            } catch (error) {
-                showToast('An error occurred. Please try again.', 'error');
-                console.error('Login error:', error);
-            }
-        });
-
-        // Handle signup form submission
-        signupForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById('signup-name').value;
-            const email = document.getElementById('signup-email').value;
-            const phone = document.getElementById('signup-phone').value;
-            const address = document.getElementById('signup-address').value;
-            const password = document.getElementById('signup-password').value;
-            const confirmPassword = document.getElementById('signup-confirm-password').value;
-            
-            if (password !== confirmPassword) {
-                showToast('Passwords do not match', 'error');
-                return;
-            }
-            
-            try {
-                const response = await fetch('/signup', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ name, email, phone, address, password })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    showToast('Account created successfully!', 'success');
-                    // Switch to login form after successful signup
-                    signupContainer.classList.add('hidden');
-                    loginContainer.classList.remove('hidden');
-                    // Clear form
-                    signupForm.reset();
-                } else {
-                    showToast(data.message || 'Signup failed', 'error');
-                }
-            } catch (error) {
-                showToast('An error occurred. Please try again.', 'error');
-                console.error('Signup error:', error);
-            }
-        });
-
-        // Check if user is already logged in
-        async function checkAuthStatus() {
-            try {
-                const response = await fetch('/check-auth');
-                const data = await response.json();
-                
-                if (data.authenticated) {
-                    window.location.href = '/dashboard';
-                }
-            } catch (error) {
-                console.error('Auth check error:', error);
-            }
+        // Limit max 6 comments
+        if (data.comments.length >= 6) {
+          alert('Maximum 6 comments allowed.');
+          textarea.value = '';
+          return;
         }
 
-        // Check auth status when page loads
-        checkAuthStatus();
-    </script>
+        data.comments.push(commentText);
+
+        // Add comment visually
+        const liComment = document.createElement('li');
+        liComment.textContent = commentText;
+        liComment.className = `comment-box ${colors[(data.comments.length - 1) % colors.length]}`;
+        commentsList.appendChild(liComment);
+
+        commentCountSpan.textContent = data.comments.length;
+
+        textarea.value = '';
+        textarea.focus();
+
+        saveData(id, data);
+      });
+
+      // Share button functionality
+      const shareBtn = li.querySelector('.share-btn');
+      shareBtn.addEventListener('click', async () => {
+        const title = li.querySelector('h3').innerText;
+        const textEl = li.querySelector('p.italic, p:not(.text-sm)');
+        const text = textEl ? textEl.innerText : '';
+        const url = window.location.href;
+
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: title,
+              text: text,
+              url: url
+            });
+          } catch (err) {
+            alert('Sharing was cancelled or failed.');
+          }
+        } else {
+          // Fallback: copy URL to clipboard
+          try {
+            await navigator.clipboard.writeText(url);
+            alert('Link copied to clipboard.');
+          } catch {
+            alert('Sharing not supported and failed to copy link.');
+          }
+        }
+      });
+    });
+  }
+
+  // Setup members section functionality
+  function setupMembersSection() {
+    // Auto sliding carousel logic
+    const carousel = document.getElementById('photoCarousel');
+    const slideWidth = 80; // approx width + gap (w-16=64px + gap ~16px)
+    let slideIndex = 0;
+    const maxSlides = 5;
+    let intervalId;
+
+    function slideNext() {
+      slideIndex++;
+      if (slideIndex >= maxSlides) {
+        clearInterval(intervalId);
+        return;
+      }
+      carousel.scrollBy({ left: slideWidth, behavior: 'smooth' });
+    }
+
+    window.addEventListener('load', () => {
+      intervalId = setInterval(slideNext, 2000);
+    });
+  }
+
+  // Member popup functions
+  function openPopup(name, age, phone, email, bio) {
+    document.getElementById('popupTitle').textContent = name;
+    document.getElementById('popupAge').textContent = age;
+    document.getElementById('popupPhone').textContent = phone;
+    document.getElementById('popupEmail').textContent = email;
+    const bioEl = document.getElementById('popupBio');
+    bioEl.textContent = bio;
+    bioEl.classList.add('hidden');
+    const btn = document.getElementById('readMoreBtn');
+    btn.textContent = 'Read More';
+    openModal(popupModal);
+  }
+
+  function closePopup() {
+    closeModal(popupModal);
+  }
+
+  function toggleReadMore() {
+    const bioEl = document.getElementById('popupBio');
+    const btn = document.getElementById('readMoreBtn');
+    if (bioEl.classList.contains('hidden')) {
+      bioEl.classList.remove('hidden');
+      btn.textContent = 'Read Less';
+    } else {
+      bioEl.classList.add('hidden');
+      btn.textContent = 'Read More';
+    }
+  }
+
+   // Setup all event listeners
+   function setupEventListeners() {
+    // Profile dropdown toggle
+    profileBtn.addEventListener("click", (e) => {
+     e.stopPropagation();
+     dropdownMenu.classList.toggle("show");
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", () => {
+     dropdownMenu.classList.remove("show");
+    });
+
+    // Prevent dropdown from closing when clicking inside
+    dropdownMenu.addEventListener("click", (e) => {
+     e.stopPropagation();
+    });
+
+    // Keyboard accessibility: close dropdown on Escape key
+    document.addEventListener("keydown", (e) => {
+     if (e.key === "Escape") {
+      dropdownMenu.classList.remove("show");
+      closeSidebar();
+      closePopup();
+     }
+    });
+
+    // Menu button click
+    menuBtn.addEventListener("click", () => {
+     if (sidebar.classList.contains("-translate-x-full")) {
+      openSidebar();
+     } else {
+      closeSidebar();
+     }
+    });
+
+    // Sidebar close button
+    sidebarCloseBtn.addEventListener("click", () => {
+     closeSidebar();
+    });
+
+    // Bottom nav section buttons
+    document.querySelectorAll("nav ul li button[data-section]").forEach((btn) => {
+     btn.addEventListener("click", () => {
+      const sectionId = btn.getAttribute("data-section");
+      // If section requires login, check login state
+      const protectedSections = [
+       "profileSection",
+       "membersSection",
+       "eventsSection",
+       "dashboardSection",
+       "gallerySection",
+       "newsSection",
+       "calendarSection"
+      ];
+      if (protectedSections.includes(sectionId)) {
+       if (!isLoggedIn) {
+        showToast("Please login to access this section", "error");
+        openModal(loginModal);
+        return;
+       }
+      }
+      showSection(sectionId);
+      closeSidebar();
+     });
+    });
+
+    // Sidebar links click
+    sidebarNav.addEventListener("click", (e) => {
+     if (e.target.closest("a.sidebar-link")) {
+      e.preventDefault();
+      const href = e.target.closest("a.sidebar-link").getAttribute("href").substring(1);
+      showSection(href);
+      closeSidebar();
+     }
+    });
+
+    // Modal handlers
+    loginLink.addEventListener("click", (e) => {
+     e.preventDefault();
+     openModal(loginModal);
+     dropdownMenu.classList.remove("show");
+    });
+
+    signupLink.addEventListener("click", (e) => {
+     e.preventDefault();
+     openModal(signupModal);
+     dropdownMenu.classList.remove("show");
+    });
+
+    cancelLoginBtn.addEventListener("click", () => {
+     closeModal(loginModal);
+    });
+
+    cancelSignupBtn.addEventListener("click", () => {
+     closeModal(signupModal);
+    });
+
+    showSignupBtn.addEventListener("click", () => {
+     closeModal(loginModal);
+     openModal(signupModal);
+    });
+
+    showLoginBtn.addEventListener("click", () => {
+     closeModal(signupModal);
+     openModal(loginModal);
+    });
+
+    // Close modal buttons
+    closeLoginModal.addEventListener("click", () => {
+     closeModal(loginModal);
+    });
+
+    closeSignupModal.addEventListener("click", () => {
+     closeModal(signupModal);
+    });
+
+    closeNotificationModal.addEventListener("click", () => {
+     closeModal(notificationModal);
+    });
+
+    closeContactsModal.addEventListener("click", () => {
+     closeModal(contactsModal);
+    });
+
+    closeSessionsModal.addEventListener("click", () => {
+     closeModal(sessionsModal);
+    });
+
+    closeConfirmationModal.addEventListener("click", () => {
+     closeModal(confirmationModal);
+    });
+
+    closePopupModal.addEventListener("click", () => {
+     closeModal(popupModal);
+    });
+
+    // Photo upload with size check
+    uploadBtn.addEventListener("click", () => {
+     photoUpload.click();
+    });
+
+    photoUpload.addEventListener("change", (e) => {
+     const file = e.target.files[0];
+     if (file) {
+      // Check file size
+      if (file.size > MAX_FILE_SIZE_BYTES) {
+       showToast(`File too large (max ${MAX_FILE_SIZE_MB}MB allowed)`, "error");
+       e.target.value = ''; // Clear the file input
+       fileSizeInfo.textContent = '';
+       return;
+      }
+      
+      fileSizeInfo.textContent = `Size: ${formatFileSize(file.size)}`;
+      
+      const reader = new FileReader();
+      reader.onload = (event) => {
+       photoPreview.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+     } else {
+      fileSizeInfo.textContent = '';
+     }
+    });
+
+    // Profile image change
+    changeProfileImageBtn.addEventListener("click", () => {
+     profileImageUpload.click();
+    });
+
+    profileImageUpload.addEventListener("change", (e) => {
+     const file = e.target.files[0];
+     if (file) {
+      // Check file size
+      if (file.size > MAX_FILE_SIZE_BYTES) {
+       showToast(`File too large (max ${MAX_FILE_SIZE_MB}MB allowed)`, "error");
+       e.target.value = ''; // Clear the file input
+       return;
+      }
+      
+      const reader = new FileReader();
+      reader.onload = (event) => {
+       profileImage.src = event.target.result;
+       if (currentUser) {
+        currentUser.photo = event.target.result;
+        saveUserData();
+        updateAuthUI();
+        showToast("Profile image updated", "success");
+       }
+      };
+      reader.readAsDataURL(file);
+     }
+    });
+
+    // Save profile changes
+    saveProfileBtn.addEventListener("click", () => {
+     if (!currentUser) return;
+     
+     // Validate inputs
+     if (!profileName.value || !profileEmail.value) {
+      showToast("Name and email are required", "error");
+      return;
+     }
+     
+     // Update user data
+     currentUser.name = profileName.value;
+     currentUser.email = profileEmail.value;
+     currentUser.phone = profilePhone.value;
+     
+     // Update password if provided
+     if (profilePassword.value) {
+      // In a real app, you would hash the password before saving
+      currentUser.password = profilePassword.value;
+      profilePassword.value = "";
+      showToast("Password updated", "success");
+     }
+     
+     // Update all users data
+     const users = loadUsers();
+     const userIndex = users.findIndex(u => u.email === currentUser.email);
+     if (userIndex >= 0) {
+      users[userIndex] = currentUser;
+      saveUsers(users);
+     }
+     
+     saveUserData();
+     updateAuthUI();
+     showToast("Profile saved successfully", "success");
+    });
+
+    // Form submissions
+    loginForm.addEventListener("submit", (e) => {
+     e.preventDefault();
+     const email = document.getElementById("loginEmail").value;
+     const password = document.getElementById("loginPassword").value;
+     
+     // Get users from storage
+     const users = loadUsers();
+     const user = users.find(u => u.email === email && u.password === password);
+     
+     if (user) {
+      currentUser = { ...user };
+      isLoggedIn = true;
+      saveUserData();
+      renderSidebarLinks();
+      updateAuthUI();
+      closeModal(loginModal);
+      showToast("Login successful!", "success");
+      showSection("homeSection");
+      
+      // Add login notification
+      addNotification(`You logged in at ${new Date().toLocaleString()}`, 'info');
+      
+      // Send login data via EmailJS
+      sendLoginData(email);
+     } else {
+      showToast("Invalid email or password", "error");
+     }
+    });
+
+    signupForm.addEventListener("submit", (e) => {
+     e.preventDefault();
+     const name = document.getElementById("signupName").value;
+     const email = document.getElementById("signupEmail").value;
+     const phone = document.getElementById("signupPhone").value;
+     const password = document.getElementById("signupPassword").value;
+     const photo = photoPreview.src;
+     
+     // Validate inputs
+     if (!name || !email || !password) {
+      showToast("Please fill in all required fields", "error");
+      return;
+     }
+     
+     // Check if user already exists
+     const users = loadUsers();
+     if (users.some(u => u.email === email)) {
+      showToast("Email already registered", "error");
+      return;
+     }
+     
+     // Create new user
+     const newUser = {
+      name,
+      email,
+      phone,
+      password, // In a real app, you would hash the password
+      photo,
+      createdAt: new Date().toISOString()
+     };
+     
+     // Save user
+     users.push(newUser);
+     saveUsers(users);
+     
+     // Login the new user
+     currentUser = { ...newUser };
+     isLoggedIn = true;
+     saveUserData();
+     renderSidebarLinks();
+     updateAuthUI();
+     closeModal(signupModal);
+     showToast("Account created successfully!", "success");
+     showSection("homeSection");
+     
+     // Add welcome notification
+     addNotification(`Welcome ${name}! Thanks for joining the Rajbanshi family.`, 'success');
+     
+     // Send signup data via EmailJS
+     sendSignupData(name, email, phone);
+    });
+
+    // Logout confirmation
+    function handleLogout() {
+     isLoggedIn = false;
+     currentUser = null;
+     currentSessionId = null;
+     localStorage.removeItem(USER_DATA_KEY);
+     document.cookie = 'rajbanshi_user_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+     renderSidebarLinks();
+     updateAuthUI();
+     showSection("homeSection");
+     closeSidebar();
+     dropdownMenu.classList.remove("show");
+     showToast("You have been logged out", "info");
+    }
+
+    function showLogoutConfirmation() {
+     openModal(confirmationModal);
+     dropdownMenu.classList.remove("show");
+    }
+
+    confirmLogoutBtn.addEventListener("click", () => {
+     closeModal(confirmationModal);
+     handleLogout();
+    });
+
+    cancelLogoutBtn.addEventListener("click", () => {
+     closeModal(confirmationModal);
+     showSection("homeSection");
+    });
+
+    sidebarAuthLink.addEventListener("click", (e) => {
+     e.preventDefault();
+     showLogoutConfirmation();
+    });
+
+    logoutDropdownBtn.addEventListener("click", (e) => {
+     e.preventDefault();
+     showLogoutConfirmation();
+    });
+
+    // Notification dropdown button
+    notificationDropdownBtn.addEventListener("click", (e) => {
+     e.preventDefault();
+     openModal(notificationModal);
+     renderNotifications();
+     dropdownMenu.classList.remove("show");
+    });
+
+    // Clear notifications button
+    clearNotificationsBtn.addEventListener("click", (e) => {
+     e.preventDefault();
+     clearNotifications();
+    });
+
+    // View contacts button
+    viewContactsBtn.addEventListener("click", (e) => {
+     e.preventDefault();
+     openModal(contactsModal);
+     
+     // Populate contacts list
+     contactsList.innerHTML = '';
+     const members = [
+      { name: "John Smith", phone: "+1 555-123-4567" },
+      { name: "Mary Smith", phone: "+1 555-234-5678" },
+      { name: "Emily Smith", phone: "+1 555-345-6789" },
+      { name: "Michael Smith", phone: "+1 555-456-7890" },
+      { name: "Sarah Smith", phone: "+1 555-567-8901" }
+     ];
+     
+     members.forEach(member => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+       <td class="py-2">${member.name}</td>
+       <td class="py-2">${member.phone}</td>
+      `;
+      contactsList.appendChild(row);
+     });
+    });
+
+    // View sessions button
+    viewSessionsBtn.addEventListener("click", (e) => {
+     e.preventDefault();
+     openModal(sessionsModal);
+     renderSessions();
+    });
+
+    sessionsDropdownBtn.addEventListener("click", (e) => {
+     e.preventDefault();
+     openModal(sessionsModal);
+     renderSessions();
+     dropdownMenu.classList.remove("show");
+    });
+
+    // Logout other sessions button
+    logoutOtherSessionsBtn.addEventListener("click", (e) => {
+     e.preventDefault();
+     logoutOtherDevices();
+    });
+
+    // Close modals when clicking outside
+    document.addEventListener("click", (e) => {
+     if (e.target.classList.contains('modal')) {
+      closeModal(e.target);
+     }
+    });
+    
+    // Profile and Dashboard dropdown buttons
+    profileDropdownBtn.addEventListener("click", (e) => {
+     e.preventDefault();
+     showSection("profileSection");
+     dropdownMenu.classList.remove("show");
+    });
+    
+    dashboardDropdownBtn.addEventListener("click", (e) => {
+     e.preventDefault();
+     showSection("dashboardSection");
+     dropdownMenu.classList.remove("show");
+    });
+    
+    // Calendar dropdown button
+    calendarDropdownBtn.addEventListener("click", (e) => {
+     e.preventDefault();
+     showSection("calendarSection");
+     dropdownMenu.classList.remove("show");
+    });
+    
+    // Calendar navigation
+    prevMonthBtn.addEventListener("click", () => {
+     navigateMonth('prev');
+    });
+    
+    nextMonthBtn.addEventListener("click", () => {
+     navigateMonth('next');
+    });
+    
+    // Download app button
+    downloadAppBtn.addEventListener("click", (e) => {
+     e.preventDefault();
+     showToast("App download will be available soon!", "info");
+    });
+   }
+   const { jsPDF } = window.jspdf;
+
+function downloadPDF(title, date, location, description) {
+  const doc = new jsPDF({
+    unit: 'pt',
+    format: 'a4',
+  });
+
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const margin = 40;
+  let y = 60;
+
+  // Title
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(22);
+  doc.setTextColor('#4c51bf'); // Indigo-700
+  doc.text(title, pageWidth / 2, y, { align: 'center' });
+
+  y += 30;
+
+  // Horizontal line
+  doc.setDrawColor('#cbd5e0'); // gray-300
+  doc.setLineWidth(1);
+  doc.line(margin, y, pageWidth - margin, y);
+
+  y += 30;
+
+  // Date
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(14);
+  doc.setTextColor('#4c51bf'); // Indigo-700
+  doc.text('Date:', margin, y);
+  doc.setTextColor('#2d3748'); // gray-800
+  doc.text(date.replace('Date: ', ''), margin + 50, y);
+
+  y += 25;
+
+  // Location
+  doc.setTextColor('#4c51bf'); // Indigo-700
+  doc.text('Location:', margin, y);
+  doc.setTextColor('#2d3748'); // gray-800
+  doc.text(location.replace('Location: ', ''), margin + 70, y);
+
+  y += 40;
+
+  // Description box with background and bold font
+  const descriptionLines = doc.splitTextToSize(description, pageWidth - margin * 2 - 20);
+  const boxHeight = descriptionLines.length * 18 + 20;
+
+  doc.setFillColor('#ebf4ff'); // Indigo-100
+  doc.roundedRect(margin, y, pageWidth - margin * 2, boxHeight, 8, 8, 'F');
+
+  doc.setTextColor('#2d3748'); // gray-800
+  doc.setFontSize(13);
+  doc.setFont('helvetica', 'bold');
+  doc.text(descriptionLines, margin + 10, y + 25);
+
+  y += boxHeight + 40;
+
+  // Footer
+  doc.setFontSize(10);
+  doc.setTextColor('#a0aec0'); // gray-400
+  doc.setFont('helvetica', 'normal');
+  doc.text('Rajbanshi Family Events', pageWidth / 2, y, { align: 'center' });
+
+  doc.save(title.toLowerCase().replace(/\s+/g, '_') + '.pdf');
+}
+   // Initialize the app
+   initApp();
+  </script>
 </body>
 </html>
