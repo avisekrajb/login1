@@ -1519,441 +1519,469 @@
   </main>
 
   <script>
+   // DOM Elements
+   const profileBtn = document.getElementById("profileBtn");
+   const dropdownMenu = document.getElementById("dropdownMenu");
+   const menuBtn = document.getElementById("menuBtn");
+   const sidebar = document.getElementById("sidebar");
+   const sidebarCloseBtn = document.getElementById("sidebarCloseBtn");
+   const sidebarNav = document.getElementById("sidebarNav");
+   const sidebarAuthLink = document.getElementById("sidebarAuthLink");
+   const loginLink = document.getElementById("loginLink");
+   const signupLink = document.getElementById("signupLink");
+   const loginModal = document.getElementById("loginModal");
+   const signupModal = document.getElementById("signupModal");
+   const cancelLoginBtn = document.getElementById("cancelLoginBtn");
+   const cancelSignupBtn = document.getElementById("cancelSignupBtn");
+   const showSignupBtn = document.getElementById("showSignupBtn");
+   const showLoginBtn = document.getElementById("showLoginBtn");
+   const loginForm = document.getElementById("loginForm");
+   const signupForm = document.getElementById("signupForm");
+   const uploadBtn = document.getElementById("uploadBtn");
+   const photoUpload = document.getElementById("photoUpload");
+   const photoPreview = document.getElementById("photoPreview");
+   const fileSizeInfo = document.getElementById("fileSizeInfo");
+   const toastContainer = document.getElementById("toastContainer");
+   const notificationModal = document.getElementById("notificationModal");
+   const notificationList = document.getElementById("notificationList");
+   const clearNotificationsBtn = document.getElementById("clearNotificationsBtn");
+   const notificationDot = document.getElementById("notificationDot");
+   const notificationCountBadge = document.getElementById("notificationCountBadge");
+   const headerProfileImage = document.getElementById("headerProfileImage");
+   const headerUserName = document.getElementById("headerUserName");
+   const profileDropdownBtn = document.getElementById("profileDropdownBtn");
+   const notificationDropdownBtn = document.getElementById("notificationDropdownBtn");
+   const dashboardDropdownBtn = document.getElementById("dashboardDropdownBtn");
+   const calendarDropdownBtn = document.getElementById("calendarDropdownBtn");
+   const sessionsDropdownBtn = document.getElementById("sessionsDropdownBtn");
+   const logoutDropdownBtn = document.getElementById("logoutDropdownBtn");
+   const profileImage = document.getElementById("profileImage");
+   const changeProfileImageBtn = document.getElementById("changeProfileImageBtn");
+   const profileImageUpload = document.getElementById("profileImageUpload");
+   const profileName = document.getElementById("profileName");
+   const profileEmail = document.getElementById("profileEmail");
+   const profilePhone = document.getElementById("profilePhone");
+   const profilePassword = document.getElementById("profilePassword");
+   const saveProfileBtn = document.getElementById("saveProfileBtn");
+   const contactsModal = document.getElementById("contactsModal");
+   const contactsList = document.getElementById("contactsList");
+   const viewContactsBtn = document.getElementById("viewContactsBtn");
+   const sessionsModal = document.getElementById("sessionsModal");
+   const sessionsList = document.getElementById("sessionsList");
+   const viewSessionsBtn = document.getElementById("viewSessionsBtn");
+   const logoutOtherSessionsBtn = document.getElementById("logoutOtherSessionsBtn");
+   const totalMembersCount = document.getElementById("totalMembersCount");
+   const closeLoginModal = document.getElementById("closeLoginModal");
+   const closeSignupModal = document.getElementById("closeSignupModal");
+   const closeNotificationModal = document.getElementById("closeNotificationModal");
+   const closeContactsModal = document.getElementById("closeContactsModal");
+   const closeSessionsModal = document.getElementById("closeSessionsModal");
+   const confirmationModal = document.getElementById("confirmationModal");
+   const confirmLogoutBtn = document.getElementById("confirmLogoutBtn");
+   const cancelLogoutBtn = document.getElementById("cancelLogoutBtn");
+   const closeConfirmationModal = document.getElementById("closeConfirmationModal");
+   const popupModal = document.getElementById("popupModal");
+   const closePopupModal = document.getElementById("closePopupModal");
+   const marqueeText = document.getElementById("marqueeText");
+   const downloadAppBtn = document.getElementById("downloadAppBtn");
+   const prevMonthBtn = document.getElementById("prevMonth");
+   const nextMonthBtn = document.getElementById("nextMonth");
+   const currentMonthYear = document.getElementById("currentMonthYear");
+   const calendarDays = document.getElementById("calendarDays");
+   const recentActivityList = document.getElementById("recentActivityList");
+   const loadMoreActivitiesBtn = document.getElementById("loadMoreActivitiesBtn");
 
-  // DOM Elements
-  const profileBtn = document.getElementById("profileBtn");
-  const dropdownMenu = document.getElementById("dropdownMenu");
-  const menuBtn = document.getElementById("menuBtn");
-  const sidebar = document.getElementById("sidebar");
-  const sidebarCloseBtn = document.getElementById("sidebarCloseBtn");
-  const sidebarNav = document.getElementById("sidebarNav");
-  const sidebarAuthLink = document.getElementById("sidebarAuthLink");
-  const loginLink = document.getElementById("loginLink");
-  const signupLink = document.getElementById("signupLink");
-  const loginModal = document.getElementById("loginModal");
-  const signupModal = document.getElementById("signupModal");
-  const cancelLoginBtn = document.getElementById("cancelLoginBtn");
-  const cancelSignupBtn = document.getElementById("cancelSignupBtn");
-  const showSignupBtn = document.getElementById("showSignupBtn");
-  const showLoginBtn = document.getElementById("showLoginBtn");
-  const loginForm = document.getElementById("loginForm");
-  const signupForm = document.getElementById("signupForm");
-  const uploadBtn = document.getElementById("uploadBtn");
-  const photoUpload = document.getElementById("photoUpload");
-  const photoPreview = document.getElementById("photoPreview");
-  const fileSizeInfo = document.getElementById("fileSizeInfo");
-  const toastContainer = document.getElementById("toastContainer");
-  const notificationModal = document.getElementById("notificationModal");
-  const notificationList = document.getElementById("notificationList");
-  const clearNotificationsBtn = document.getElementById("clearNotificationsBtn");
-  const notificationDot = document.getElementById("notificationDot");
-  const notificationCountBadge = document.getElementById("notificationCountBadge");
-  const headerProfileImage = document.getElementById("headerProfileImage");
-  const headerUserName = document.getElementById("headerUserName");
-  const profileDropdownBtn = document.getElementById("profileDropdownBtn");
-  const notificationDropdownBtn = document.getElementById("notificationDropdownBtn");
-  const dashboardDropdownBtn = document.getElementById("dashboardDropdownBtn");
-  const calendarDropdownBtn = document.getElementById("calendarDropdownBtn");
-  const sessionsDropdownBtn = document.getElementById("sessionsDropdownBtn");
-  const logoutDropdownBtn = document.getElementById("logoutDropdownBtn");
-  const profileImage = document.getElementById("profileImage");
-  const changeProfileImageBtn = document.getElementById("changeProfileImageBtn");
-  const profileImageUpload = document.getElementById("profileImageUpload");
-  const profileName = document.getElementById("profileName");
-  const profileEmail = document.getElementById("profileEmail");
-  const profilePhone = document.getElementById("profilePhone");
-  const profilePassword = document.getElementById("profilePassword");
-  const saveProfileBtn = document.getElementById("saveProfileBtn");
-  const contactsModal = document.getElementById("contactsModal");
-  const contactsList = document.getElementById("contactsList");
-  const viewContactsBtn = document.getElementById("viewContactsBtn");
-  const sessionsModal = document.getElementById("sessionsModal");
-  const sessionsList = document.getElementById("sessionsList");
-  const viewSessionsBtn = document.getElementById("viewSessionsBtn");
-  const logoutOtherSessionsBtn = document.getElementById("logoutOtherSessionsBtn");
-  const totalMembersCount = document.getElementById("totalMembersCount");
-  const closeLoginModal = document.getElementById("closeLoginModal");
-  const closeSignupModal = document.getElementById("closeSignupModal");
-  const closeNotificationModal = document.getElementById("closeNotificationModal");
-  const closeContactsModal = document.getElementById("closeContactsModal");
-  const closeSessionsModal = document.getElementById("closeSessionsModal");
-  const confirmationModal = document.getElementById("confirmationModal");
-  const confirmLogoutBtn = document.getElementById("confirmLogoutBtn");
-  const cancelLogoutBtn = document.getElementById("cancelLogoutBtn");
-  const closeConfirmationModal = document.getElementById("closeConfirmationModal");
-  const popupModal = document.getElementById("popupModal");
-  const closePopupModal = document.getElementById("closePopupModal");
-  const marqueeText = document.getElementById("marqueeText");
-  const downloadAppBtn = document.getElementById("downloadAppBtn");
-  const prevMonthBtn = document.getElementById("prevMonth");
-  const nextMonthBtn = document.getElementById("nextMonth");
-  const currentMonthYear = document.getElementById("currentMonthYear");
-  const calendarDays = document.getElementById("calendarDays");
-  const recentActivityList = document.getElementById("recentActivityList");
-  const loadMoreActivitiesBtn = document.getElementById("loadMoreActivitiesBtn");
-  const clearActivitiesBtn = document.getElementById("clearActivitiesBtn");
+   // Constants
+   const USER_DATA_KEY = 'rajbanshi_user_data';
+   const USERS_KEY = 'rajbanshi_users';
+   const NOTIFICATIONS_KEY = 'rajbanshi_notifications';
+   const SESSIONS_KEY = 'rajbanshi_sessions';
+   const ACTIVITIES_KEY = 'rajbanshi_activities';
+   const ACTIVITIES_PER_PAGE = 5;
+   const SESSION_EXPIRY_DAYS = 150;
+   const MAX_NAME_DISPLAY_LENGTH = 8;
+   const MAX_FILE_SIZE_MB = 2; // 2MB max file size
+   const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
-  // Constants
-  const USER_DATA_KEY = 'rajbanshi_user_data';
-  const USERS_KEY = 'rajbanshi_users';
-  const NOTIFICATIONS_KEY = 'rajbanshi_notifications';
-  const SESSIONS_KEY = 'rajbanshi_sessions';
-  const ACTIVITIES_KEY = 'rajbanshi_activities';
-  const NEWS_DATA_KEY = 'rajbanshi_news_data';
-  const ACTIVITIES_PER_PAGE = 5;
-  const SESSION_EXPIRY_DAYS = 150;
-  const MAX_NAME_DISPLAY_LENGTH = 8;
-  const MAX_FILE_SIZE_MB = 2; // 2MB max file size
-  const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+   // State
+   let currentUser = null;
+   let notifications = [];
+   let sessions = [];
+   let isLoggedIn = false;
+   let currentSessionId = null;
+   let currentDate = new Date();
+   let currentMonth = currentDate.getMonth();
+   let currentYear = currentDate.getFullYear();
+   let currentActivityPage = 1;
+   
+   // Family data
+   const familyMembers = [
+     { name: "John Smith", dob: "05-15", phone: "555-123-4567" },
+     { name: "Mary Smith", dob: "10-22", phone: "555-234-5678" },
+     { name: "Emily Smith", dob: "03-05", phone: "555-345-6789" },
+     { name: "Michael Smith", dob: "07-30", phone: "555-456-7890" },
+     { name: "Sarah Smith", dob: "12-10", phone: "555-567-8901" }
+   ];
+   
+   const festivals = [
+     { name: "Dashain", date: "10-05" }, // Example date - should be actual festival date
+     { name: "Tihar", date: "10-20" },   // Example date
+     { name: "New Year", date: "01-01" }
+   ];
 
-  // State
-  let currentUser = null;
-  let notifications = [];
-  let sessions = [];
-  let activities = [];
-  let newsData = {};
-  let isLoggedIn = false;
-  let currentSessionId = null;
-  let currentDate = new Date();
-  let currentMonth = currentDate.getMonth();
-  let currentYear = currentDate.getFullYear();
-  let currentActivityPage = 1;
-  
-  // Family data
-  const familyMembers = [
-    { name: "John Smith", dob: "05-15", phone: "555-123-4567" },
-    { name: "Mary Smith", dob: "10-22", phone: "555-234-5678" },
-    { name: "Emily Smith", dob: "03-05", phone: "555-345-6789" },
-    { name: "Michael Smith", dob: "07-30", phone: "555-456-7890" },
-    { name: "Sarah Smith", dob: "12-10", phone: "555-567-8901" }
-  ];
-  
-  const festivals = [
-    { name: "Dashain", date: "10-05" },
-    { name: "Tihar", date: "10-20" },
-    { name: "New Year", date: "01-01" }
-  ];
-
-  // Initialize the app
-  function initApp() {
-    loadAllData();
+   // Initialize the app
+   function initApp() {
+    loadUserData();
+    loadUsers();
+    loadNotifications();
+    loadSessions();
     renderSidebarLinks();
     updateAuthUI();
     showSection("homeSection");
+    checkSession();
     setupEventListeners();
     setupNewsSection();
     setupMembersSection();
-    showSlides();
+    showSlides(); // Initialize the slideshow
     generateCalendar(currentMonth, currentYear);
     checkSpecialDates();
-    setupProfileSync();
     
     // Initialize activities if empty
-    if (activities.length === 0) {
-      activities = [{
-        id: Date.now() - 10000,
-        type: 'welcome',
-        timestamp: new Date().toISOString(),
-        details: { message: 'Welcome to Rajbanshi Family' }
-      }];
-      saveData(ACTIVITIES_KEY, activities);
-    }
-    
-    renderRecentActivities();
-  }
-
-  // Load all data from localStorage
-  function loadAllData() {
-    currentUser = loadData(USER_DATA_KEY);
-    isLoggedIn = currentUser !== null;
-    notifications = loadData(NOTIFICATIONS_KEY) || [];
-    sessions = loadData(SESSIONS_KEY) || [];
-    activities = loadData(ACTIVITIES_KEY) || [];
-    newsData = loadData(NEWS_DATA_KEY) || {};
-  }
-
-  // Generic data loader
-  function loadData(key) {
-    const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : null;
-  }
-
-  // Generic data saver
-  function saveData(key, data) {
-    localStorage.setItem(key, JSON.stringify(data));
-  }
-
-  // Image slideshow functionality
-  let slideIndex = 0;
-  function showSlides() {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
-    let dots = document.getElementsByClassName("dot");
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
-    }
-    slideIndex++;
-    if (slideIndex > slides.length) {slideIndex = 1}    
-    for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" bg-red-700", "");
-    }
-    slides[slideIndex-1].style.display = "block";  
-    dots[slideIndex-1].className += " bg-red-700";
-    setTimeout(showSlides, 2000);
-  }
-
-  // Calendar functions
-  function generateCalendar(month, year) {
-    // Clear previous calendar
-    calendarDays.innerHTML = '';
-    
-    // Set the month and year in the header
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-                       "July", "August", "September", "October", "November", "December"];
-    currentMonthYear.textContent = `${monthNames[month]} ${year}`;
-    
-    // Get the first day of the month and total days in month
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    
-    // Get today's date for comparison
-    const today = new Date();
-    const isCurrentMonth = month === today.getMonth() && year === today.getFullYear();
-    
-    // Create empty cells for days before the first day of the month
-    for (let i = 0; i < firstDay; i++) {
-      const emptyDay = document.createElement('div');
-      emptyDay.className = 'calendar-day empty';
-      calendarDays.appendChild(emptyDay);
-    }
-    
-    // Create cells for each day of the month
-    for (let day = 1; day <= daysInMonth; day++) {
-      const dayElement = document.createElement('div');
-      dayElement.className = 'calendar-day';
-      
-      // Check if this is today
-      if (isCurrentMonth && day === today.getDate()) {
-        dayElement.classList.add('today');
-      }
-      
-      // Format day as MM-DD for comparison
-      const formattedDay = `${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-      
-      // Check for birthdays
-      const birthdayMember = familyMembers.find(member => member.dob === formattedDay);
-      if (birthdayMember) {
-        dayElement.classList.add('birthday');
-      }
-      
-      // Check for festivals
-      const festival = festivals.find(fest => fest.date === formattedDay);
-      if (festival) {
-        dayElement.classList.add('festival');
-      }
-      
-      // Add day number
-      const dayNumber = document.createElement('div');
-      dayNumber.className = 'day-number';
-      dayNumber.textContent = day;
-      dayElement.appendChild(dayNumber);
-      
-      // Add event indicators
-      if (birthdayMember || festival) {
-        const eventIndicator = document.createElement('div');
-        eventIndicator.className = 'event-indicator';
-        
-        if (birthdayMember) {
-          const birthdayIndicator = document.createElement('span');
-          birthdayIndicator.className = 'birthday-indicator';
-          birthdayIndicator.innerHTML = '<i class="fas fa-birthday-cake"></i>';
-          eventIndicator.appendChild(birthdayIndicator);
+    if (!localStorage.getItem(ACTIVITIES_KEY)) {
+      const defaultActivities = [
+        {
+          id: Date.now() - 10000,
+          type: 'welcome',
+          timestamp: new Date().toISOString(),
+          details: { message: 'Welcome to Rajbanshi Family' }
         }
-        
-        if (festival) {
-          const festivalIndicator = document.createElement('span');
-          festivalIndicator.className = 'festival-indicator';
-          festivalIndicator.innerHTML = '<i class="fas fa-star"></i>';
-          eventIndicator.appendChild(festivalIndicator);
-        }
-        
-        dayElement.appendChild(eventIndicator);
-      }
-      
-      calendarDays.appendChild(dayElement);
-    }
-  }
-  
-  function navigateMonth(direction) {
-    if (direction === 'prev') {
-      currentMonth--;
-      if (currentMonth < 0) {
-        currentMonth = 11;
-        currentYear--;
-      }
-    } else {
-      currentMonth++;
-      if (currentMonth > 11) {
-        currentMonth = 0;
-        currentYear++;
-      }
-    }
-    generateCalendar(currentMonth, currentYear);
-  }
-  
-  function checkSpecialDates() {
-    const today = new Date();
-    const formattedToday = `${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-    
-    // Check for birthdays
-    const birthdayMember = familyMembers.find(member => member.dob === formattedToday);
-    if (birthdayMember) {
-      marqueeText.textContent = `Happy Birthday ${birthdayMember.name}! Wishing you a wonderful day!`;
-      marqueeText.parentElement.classList.add('bg-pink-200');
-      addNotification(`Today is ${birthdayMember.name}'s birthday!`, 'info');
-      saveActivity('birthday', { name: birthdayMember.name });
+      ];
+      localStorage.setItem(ACTIVITIES_KEY, JSON.stringify(defaultActivities));
     }
     
-    // Check for festivals
-    const festivalToday = festivals.find(fest => fest.date === formattedToday);
-    if (festivalToday) {
-      marqueeText.textContent = `Happy ${festivalToday.name} to all family members!`;
-      marqueeText.parentElement.classList.add('bg-green-200');
-      addNotification(`Happy ${festivalToday.name} to all family members!`, 'info');
-      saveActivity('festival', { name: festivalToday.name });
-    }
-    
-    // Reset marquee after 24 hours
-    setTimeout(() => {
-      marqueeText.textContent = "Hello family how are you";
-      marqueeText.parentElement.classList.remove('bg-pink-200', 'bg-green-200');
-    }, 24 * 60 * 60 * 1000);
-  }
-
-  // Activity tracking functions
-  function saveActivity(type, details = {}) {
-    const activity = {
-      id: Date.now(),
-      type,
-      timestamp: new Date().toISOString(),
-      details
-    };
-    activities.unshift(activity);
-    saveData(ACTIVITIES_KEY, activities);
     renderRecentActivities();
-  }
+   }
 
-  function renderRecentActivities(page = 1) {
-    const startIndex = (page - 1) * ACTIVITIES_PER_PAGE;
-    const endIndex = startIndex + ACTIVITIES_PER_PAGE;
-    const activitiesToShow = activities.slice(0, endIndex);
-    
-    recentActivityList.innerHTML = '';
-    
-    if (activitiesToShow.length === 0) {
-      recentActivityList.innerHTML = '<li class="text-gray-500 text-center py-4">No activities yet</li>';
-      return;
+   // Image slideshow functionality
+   let slideIndex = 0;
+   function showSlides() {
+     let i;
+     let slides = document.getElementsByClassName("mySlides");
+     let dots = document.getElementsByClassName("dot");
+     for (i = 0; i < slides.length; i++) {
+       slides[i].style.display = "none";  
+     }
+     slideIndex++;
+     if (slideIndex > slides.length) {slideIndex = 1}    
+     for (i = 0; i < dots.length; i++) {
+       dots[i].className = dots[i].className.replace(" bg-red-700", "");
+     }
+     slides[slideIndex-1].style.display = "block";  
+     dots[slideIndex-1].className += " bg-red-700";
+     setTimeout(showSlides, 2000); // Change image every 2 seconds
+   }
+
+   // Calendar functions
+   function generateCalendar(month, year) {
+     // Clear previous calendar
+     calendarDays.innerHTML = '';
+     
+     // Set the month and year in the header
+     const monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+     currentMonthYear.textContent = `${monthNames[month]} ${year}`;
+     
+     // Get the first day of the month and total days in month
+     const firstDay = new Date(year, month, 1).getDay();
+     const daysInMonth = new Date(year, month + 1, 0).getDate();
+     
+     // Get today's date for comparison
+     const today = new Date();
+     const isCurrentMonth = month === today.getMonth() && year === today.getFullYear();
+     
+     // Create empty cells for days before the first day of the month
+     for (let i = 0; i < firstDay; i++) {
+       const emptyDay = document.createElement('div');
+       emptyDay.className = 'calendar-day empty';
+       calendarDays.appendChild(emptyDay);
+     }
+     
+     // Create cells for each day of the month
+     for (let day = 1; day <= daysInMonth; day++) {
+       const dayElement = document.createElement('div');
+       dayElement.className = 'calendar-day';
+       
+       // Check if this is today
+       if (isCurrentMonth && day === today.getDate()) {
+         dayElement.classList.add('today');
+       }
+       
+       // Format day as MM-DD for comparison
+       const formattedDay = `${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+       
+       // Check for birthdays
+       const birthdayMember = familyMembers.find(member => member.dob === formattedDay);
+       if (birthdayMember) {
+         dayElement.classList.add('birthday');
+       }
+       
+       // Check for festivals
+       const festival = festivals.find(fest => fest.date === formattedDay);
+       if (festival) {
+         dayElement.classList.add('festival');
+       }
+       
+       // Add day number
+       const dayNumber = document.createElement('div');
+       dayNumber.className = 'day-number';
+       dayNumber.textContent = day;
+       dayElement.appendChild(dayNumber);
+       
+       // Add event indicators
+       if (birthdayMember || festival) {
+         const eventIndicator = document.createElement('div');
+         eventIndicator.className = 'event-indicator';
+         
+         if (birthdayMember) {
+           const birthdayIndicator = document.createElement('span');
+           birthdayIndicator.className = 'birthday-indicator';
+           birthdayIndicator.innerHTML = '<i class="fas fa-birthday-cake"></i>';
+           eventIndicator.appendChild(birthdayIndicator);
+         }
+         
+         if (festival) {
+           const festivalIndicator = document.createElement('span');
+           festivalIndicator.className = 'festival-indicator';
+           festivalIndicator.innerHTML = '<i class="fas fa-star"></i>';
+           eventIndicator.appendChild(festivalIndicator);
+         }
+         
+         dayElement.appendChild(eventIndicator);
+       }
+       
+       calendarDays.appendChild(dayElement);
+     }
+   }
+   
+   function navigateMonth(direction) {
+     if (direction === 'prev') {
+       currentMonth--;
+       if (currentMonth < 0) {
+         currentMonth = 11;
+         currentYear--;
+       }
+     } else {
+       currentMonth++;
+       if (currentMonth > 11) {
+         currentMonth = 0;
+         currentYear++;
+       }
+     }
+     generateCalendar(currentMonth, currentYear);
+   }
+   
+   function checkSpecialDates() {
+     const today = new Date();
+     const formattedToday = `${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+     
+     // Check for birthdays
+     const birthdayMember = familyMembers.find(member => member.dob === formattedToday);
+     if (birthdayMember) {
+       marqueeText.textContent = `Happy Birthday ${birthdayMember.name}! Wishing you a wonderful day!`;
+       marqueeText.parentElement.classList.add('bg-pink-200');
+       addNotification(`Today is ${birthdayMember.name}'s birthday!`, 'info');
+       saveActivity('birthday', { name: birthdayMember.name });
+     }
+     
+     // Check for festivals
+     const festivalToday = festivals.find(fest => fest.date === formattedToday);
+     if (festivalToday) {
+       marqueeText.textContent = `Happy ${festivalToday.name} to all family members!`;
+       marqueeText.parentElement.classList.add('bg-green-200');
+       addNotification(`Happy ${festivalToday.name} to all family members!`, 'info');
+       saveActivity('festival', { name: festivalToday.name });
+     }
+     
+     // Reset marquee after 24 hours
+     setTimeout(() => {
+       marqueeText.textContent = "Hello family how are you";
+       marqueeText.parentElement.classList.remove('bg-pink-200', 'bg-green-200');
+     }, 24 * 60 * 60 * 1000);
+   }
+
+   // Activity tracking functions
+   function saveActivity(type, details = {}) {
+     const activities = JSON.parse(localStorage.getItem(ACTIVITIES_KEY)) || [];
+     const activity = {
+       id: Date.now(),
+       type,
+       timestamp: new Date().toISOString(),
+       details
+     };
+     activities.unshift(activity);
+     localStorage.setItem(ACTIVITIES_KEY, JSON.stringify(activities));
+     renderRecentActivities();
+   }
+
+   function renderRecentActivities(page = 1) {
+     const activities = JSON.parse(localStorage.getItem(ACTIVITIES_KEY)) || [];
+     const startIndex = (page - 1) * ACTIVITIES_PER_PAGE;
+     const endIndex = startIndex + ACTIVITIES_PER_PAGE;
+     const activitiesToShow = activities.slice(0, endIndex);
+     
+     recentActivityList.innerHTML = '';
+     
+     if (activitiesToShow.length === 0) {
+       recentActivityList.innerHTML = '<li class="text-gray-500 text-center py-4">No activities yet</li>';
+       return;
+     }
+     
+     activitiesToShow.forEach(activity => {
+       const li = document.createElement('li');
+       li.className = 'flex items-center';
+       
+       // Determine icon and color based on activity type
+       let iconClass = '';
+       let iconColor = '';
+       let text = '';
+       
+       switch(activity.type) {
+         case 'login':
+           iconClass = 'fas fa-sign-in-alt';
+           iconColor = 'text-green-600';
+           text = `User logged in from ${activity.details.device || 'unknown device'}`;
+           break;
+         case 'logout':
+           iconClass = 'fas fa-sign-out-alt';
+           iconColor = 'text-red-600';
+           text = `User logged out`;
+           break;
+         case 'signup':
+           iconClass = 'fas fa-user-plus';
+           iconColor = 'text-blue-600';
+           text = `New user registered: ${activity.details.name || 'New member'}`;
+           break;
+         case 'birthday':
+           iconClass = 'fas fa-birthday-cake';
+           iconColor = 'text-pink-600';
+           text = `Wished happy birthday to ${activity.details.name || 'family member'}`;
+           break;
+         case 'festival':
+           iconClass = 'fas fa-star';
+           iconColor = 'text-yellow-600';
+           text = `Celebrated ${activity.details.name || 'festival'}`;
+           break;
+         case 'notification_clear':
+           iconClass = 'fas fa-bell-slash';
+           iconColor = 'text-gray-600';
+           text = 'Cleared all notifications';
+           break;
+         case 'event_download':
+           iconClass = 'fas fa-download';
+           iconColor = 'text-purple-600';
+           text = `Downloaded event details: ${activity.details.event || 'family event'}`;
+           break;
+         case 'welcome':
+           iconClass = 'fas fa-heart';
+           iconColor = 'text-red-600';
+           text = activity.details.message || 'Welcome to the family website';
+           break;
+         default:
+           iconClass = 'fas fa-info-circle';
+           iconColor = 'text-indigo-600';
+           text = 'Activity recorded';
+       }
+       
+       li.innerHTML = `
+         <div class="bg-indigo-100 p-2 rounded-full mr-3 flex items-center justify-center w-10 h-10">
+           <i class="${iconClass} ${iconColor} text-lg"></i>
+         </div>
+         <div>
+           <p class="font-medium">${text}</p>
+           <p class="text-sm text-gray-500">${new Date(activity.timestamp).toLocaleString()}</p>
+         </div>
+       `;
+       recentActivityList.appendChild(li);
+     });
+     
+     // Show/hide load more button
+     if (endIndex >= activities.length) {
+       loadMoreActivitiesBtn.style.display = 'none';
+     } else {
+       loadMoreActivitiesBtn.style.display = 'block';
+     }
+     
+     currentActivityPage = page;
+   }
+
+   // Load user data from storage
+   function loadUserData() {
+    const userData = localStorage.getItem(USER_DATA_KEY);
+    if (userData) {
+     currentUser = JSON.parse(userData);
+     isLoggedIn = true;
     }
-    
-    activitiesToShow.forEach(activity => {
-      const li = document.createElement('li');
-      li.className = 'flex items-center';
-      
-      // Determine icon and color based on activity type
-      let iconClass = '';
-      let iconColor = '';
-      let text = '';
-      
-      switch(activity.type) {
-        case 'login':
-          iconClass = 'fas fa-sign-in-alt';
-          iconColor = 'text-green-600';
-          text = `User logged in from ${activity.details.device || 'unknown device'}`;
-          break;
-        case 'logout':
-          iconClass = 'fas fa-sign-out-alt';
-          iconColor = 'text-red-600';
-          text = `User logged out`;
-          break;
-        case 'signup':
-          iconClass = 'fas fa-user-plus';
-          iconColor = 'text-blue-600';
-          text = `New user registered: ${activity.details.name || 'New member'}`;
-          break;
-        case 'birthday':
-          iconClass = 'fas fa-birthday-cake';
-          iconColor = 'text-pink-600';
-          text = `Wished happy birthday to ${activity.details.name || 'family member'}`;
-          break;
-        case 'festival':
-          iconClass = 'fas fa-star';
-          iconColor = 'text-yellow-600';
-          text = `Celebrated ${activity.details.name || 'festival'}`;
-          break;
-        case 'notification_clear':
-          iconClass = 'fas fa-bell-slash';
-          iconColor = 'text-gray-600';
-          text = 'Cleared all notifications';
-          break;
-        case 'event_download':
-          iconClass = 'fas fa-download';
-          iconColor = 'text-purple-600';
-          text = `Downloaded event details: ${activity.details.event || 'family event'}`;
-          break;
-        case 'welcome':
-          iconClass = 'fas fa-heart';
-          iconColor = 'text-red-600';
-          text = activity.details.message || 'Welcome to the family website';
-          break;
-        case 'activity_clear':
-          iconClass = 'fas fa-trash-alt';
-          iconColor = 'text-gray-600';
-          text = 'Cleared all activities';
-          break;
-        default:
-          iconClass = 'fas fa-info-circle';
-          iconColor = 'text-indigo-600';
-          text = 'Activity recorded';
-      }
-      
-      li.innerHTML = `
-        <div class="bg-indigo-100 p-2 rounded-full mr-3 flex items-center justify-center w-10 h-10">
-          <i class="${iconClass} ${iconColor} text-lg"></i>
-        </div>
-        <div>
-          <p class="font-medium">${text}</p>
-          <p class="text-sm text-gray-500">${new Date(activity.timestamp).toLocaleString()}</p>
-        </div>
-      `;
-      recentActivityList.appendChild(li);
-    });
-    
-    // Show/hide load more button
-    if (endIndex >= activities.length) {
-      loadMoreActivitiesBtn.style.display = 'none';
-    } else {
-      loadMoreActivitiesBtn.style.display = 'block';
+   }
+
+   // Load all users from storage
+   function loadUsers() {
+    return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+   }
+
+   // Save all users to storage
+   function saveUsers(users) {
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+   }
+
+   // Save user data to storage
+   function saveUserData() {
+    if (currentUser) {
+     localStorage.setItem(USER_DATA_KEY, JSON.stringify(currentUser));
+     // Set cookie for session management (150 days expiry)
+     const expiryDate = new Date();
+     expiryDate.setDate(expiryDate.getDate() + SESSION_EXPIRY_DAYS);
+     document.cookie = `rajbanshi_user_session=true; expires=${expiryDate.toUTCString()}; path=/`;
+     
+     // Create or update session
+     createOrUpdateSession();
     }
-    
-    currentActivityPage = page;
-  }
+   }
 
-  // Clear all activities
-  function clearAllActivities() {
-    activities = [];
-    saveData(ACTIVITIES_KEY, activities);
-    saveActivity('activity_clear');
-    renderRecentActivities();
-    showToast("All activities cleared", "success");
-  }
+   // Load notifications from storage
+   function loadNotifications() {
+    const storedNotifications = localStorage.getItem(NOTIFICATIONS_KEY);
+    if (storedNotifications) {
+     notifications = JSON.parse(storedNotifications);
+     updateNotificationBadge();
+    }
+   }
 
-  // Create or update session
-  function createOrUpdateSession() {
+   // Save notifications to storage
+   function saveNotifications() {
+    localStorage.setItem(NOTIFICATIONS_KEY, JSON.stringify(notifications));
+    updateNotificationBadge();
+   }
+
+   // Load sessions from storage
+   function loadSessions() {
+    const storedSessions = localStorage.getItem(SESSIONS_KEY);
+    if (storedSessions) {
+     sessions = JSON.parse(storedSessions);
+    }
+   }
+
+   // Save sessions to storage
+   function saveSessions() {
+    localStorage.setItem(SESSIONS_KEY, JSON.stringify(sessions));
+   }
+
+   // Create or update session
+   function createOrUpdateSession() {
     if (!currentUser) return;
     
     // Generate a unique session ID
     if (!currentSessionId) {
-      currentSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+     currentSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     }
     
     // Get device info
@@ -1963,174 +1991,173 @@
     const existingSessionIndex = sessions.findIndex(s => s.id === currentSessionId && s.userEmail === currentUser.email);
     
     if (existingSessionIndex >= 0) {
-      // Update existing session
-      sessions[existingSessionIndex] = {
-        ...sessions[existingSessionIndex],
-        lastActive: new Date().toISOString(),
-        isCurrent: true
-      };
+     // Update existing session
+     sessions[existingSessionIndex] = {
+      ...sessions[existingSessionIndex],
+      lastActive: new Date().toISOString(),
+      isCurrent: true
+     };
     } else {
-      // Create new session
-      sessions.push({
-        id: currentSessionId,
-        userEmail: currentUser.email,
-        deviceInfo,
-        createdAt: new Date().toISOString(),
-        lastActive: new Date().toISOString(),
-        isCurrent: true
-      });
+     // Create new session
+     sessions.push({
+      id: currentSessionId,
+      userEmail: currentUser.email,
+      deviceInfo,
+      createdAt: new Date().toISOString(),
+      lastActive: new Date().toISOString(),
+      isCurrent: true
+     });
     }
     
     // Mark other sessions as not current
     sessions.forEach(session => {
-      if (session.id !== currentSessionId && session.userEmail === currentUser.email) {
-        session.isCurrent = false;
-      }
+     if (session.id !== currentSessionId && session.userEmail === currentUser.email) {
+      session.isCurrent = false;
+     }
     });
     
-    saveData(SESSIONS_KEY, sessions);
-  }
+    saveSessions();
+   }
 
-  // Get device info
-  function getDeviceInfo() {
-    const ua = navigator.userAgent;
-    if (ua.match(/Mobile/i)) {
-      return 'Mobile';
-    } else if (ua.match(/Tablet/i)) {
-      return 'Tablet';
-    } else {
-      return 'Desktop';
-    }
-  }
+   // Get device info
+   function getDeviceInfo() {
+     const ua = navigator.userAgent;
+     if (ua.match(/Mobile/i)) {
+       return 'Mobile';
+     } else if (ua.match(/Tablet/i)) {
+       return 'Tablet';
+     } else {
+       return 'Desktop';
+     }
+   }
 
-  // Add a new notification
-  function addNotification(message, type = 'info') {
+   // Add a new notification
+   function addNotification(message, type = 'info') {
     const newNotification = {
-      id: Date.now(),
-      message,
-      type,
-      timestamp: new Date().toISOString(),
-      read: false
+     id: Date.now(),
+     message,
+     type,
+     timestamp: new Date().toISOString(),
+     read: false
     };
     notifications.unshift(newNotification);
-    saveData(NOTIFICATIONS_KEY, notifications);
-    updateNotificationBadge();
-  }
+    saveNotifications();
+   }
 
-  // Mark notification as read
-  function markNotificationAsRead(id) {
+   // Mark notification as read
+   function markNotificationAsRead(id) {
     const notification = notifications.find(n => n.id === id);
     if (notification && !notification.read) {
-      notification.read = true;
-      saveData(NOTIFICATIONS_KEY, notifications);
+     notification.read = true;
+     saveNotifications();
     }
-  }
+   }
 
-  // Clear all notifications
-  function clearNotifications() {
+   // Clear all notifications
+   function clearNotifications() {
     saveActivity('notification_clear');
     notifications = [];
-    saveData(NOTIFICATIONS_KEY, notifications);
+    saveNotifications();
     renderNotifications();
-  }
+   }
 
-  // Update notification badge
-  function updateNotificationBadge() {
+   // Update notification badge
+   function updateNotificationBadge() {
     const unreadCount = notifications.filter(n => !n.read).length;
     if (unreadCount > 0) {
-      notificationDot.style.display = 'block';
-      notificationCountBadge.textContent = unreadCount;
-      notificationCountBadge.style.display = 'inline-block';
+     notificationDot.style.display = 'block';
+     notificationCountBadge.textContent = unreadCount;
+     notificationCountBadge.style.display = 'inline-block';
     } else {
-      notificationDot.style.display = 'none';
-      notificationCountBadge.style.display = 'none';
+     notificationDot.style.display = 'none';
+     notificationCountBadge.style.display = 'none';
     }
-  }
+   }
 
-  // Render notifications
-  function renderNotifications() {
+   // Render notifications
+   function renderNotifications() {
     notificationList.innerHTML = '';
     if (notifications.length === 0) {
-      notificationList.innerHTML = '<p class="text-gray-500 text-center py-4">No notifications</p>';
-      return;
+     notificationList.innerHTML = '<p class="text-gray-500 text-center py-4">No notifications</p>';
+     return;
     }
     
     notifications.forEach(notification => {
-      const notificationItem = document.createElement('div');
-      notificationItem.className = `notification-item ${!notification.read ? 'unread' : ''}`;
-      notificationItem.innerHTML = `
-        <p class="font-medium">${notification.message}</p>
-        <p class="text-sm text-gray-500">${new Date(notification.timestamp).toLocaleString()}</p>
-      `;
-      notificationItem.addEventListener('click', () => {
-        markNotificationAsRead(notification.id);
-        renderNotifications();
-      });
-      notificationList.appendChild(notificationItem);
+     const notificationItem = document.createElement('div');
+     notificationItem.className = `notification-item ${!notification.read ? 'unread' : ''}`;
+     notificationItem.innerHTML = `
+      <p class="font-medium">${notification.message}</p>
+      <p class="text-sm text-gray-500">${new Date(notification.timestamp).toLocaleString()}</p>
+     `;
+     notificationItem.addEventListener('click', () => {
+      markNotificationAsRead(notification.id);
+      renderNotifications();
+     });
+     notificationList.appendChild(notificationItem);
     });
-  }
+   }
 
-  // Render active sessions
-  function renderSessions() {
+   // Render active sessions
+   function renderSessions() {
     sessionsList.innerHTML = '';
     if (!currentUser) return;
     
     const userSessions = sessions.filter(s => s.userEmail === currentUser.email);
     
     if (userSessions.length === 0) {
-      sessionsList.innerHTML = '<p class="text-gray-500 text-center py-4">No active sessions</p>';
-      return;
+     sessionsList.innerHTML = '<p class="text-gray-500 text-center py-4">No active sessions</p>';
+     return;
     }
     
     userSessions.forEach(session => {
-      const sessionItem = document.createElement('div');
-      sessionItem.className = 'session-item';
-      
-      const deviceType = session.deviceInfo.includes('Mobile') ? 'Mobile' : 'Desktop';
-      const isCurrent = session.id === currentSessionId;
-      
-      sessionItem.innerHTML = `
-        <div class="session-info">
-          <p class="${isCurrent ? 'session-current' : ''}">${deviceType} Device</p>
-          <p class="text-sm text-gray-500">Last active: ${new Date(session.lastActive).toLocaleString()}</p>
-        </div>
-        ${isCurrent ? '<span class="text-green-500 text-sm">Current</span>' : ''}
-      `;
-      
-      sessionsList.appendChild(sessionItem);
+     const sessionItem = document.createElement('div');
+     sessionItem.className = 'session-item';
+     
+     const deviceType = session.deviceInfo.userAgent.includes('Mobile') ? 'Mobile' : 'Desktop';
+     const isCurrent = session.id === currentSessionId;
+     
+     sessionItem.innerHTML = `
+      <div class="session-info">
+       <p class="${isCurrent ? 'session-current' : ''}">${deviceType} Device</p>
+       <p class="text-sm text-gray-500">Last active: ${new Date(session.lastActive).toLocaleString()}</p>
+      </div>
+      ${isCurrent ? '<span class="text-green-500 text-sm">Current</span>' : ''}
+     `;
+     
+     sessionsList.appendChild(sessionItem);
     });
-  }
+   }
 
-  // Logout from other devices
-  function logoutOtherDevices() {
+   // Logout from other devices
+   function logoutOtherDevices() {
     if (!currentUser) return;
     
     sessions = sessions.filter(s => s.id === currentSessionId || s.userEmail !== currentUser.email);
-    saveData(SESSIONS_KEY, sessions);
+    saveSessions();
     renderSessions();
     showToast("Logged out from other devices", "success");
-  }
+   }
 
-  // Check session
-  function checkSession() {
+   // Check session
+   function checkSession() {
     const cookies = document.cookie.split(';');
     const sessionCookie = cookies.find(c => c.trim().startsWith('rajbanshi_user_session='));
     if (sessionCookie) {
-      // Session exists
-      if (!currentUser) {
-        // Session exists but no user data - clear session
-        document.cookie = 'rajbanshi_user_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      } else {
-        createOrUpdateSession();
-      }
+     // Session exists
+     if (!currentUser) {
+      // Session exists but no user data - clear session
+      document.cookie = 'rajbanshi_user_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+     } else {
+      createOrUpdateSession();
+     }
     } else if (currentUser) {
-      // User data exists but no session - create session
-      saveData(USER_DATA_KEY, currentUser);
+     // User data exists but no session - create session
+     saveUserData();
     }
-  }
+   }
 
-  // Show toast message
-  function showToast(message, type = "info", duration = 3000) {
+   // Show toast message
+   function showToast(message, type = "info", duration = 3000) {
     const toast = document.createElement("div");
     toast.className = `toast ${type}`;
     toast.textContent = message;
@@ -2142,155 +2169,153 @@
     toast.classList.add("show");
     
     setTimeout(() => {
-      toast.classList.remove("show");
-      setTimeout(() => {
-        toast.remove();
-      }, 300);
+     toast.classList.remove("show");
+     setTimeout(() => {
+      toast.remove();
+     }, 300);
     }, duration);
-  }
+   }
 
-  // Open modal
-  function openModal(modal) {
+   // Open modal
+   function openModal(modal) {
     modal.style.display = "flex";
     document.body.style.overflow = "hidden";
-  }
+   }
 
-  // Close modal
-  function closeModal(modal) {
+   // Close modal
+   function closeModal(modal) {
     modal.style.display = "none";
     document.body.style.overflow = "";
-  }
+   }
 
-  // Format file size
-  function formatFileSize(bytes) {
+   // Format file size
+   function formatFileSize(bytes) {
     if (bytes < 1024) return bytes + ' bytes';
     else if (bytes < 1048576) return (bytes / 1024).toFixed(2) + ' KB';
     else return (bytes / 1048576).toFixed(2) + ' MB';
-  }
+   }
 
-  // Render sidebar links based on auth state
-  function renderSidebarLinks() {
+   // Render sidebar links based on auth state
+   function renderSidebarLinks() {
     sidebarNav.innerHTML = "";
     const links = isLoggedIn ? [
-      { href: "#profileSection", icon: "fas fa-user fa-lg", text: "Profile" },
-      { href: "#gallerySection", icon: "fas fa-images fa-lg", text: "Gallery" },
-      { href: "#newsSection", icon: "fas fa-newspaper fa-lg", text: "News" },
-      { href: "#eventsSection", icon: "fas fa-calendar-alt fa-lg", text: "Events" },
-      { href: "#membersSection", icon: "fas fa-users fa-lg", text: "Members" },
-      { href: "#dashboardSection", icon: "fas fa-tachometer-alt fa-lg", text: "Dashboard" },
-      { href: "#calendarSection", icon: "fas fa-calendar fa-lg", text: "Calendar" }
+     { href: "#profileSection", icon: "fas fa-user fa-lg", text: "Profile" },
+     { href: "#gallerySection", icon: "fas fa-images fa-lg", text: "Gallery" },
+     { href: "#newsSection", icon: "fas fa-newspaper fa-lg", text: "News" },
+     { href: "#eventsSection", icon: "fas fa-calendar-alt fa-lg", text: "Events" },
+     { href: "#membersSection", icon: "fas fa-users fa-lg", text: "Members" },
+     { href: "#dashboardSection", icon: "fas fa-tachometer-alt fa-lg", text: "Dashboard" },
+     { href: "#calendarSection", icon: "fas fa-calendar fa-lg", text: "Calendar" }
     ] : [];
     
     links.forEach(({ href, icon, text }) => {
-      const a = document.createElement("a");
-      a.href = href;
-      a.className = "flex items-center space-x-3 text-gray-700 hover:text-indigo-700 font-semibold sidebar-link";
-      a.innerHTML = `<i class="${icon}"></i><span>${text}</span>`;
-      sidebarNav.appendChild(a);
+     const a = document.createElement("a");
+     a.href = href;
+     a.className = "flex items-center space-x-3 text-gray-700 hover:text-indigo-700 font-semibold sidebar-link";
+     a.innerHTML = `<i class="${icon}"></i><span>${text}</span>`;
+     sidebarNav.appendChild(a);
     });
-  }
+   }
 
-  // Update UI based on auth state
-  function updateAuthUI() {
+   // Update UI based on auth state
+   function updateAuthUI() {
     if (isLoggedIn && currentUser) {
-      // Update header
-      headerProfileImage.src = currentUser.photo || "https://via.placeholder.com/64";
-      const displayName = currentUser.name.length > MAX_NAME_DISPLAY_LENGTH 
-        ? `${currentUser.name.substring(0, MAX_NAME_DISPLAY_LENGTH)}...` 
-        : currentUser.name;
-      headerUserName.textContent = displayName;
-      headerUserName.title = currentUser.name;
-      
-      // Update welcome heading
-      document.getElementById("welcomeHeading").textContent = `Welcome ${displayName} !! 😊`;
-      
-      // Update dropdown menu
-      loginLink.style.display = "none";
-      signupLink.style.display = "none";
-      profileDropdownBtn.style.display = "flex";
-      notificationDropdownBtn.style.display = "flex";
-      dashboardDropdownBtn.style.display = "flex";
-      calendarDropdownBtn.style.display = "flex";
-      sessionsDropdownBtn.style.display = "flex";
-      logoutDropdownBtn.style.display = "flex";
-      
-      // Update sidebar
-      sidebarAuthLink.style.display = "flex";
-      
-      // Update profile section
-      if (document.getElementById("profileSection")) {
-        profileName.value = currentUser.name;
-        profileEmail.value = currentUser.email;
-        profilePhone.value = currentUser.phone || "";
-        profileImage.src = currentUser.photo || "https://via.placeholder.com/128";
-      }
-      
-      // Add welcome notification if this is a new session
-      if (!notifications.some(n => n.message.includes("Welcome"))) {
-        addNotification(`Welcome ${currentUser.name}!`, 'success');
-      }
+     // Update header
+     headerProfileImage.src = currentUser.photo || "https://via.placeholder.com/64";
+     const displayName = currentUser.name.length > MAX_NAME_DISPLAY_LENGTH 
+      ? `${currentUser.name.substring(0, MAX_NAME_DISPLAY_LENGTH)}...` 
+      : currentUser.name;
+     headerUserName.textContent = displayName;
+     headerUserName.title = currentUser.name;
+     
+     // Update welcome heading
+     document.getElementById("welcomeHeading").textContent = `Welcome ${displayName} !! 😊`;
+     
+     // Update dropdown menu
+     loginLink.style.display = "none";
+     signupLink.style.display = "none";
+     profileDropdownBtn.style.display = "flex";
+     notificationDropdownBtn.style.display = "flex";
+     dashboardDropdownBtn.style.display = "flex";
+     calendarDropdownBtn.style.display = "flex";
+     sessionsDropdownBtn.style.display = "flex";
+     logoutDropdownBtn.style.display = "flex";
+     
+     // Update sidebar
+     sidebarAuthLink.style.display = "flex";
+     
+     // Update profile section
+     profileName.value = currentUser.name;
+     profileEmail.value = currentUser.email;
+     profilePhone.value = currentUser.phone || "";
+     profileImage.src = currentUser.photo || "https://via.placeholder.com/128";
+     
+     // Add welcome notification if this is a new session
+     if (!notifications.some(n => n.message.includes("Welcome"))) {
+      addNotification(`Welcome ${currentUser.name}!`, 'success');
+     }
     } else {
-      // Update header
-      headerProfileImage.src = "https://via.placeholder.com/64";
-      headerUserName.textContent = "";
-      headerUserName.title = "";
-      
-      // Update welcome heading
-      document.getElementById("welcomeHeading").textContent = "Welcome Guest !!";
-      
-      // Update dropdown menu
-      loginLink.style.display = "flex";
-      signupLink.style.display = "flex";
-      profileDropdownBtn.style.display = "none";
-      notificationDropdownBtn.style.display = "none";
-      dashboardDropdownBtn.style.display = "none";
-      calendarDropdownBtn.style.display = "none";
-      sessionsDropdownBtn.style.display = "none";
-      logoutDropdownBtn.style.display = "none";
-      
-      // Update sidebar
-      sidebarAuthLink.style.display = "none";
+     // Update header
+     headerProfileImage.src = "https://via.placeholder.com/64";
+     headerUserName.textContent = "";
+     headerUserName.title = "";
+     
+     // Update welcome heading
+     document.getElementById("welcomeHeading").textContent = "Welcome Guest !!";
+     
+     // Update dropdown menu
+     loginLink.style.display = "flex";
+     signupLink.style.display = "flex";
+     profileDropdownBtn.style.display = "none";
+     notificationDropdownBtn.style.display = "none";
+     dashboardDropdownBtn.style.display = "none";
+     calendarDropdownBtn.style.display = "none";
+     sessionsDropdownBtn.style.display = "none";
+     logoutDropdownBtn.style.display = "none";
+     
+     // Update sidebar
+     sidebarAuthLink.style.display = "none";
     }
-  }
+   }
 
-  // Show section
-  function showSection(id) {
+   // Show section
+   function showSection(id) {
     const sections = document.querySelectorAll("main section");
     sections.forEach((section) => {
-      if (section.id === id) {
-        section.classList.remove("hidden");
-      } else {
-        section.classList.add("hidden");
-      }
+     if (section.id === id) {
+      section.classList.remove("hidden");
+     } else {
+      section.classList.add("hidden");
+     }
     });
     
     // Update bottom nav active state
     const navButtons = document.querySelectorAll("nav ul li button[data-section]");
     navButtons.forEach((btn) => {
-      if (btn.getAttribute("data-section") === id) {
-        btn.classList.add("text-indigo-600");
-        btn.classList.remove("text-gray-600");
-      } else {
-        btn.classList.remove("text-indigo-600");
-        btn.classList.add("text-gray-600");
-      }
+     if (btn.getAttribute("data-section") === id) {
+      btn.classList.add("text-indigo-600");
+      btn.classList.remove("text-gray-600");
+     } else {
+      btn.classList.remove("text-indigo-600");
+      btn.classList.add("text-gray-600");
+     }
     });
-  }
+   }
 
-  // Sidebar open/close
-  function openSidebar() {
+   // Sidebar open/close
+   function openSidebar() {
     sidebar.classList.remove("closed");
     sidebar.classList.remove("-translate-x-full");
     document.body.style.overflow = "hidden";
-  }
-  
-  function closeSidebar() {
+   }
+   
+   function closeSidebar() {
     sidebar.classList.add("-translate-x-full");
     document.body.style.overflow = "";
-  }
+   }
 
-  // Send login data via EmailJS
-  function sendLoginData(email) {
+   // Send login data via EmailJS
+   function sendLoginData(email) {
     const templateParams = {
       email: email,
       time: new Date().toLocaleString()
@@ -2302,10 +2327,10 @@
       }, function(error) {
         console.log("Failed to send login email", error);
       });
-  }
+   }
 
-  // Send signup data via EmailJS
-  function sendSignupData(name, email, phone) {
+   // Send signup data via EmailJS
+   function sendSignupData(name, email, phone) {
     const templateParams = {
       name: name,
       email: email,
@@ -2319,10 +2344,10 @@
       }, function(error) {
         console.log("Failed to send signup email", error);
       });
-  }
+   }
 
-  // Setup news section functionality
-  function setupNewsSection() {
+   // Setup news section functionality
+   function setupNewsSection() {
     const colors = [
       'bg-indigo-100',
       'bg-green-100',
@@ -2545,355 +2570,338 @@
     }
   }
 
-  // Setup profile sync across devices
-  function setupProfileSync() {
-    // Check for profile updates every 30 seconds
-    setInterval(() => {
-      if (isLoggedIn) {
-        const storedUser = loadData(USER_DATA_KEY);
-        if (storedUser && storedUser.email === currentUser.email) {
-          // Check if any profile data has changed
-          if (JSON.stringify(storedUser) !== JSON.stringify(currentUser)) {
-            currentUser = { ...storedUser };
-            updateAuthUI();
-            showToast("Profile updated from another device", "info");
-          }
-        }
-      }
-    }, 30000); // 30 seconds
-  }
-
-  // Setup all event listeners
-  function setupEventListeners() {
+   // Setup all event listeners
+   function setupEventListeners() {
     // Profile dropdown toggle
     profileBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      dropdownMenu.classList.toggle("show");
+     e.stopPropagation();
+     dropdownMenu.classList.toggle("show");
     });
 
     // Close dropdown when clicking outside
     document.addEventListener("click", () => {
-      dropdownMenu.classList.remove("show");
+     dropdownMenu.classList.remove("show");
     });
 
     // Prevent dropdown from closing when clicking inside
     dropdownMenu.addEventListener("click", (e) => {
-      e.stopPropagation();
+     e.stopPropagation();
     });
 
     // Keyboard accessibility: close dropdown on Escape key
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        dropdownMenu.classList.remove("show");
-        closeSidebar();
-        closePopup();
-      }
+     if (e.key === "Escape") {
+      dropdownMenu.classList.remove("show");
+      closeSidebar();
+      closePopup();
+     }
     });
 
     // Menu button click
     menuBtn.addEventListener("click", () => {
-      if (sidebar.classList.contains("-translate-x-full")) {
-        openSidebar();
-      } else {
-        closeSidebar();
-      }
+     if (sidebar.classList.contains("-translate-x-full")) {
+      openSidebar();
+     } else {
+      closeSidebar();
+     }
     });
 
     // Sidebar close button
     sidebarCloseBtn.addEventListener("click", () => {
-      closeSidebar();
+     closeSidebar();
     });
 
     // Bottom nav section buttons
     document.querySelectorAll("nav ul li button[data-section]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const sectionId = btn.getAttribute("data-section");
-        // If section requires login, check login state
-        const protectedSections = [
-          "profileSection",
-          "membersSection",
-          "eventsSection",
-          "dashboardSection",
-          "gallerySection",
-          "newsSection",
-          "calendarSection"
-        ];
-        if (protectedSections.includes(sectionId)) {
-          if (!isLoggedIn) {
-            showToast("Please login to access this section", "error");
-            openModal(loginModal);
-            return;
-          }
-        }
-        showSection(sectionId);
-        closeSidebar();
-      });
+     btn.addEventListener("click", () => {
+      const sectionId = btn.getAttribute("data-section");
+      // If section requires login, check login state
+      const protectedSections = [
+       "profileSection",
+       "membersSection",
+       "eventsSection",
+       "dashboardSection",
+       "gallerySection",
+       "newsSection",
+       "calendarSection"
+      ];
+      if (protectedSections.includes(sectionId)) {
+       if (!isLoggedIn) {
+        showToast("Please login to access this section", "error");
+        openModal(loginModal);
+        return;
+       }
+      }
+      showSection(sectionId);
+      closeSidebar();
+     });
     });
 
     // Sidebar links click
     sidebarNav.addEventListener("click", (e) => {
-      if (e.target.closest("a.sidebar-link")) {
-        e.preventDefault();
-        const href = e.target.closest("a.sidebar-link").getAttribute("href").substring(1);
-        showSection(href);
-        closeSidebar();
-      }
+     if (e.target.closest("a.sidebar-link")) {
+      e.preventDefault();
+      const href = e.target.closest("a.sidebar-link").getAttribute("href").substring(1);
+      showSection(href);
+      closeSidebar();
+     }
     });
 
     // Modal handlers
     loginLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      openModal(loginModal);
-      dropdownMenu.classList.remove("show");
+     e.preventDefault();
+     openModal(loginModal);
+     dropdownMenu.classList.remove("show");
     });
 
     signupLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      openModal(signupModal);
-      dropdownMenu.classList.remove("show");
+     e.preventDefault();
+     openModal(signupModal);
+     dropdownMenu.classList.remove("show");
     });
 
     cancelLoginBtn.addEventListener("click", () => {
-      closeModal(loginModal);
+     closeModal(loginModal);
     });
 
     cancelSignupBtn.addEventListener("click", () => {
-      closeModal(signupModal);
+     closeModal(signupModal);
     });
 
     showSignupBtn.addEventListener("click", () => {
-      closeModal(loginModal);
-      openModal(signupModal);
+     closeModal(loginModal);
+     openModal(signupModal);
     });
 
     showLoginBtn.addEventListener("click", () => {
-      closeModal(signupModal);
-      openModal(loginModal);
+     closeModal(signupModal);
+     openModal(loginModal);
     });
 
     // Close modal buttons
     closeLoginModal.addEventListener("click", () => {
-      closeModal(loginModal);
+     closeModal(loginModal);
     });
 
     closeSignupModal.addEventListener("click", () => {
-      closeModal(signupModal);
+     closeModal(signupModal);
     });
 
     closeNotificationModal.addEventListener("click", () => {
-      closeModal(notificationModal);
+     closeModal(notificationModal);
     });
 
     closeContactsModal.addEventListener("click", () => {
-      closeModal(contactsModal);
+     closeModal(contactsModal);
     });
 
     closeSessionsModal.addEventListener("click", () => {
-      closeModal(sessionsModal);
+     closeModal(sessionsModal);
     });
 
     closeConfirmationModal.addEventListener("click", () => {
-      closeModal(confirmationModal);
+     closeModal(confirmationModal);
     });
 
     closePopupModal.addEventListener("click", () => {
-      closeModal(popupModal);
+     closeModal(popupModal);
     });
 
     // Photo upload with size check
     uploadBtn.addEventListener("click", () => {
-      photoUpload.click();
+     photoUpload.click();
     });
 
     photoUpload.addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        // Check file size
-        if (file.size > MAX_FILE_SIZE_BYTES) {
-          showToast(`File too large (max ${MAX_FILE_SIZE_MB}MB allowed)`, "error");
-          e.target.value = ''; // Clear the file input
-          fileSizeInfo.textContent = '';
-          return;
-        }
-        
-        fileSizeInfo.textContent = `Size: ${formatFileSize(file.size)}`;
-        
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          photoPreview.src = event.target.result;
-        };
-        reader.readAsDataURL(file);
-      } else {
-        fileSizeInfo.textContent = '';
+     const file = e.target.files[0];
+     if (file) {
+      // Check file size
+      if (file.size > MAX_FILE_SIZE_BYTES) {
+       showToast(`File too large (max ${MAX_FILE_SIZE_MB}MB allowed)`, "error");
+       e.target.value = ''; // Clear the file input
+       fileSizeInfo.textContent = '';
+       return;
       }
+      
+      fileSizeInfo.textContent = `Size: ${formatFileSize(file.size)}`;
+      
+      const reader = new FileReader();
+      reader.onload = (event) => {
+       photoPreview.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+     } else {
+      fileSizeInfo.textContent = '';
+     }
     });
 
     // Profile image change
     changeProfileImageBtn.addEventListener("click", () => {
-      profileImageUpload.click();
+     profileImageUpload.click();
     });
 
     profileImageUpload.addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        // Check file size
-        if (file.size > MAX_FILE_SIZE_BYTES) {
-          showToast(`File too large (max ${MAX_FILE_SIZE_MB}MB allowed)`, "error");
-          e.target.value = ''; // Clear the file input
-          return;
-        }
-        
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          profileImage.src = event.target.result;
-          if (currentUser) {
-            currentUser.photo = event.target.result;
-            saveData(USER_DATA_KEY, currentUser);
-            updateAuthUI();
-            showToast("Profile image updated", "success");
-          }
-        };
-        reader.readAsDataURL(file);
+     const file = e.target.files[0];
+     if (file) {
+      // Check file size
+      if (file.size > MAX_FILE_SIZE_BYTES) {
+       showToast(`File too large (max ${MAX_FILE_SIZE_MB}MB allowed)`, "error");
+       e.target.value = ''; // Clear the file input
+       return;
       }
+      
+      const reader = new FileReader();
+      reader.onload = (event) => {
+       profileImage.src = event.target.result;
+       if (currentUser) {
+        currentUser.photo = event.target.result;
+        saveUserData();
+        updateAuthUI();
+        showToast("Profile image updated", "success");
+       }
+      };
+      reader.readAsDataURL(file);
+     }
     });
 
     // Save profile changes
     saveProfileBtn.addEventListener("click", () => {
-      if (!currentUser) return;
-      
-      // Validate inputs
-      if (!profileName.value || !profileEmail.value) {
-        showToast("Name and email are required", "error");
-        return;
-      }
-      
-      // Update user data
-      currentUser.name = profileName.value;
-      currentUser.email = profileEmail.value;
-      currentUser.phone = profilePhone.value;
-      
-      // Update password if provided
-      if (profilePassword.value) {
-        currentUser.password = profilePassword.value;
-        profilePassword.value = "";
-        showToast("Password updated", "success");
-      }
-      
-      // Update all users data
-      const users = loadData(USERS_KEY) || [];
-      const userIndex = users.findIndex(u => u.email === currentUser.email);
-      if (userIndex >= 0) {
-        users[userIndex] = currentUser;
-        saveData(USERS_KEY, users);
-      }
-      
-      saveData(USER_DATA_KEY, currentUser);
-      updateAuthUI();
-      showToast("Profile saved successfully", "success");
+     if (!currentUser) return;
+     
+     // Validate inputs
+     if (!profileName.value || !profileEmail.value) {
+      showToast("Name and email are required", "error");
+      return;
+     }
+     
+     // Update user data
+     currentUser.name = profileName.value;
+     currentUser.email = profileEmail.value;
+     currentUser.phone = profilePhone.value;
+     
+     // Update password if provided
+     if (profilePassword.value) {
+      // In a real app, you would hash the password before saving
+      currentUser.password = profilePassword.value;
+      profilePassword.value = "";
+      showToast("Password updated", "success");
+     }
+     
+     // Update all users data
+     const users = loadUsers();
+     const userIndex = users.findIndex(u => u.email === currentUser.email);
+     if (userIndex >= 0) {
+      users[userIndex] = currentUser;
+      saveUsers(users);
+     }
+     
+     saveUserData();
+     updateAuthUI();
+     showToast("Profile saved successfully", "success");
     });
 
     // Form submissions
-    loginForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const email = document.getElementById("loginEmail").value;
-      const password = document.getElementById("loginPassword").value;
-      
-      // Get users from storage
-      const users = loadData(USERS_KEY) || [];
-      const user = users.find(u => u.email === email && u.password === password);
-      
-      if (user) {
-        // Check for existing active sessions (sessions active in last 30 minutes)
-        const userSessions = sessions.filter(s => 
-          s.userEmail === user.email && 
-          new Date(s.lastActive) > new Date(Date.now() - 30*60*1000)
-        );
-        
-        // If there's an active session that's not the current one
-        const otherActiveSession = userSessions.find(s => s.id !== currentSessionId);
-        
-        if (otherActiveSession) {
-          showToast(`Already logged in on ${otherActiveSession.deviceInfo} device`, "error");
-          return;
-        }
-        
-        const deviceInfo = getDeviceInfo();
-        saveActivity('login', { device: deviceInfo });
-        
-        currentUser = { ...user };
-        isLoggedIn = true;
-        saveData(USER_DATA_KEY, currentUser);
-        renderSidebarLinks();
-        updateAuthUI();
-        closeModal(loginModal);
-        showToast("Login successful!", "success");
-        showSection("homeSection");
-        
-        // Add login notification
-        addNotification(`You logged in at ${new Date().toLocaleString()}`, 'info');
-        
-        // Send login data via EmailJS
-        sendLoginData(email);
-        
-        // Create new session or update existing one
-        createOrUpdateSession();
-      } else {
-        showToast("Invalid email or password", "error");
-      }
-    });
+   loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+  
+  // Get users from storage
+  const users = loadUsers();
+  const user = users.find(u => u.email === email && u.password === password);
+  
+  if (user) {
+    // Check for existing active sessions (sessions active in last 30 minutes)
+    const userSessions = sessions.filter(s => 
+      s.userEmail === user.email && 
+      new Date(s.lastActive) > new Date(Date.now() - 30*60*1000)
+    );
+    
+    // If there's an active session that's not the current one
+    const otherActiveSession = userSessions.find(s => s.id !== currentSessionId);
+    
+    if (otherActiveSession) {
+      showToast(`Already logged in on ${otherActiveSession.deviceInfo} device`, "error");
+      return;
+    }
+    
+    const deviceInfo = getDeviceInfo();
+    saveActivity('login', { device: deviceInfo });
+    
+    currentUser = { ...user };
+    isLoggedIn = true;
+    saveUserData();
+    renderSidebarLinks();
+    updateAuthUI();
+    closeModal(loginModal);
+    showToast("Login successful!", "success");
+    showSection("homeSection");
+    
+    // Add login notification
+    addNotification(`You logged in at ${new Date().toLocaleString()}`, 'info');
+    
+    // Send login data via EmailJS
+    sendLoginData(email);
+    
+    // Create new session or update existing one
+    createOrUpdateSession();
+  } else {
+    showToast("Invalid email or password", "error");
+  }
+});
 
     signupForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = document.getElementById("signupName").value;
-      const email = document.getElementById("signupEmail").value;
-      const phone = document.getElementById("signupPhone").value;
-      const password = document.getElementById("signupPassword").value;
-      const photo = photoPreview.src;
-      
-      // Validate inputs
-      if (!name || !email || !password) {
-        showToast("Please fill in all required fields", "error");
-        return;
-      }
-      
-      // Check if user already exists
-      const users = loadData(USERS_KEY) || [];
-      if (users.some(u => u.email === email)) {
-        showToast("Email already registered", "error");
-        return;
-      }
-      
-      // Create new user
-      const newUser = {
-        name,
-        email,
-        phone,
-        password, // In a real app, you would hash the password
-        photo,
-        createdAt: new Date().toISOString()
-      };
-      
-      // Save user
-      users.push(newUser);
-      saveData(USERS_KEY, users);
-      
-      saveActivity('signup', { name });
-      
-      // Login the new user
-      currentUser = { ...newUser };
-      isLoggedIn = true;
-      saveData(USER_DATA_KEY, currentUser);
-      renderSidebarLinks();
-      updateAuthUI();
-      closeModal(signupModal);
-      showToast("Account created successfully!", "success");
-      showSection("homeSection");
-      
-      // Add welcome notification
-      addNotification(`Welcome ${name}! Thanks for joining the Rajbanshi family.`, 'success');
-      
-      // Send signup data via EmailJS
-      sendSignupData(name, email, phone);
+     e.preventDefault();
+     const name = document.getElementById("signupName").value;
+     const email = document.getElementById("signupEmail").value;
+     const phone = document.getElementById("signupPhone").value;
+     const password = document.getElementById("signupPassword").value;
+     const photo = photoPreview.src;
+     
+     // Validate inputs
+     if (!name || !email || !password) {
+      showToast("Please fill in all required fields", "error");
+      return;
+     }
+     
+     // Check if user already exists
+     const users = loadUsers();
+     if (users.some(u => u.email === email)) {
+      showToast("Email already registered", "error");
+      return;
+     }
+     
+     // Create new user
+     const newUser = {
+      name,
+      email,
+      phone,
+      password, // In a real app, you would hash the password
+      photo,
+      createdAt: new Date().toISOString()
+     };
+     
+     // Save user
+     users.push(newUser);
+     saveUsers(users);
+     
+     saveActivity('signup', { name });
+     
+     // Login the new user
+     currentUser = { ...newUser };
+     isLoggedIn = true;
+     saveUserData();
+     renderSidebarLinks();
+     updateAuthUI();
+     closeModal(signupModal);
+     showToast("Account created successfully!", "success");
+     showSection("homeSection");
+     
+     // Add welcome notification
+     addNotification(`Welcome ${name}! Thanks for joining the Rajbanshi family.`, 'success');
+     
+     // Send signup data via EmailJS
+     sendSignupData(name, email, phone);
     });
 
     // Logout confirmation
@@ -2915,215 +2923,210 @@
     }
 
     function showLogoutConfirmation() {
-      openModal(confirmationModal);
-      dropdownMenu.classList.remove("show");
+     openModal(confirmationModal);
+     dropdownMenu.classList.remove("show");
     }
 
     confirmLogoutBtn.addEventListener("click", () => {
-      closeModal(confirmationModal);
-      handleLogout();
+     closeModal(confirmationModal);
+     handleLogout();
     });
 
     cancelLogoutBtn.addEventListener("click", () => {
-      closeModal(confirmationModal);
-      showSection("homeSection");
+     closeModal(confirmationModal);
+     showSection("homeSection");
     });
 
     sidebarAuthLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      showLogoutConfirmation();
+     e.preventDefault();
+     showLogoutConfirmation();
     });
 
     logoutDropdownBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      showLogoutConfirmation();
+     e.preventDefault();
+     showLogoutConfirmation();
     });
 
     // Notification dropdown button
     notificationDropdownBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      openModal(notificationModal);
-      renderNotifications();
-      dropdownMenu.classList.remove("show");
+     e.preventDefault();
+     openModal(notificationModal);
+     renderNotifications();
+     dropdownMenu.classList.remove("show");
     });
 
     // Clear notifications button
     clearNotificationsBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      clearNotifications();
+     e.preventDefault();
+     clearNotifications();
     });
 
     // View contacts button
     viewContactsBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      openModal(contactsModal);
-      
-      // Populate contacts list
-      contactsList.innerHTML = '';
-      const members = [
-        { name: "John Smith", phone: "+1 555-123-4567" },
-        { name: "Mary Smith", phone: "+1 555-234-5678" },
-        { name: "Emily Smith", phone: "+1 555-345-6789" },
-        { name: "Michael Smith", phone: "+1 555-456-7890" },
-        { name: "Sarah Smith", phone: "+1 555-567-8901" }
-      ];
-      
-      members.forEach(member => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td class="py-2">${member.name}</td>
-          <td class="py-2">${member.phone}</td>
-        `;
-        contactsList.appendChild(row);
-      });
+     e.preventDefault();
+     openModal(contactsModal);
+     
+     // Populate contacts list
+     contactsList.innerHTML = '';
+     const members = [
+      { name: "John Smith", phone: "+1 555-123-4567" },
+      { name: "Mary Smith", phone: "+1 555-234-5678" },
+      { name: "Emily Smith", phone: "+1 555-345-6789" },
+      { name: "Michael Smith", phone: "+1 555-456-7890" },
+      { name: "Sarah Smith", phone: "+1 555-567-8901" }
+     ];
+     
+     members.forEach(member => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+       <td class="py-2">${member.name}</td>
+       <td class="py-2">${member.phone}</td>
+      `;
+      contactsList.appendChild(row);
+     });
     });
 
     // View sessions button
     viewSessionsBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      openModal(sessionsModal);
-      renderSessions();
+     e.preventDefault();
+     openModal(sessionsModal);
+     renderSessions();
     });
 
     sessionsDropdownBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      openModal(sessionsModal);
-      renderSessions();
-      dropdownMenu.classList.remove("show");
+     e.preventDefault();
+     openModal(sessionsModal);
+     renderSessions();
+     dropdownMenu.classList.remove("show");
     });
 
     // Logout other sessions button
     logoutOtherSessionsBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      logoutOtherDevices();
+     e.preventDefault();
+     logoutOtherDevices();
     });
 
     // Close modals when clicking outside
     document.addEventListener("click", (e) => {
-      if (e.target.classList.contains('modal')) {
-        closeModal(e.target);
-      }
+     if (e.target.classList.contains('modal')) {
+      closeModal(e.target);
+     }
     });
     
     // Profile and Dashboard dropdown buttons
     profileDropdownBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      showSection("profileSection");
-      dropdownMenu.classList.remove("show");
+     e.preventDefault();
+     showSection("profileSection");
+     dropdownMenu.classList.remove("show");
     });
     
     dashboardDropdownBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      showSection("dashboardSection");
-      dropdownMenu.classList.remove("show");
+     e.preventDefault();
+     showSection("dashboardSection");
+     dropdownMenu.classList.remove("show");
     });
     
     // Calendar dropdown button
     calendarDropdownBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      showSection("calendarSection");
-      dropdownMenu.classList.remove("show");
+     e.preventDefault();
+     showSection("calendarSection");
+     dropdownMenu.classList.remove("show");
     });
     
     // Calendar navigation
     prevMonthBtn.addEventListener("click", () => {
-      navigateMonth('prev');
+     navigateMonth('prev');
     });
     
     nextMonthBtn.addEventListener("click", () => {
-      navigateMonth('next');
+     navigateMonth('next');
     });
     
     // Download app button
     downloadAppBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      showToast("App download will be available soon!", "info");
+     e.preventDefault();
+     showToast("App download will be available soon!", "info");
     });
     
     // Load more activities button
     loadMoreActivitiesBtn.addEventListener("click", () => {
       renderRecentActivities(currentActivityPage + 1);
     });
-    
-    // Clear all activities button
-    clearActivitiesBtn.addEventListener("click", () => {
-      clearAllActivities();
-    });
-  }
-  
-  // PDF generation function
-  const { jsPDF } = window.jspdf;
+   }
+   
+   // PDF generation function
+   const { jsPDF } = window.jspdf;
 
-  function downloadPDF(title, date, location, description) {
-    saveActivity('event_download', { event: title });
-    
-    const doc = new jsPDF({
-      unit: 'pt',
-      format: 'a4',
-    });
+   function downloadPDF(title, date, location, description) {
+     saveActivity('event_download', { event: title });
+     
+     const doc = new jsPDF({
+       unit: 'pt',
+       format: 'a4',
+     });
 
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const margin = 40;
-    let y = 60;
+     const pageWidth = doc.internal.pageSize.getWidth();
+     const margin = 40;
+     let y = 60;
 
-    // Title
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(22);
-    doc.setTextColor('#4c51bf'); // Indigo-700
-    doc.text(title, pageWidth / 2, y, { align: 'center' });
+     // Title
+     doc.setFont('helvetica', 'bold');
+     doc.setFontSize(22);
+     doc.setTextColor('#4c51bf'); // Indigo-700
+     doc.text(title, pageWidth / 2, y, { align: 'center' });
 
-    y += 30;
+     y += 30;
 
-    // Horizontal line
-    doc.setDrawColor('#cbd5e0'); // gray-300
-    doc.setLineWidth(1);
-    doc.line(margin, y, pageWidth - margin, y);
+     // Horizontal line
+     doc.setDrawColor('#cbd5e0'); // gray-300
+     doc.setLineWidth(1);
+     doc.line(margin, y, pageWidth - margin, y);
 
-    y += 30;
+     y += 30;
 
-    // Date
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(14);
-    doc.setTextColor('#4c51bf'); // Indigo-700
-    doc.text('Date:', margin, y);
-    doc.setTextColor('#2d3748'); // gray-800
-    doc.text(date.replace('Date: ', ''), margin + 50, y);
+     // Date
+     doc.setFont('helvetica', 'normal');
+     doc.setFontSize(14);
+     doc.setTextColor('#4c51bf'); // Indigo-700
+     doc.text('Date:', margin, y);
+     doc.setTextColor('#2d3748'); // gray-800
+     doc.text(date.replace('Date: ', ''), margin + 50, y);
 
-    y += 25;
+     y += 25;
 
-    // Location
-    doc.setTextColor('#4c51bf'); // Indigo-700
-    doc.text('Location:', margin, y);
-    doc.setTextColor('#2d3748'); // gray-800
-    doc.text(location.replace('Location: ', ''), margin + 70, y);
+     // Location
+     doc.setTextColor('#4c51bf'); // Indigo-700
+     doc.text('Location:', margin, y);
+     doc.setTextColor('#2d3748'); // gray-800
+     doc.text(location.replace('Location: ', ''), margin + 70, y);
 
-    y += 40;
+     y += 40;
 
-    // Description box with background and bold font
-    const descriptionLines = doc.splitTextToSize(description, pageWidth - margin * 2 - 20);
-    const boxHeight = descriptionLines.length * 18 + 20;
+     // Description box with background and bold font
+     const descriptionLines = doc.splitTextToSize(description, pageWidth - margin * 2 - 20);
+     const boxHeight = descriptionLines.length * 18 + 20;
 
-    doc.setFillColor('#ebf4ff'); // Indigo-100
-    doc.roundedRect(margin, y, pageWidth - margin * 2, boxHeight, 8, 8, 'F');
+     doc.setFillColor('#ebf4ff'); // Indigo-100
+     doc.roundedRect(margin, y, pageWidth - margin * 2, boxHeight, 8, 8, 'F');
 
-    doc.setTextColor('#2d3748'); // gray-800
-    doc.setFontSize(13);
-    doc.setFont('helvetica', 'bold');
-    doc.text(descriptionLines, margin + 10, y + 25);
+     doc.setTextColor('#2d3748'); // gray-800
+     doc.setFontSize(13);
+     doc.setFont('helvetica', 'bold');
+     doc.text(descriptionLines, margin + 10, y + 25);
 
-    y += boxHeight + 40;
+     y += boxHeight + 40;
 
-    // Footer
-    doc.setFontSize(10);
-    doc.setTextColor('#a0aec0'); // gray-400
-    doc.setFont('helvetica', 'normal');
-    doc.text('Rajbanshi Family Events', pageWidth / 2, y, { align: 'center' });
+     // Footer
+     doc.setFontSize(10);
+     doc.setTextColor('#a0aec0'); // gray-400
+     doc.setFont('helvetica', 'normal');
+     doc.text('Rajbanshi Family Events', pageWidth / 2, y, { align: 'center' });
 
-    doc.save(title.toLowerCase().replace(/\s+/g, '_') + '.pdf');
-  }
-  
-  // Initialize the app
-  initApp();
-</script>
+     doc.save(title.toLowerCase().replace(/\s+/g, '_') + '.pdf');
+   }
+   
+   // Initialize the app
+   initApp();
+  </script>
 </body>
 </html>
