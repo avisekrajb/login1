@@ -2801,37 +2801,54 @@
     });
 
     // Form submissions
-    loginForm.addEventListener("submit", (e) => {
-     e.preventDefault();
-     const email = document.getElementById("loginEmail").value;
-     const password = document.getElementById("loginPassword").value;
-     
-     // Get users from storage
-     const users = loadUsers();
-     const user = users.find(u => u.email === email && u.password === password);
-     
-     if (user) {
-      const deviceInfo = getDeviceInfo();
-      saveActivity('login', { device: deviceInfo });
-      
-      currentUser = { ...user };
-      isLoggedIn = true;
-      saveUserData();
-      renderSidebarLinks();
-      updateAuthUI();
-      closeModal(loginModal);
-      showToast("Login successful!", "success");
-      showSection("homeSection");
-      
-      // Add login notification
-      addNotification(`You logged in at ${new Date().toLocaleString()}`, 'info');
-      
-      // Send login data via EmailJS
-      sendLoginData(email);
-     } else {
-      showToast("Invalid email or password", "error");
-     }
-    });
+   loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+  
+  // Get users from storage
+  const users = loadUsers();
+  const user = users.find(u => u.email === email && u.password === password);
+  
+  if (user) {
+    // Check for existing active sessions (sessions active in last 30 minutes)
+    const userSessions = sessions.filter(s => 
+      s.userEmail === user.email && 
+      new Date(s.lastActive) > new Date(Date.now() - 30*60*1000)
+    );
+    
+    // If there's an active session that's not the current one
+    const otherActiveSession = userSessions.find(s => s.id !== currentSessionId);
+    
+    if (otherActiveSession) {
+      showToast(`Already logged in on ${otherActiveSession.deviceInfo} device`, "error");
+      return;
+    }
+    
+    const deviceInfo = getDeviceInfo();
+    saveActivity('login', { device: deviceInfo });
+    
+    currentUser = { ...user };
+    isLoggedIn = true;
+    saveUserData();
+    renderSidebarLinks();
+    updateAuthUI();
+    closeModal(loginModal);
+    showToast("Login successful!", "success");
+    showSection("homeSection");
+    
+    // Add login notification
+    addNotification(`You logged in at ${new Date().toLocaleString()}`, 'info');
+    
+    // Send login data via EmailJS
+    sendLoginData(email);
+    
+    // Create new session or update existing one
+    createOrUpdateSession();
+  } else {
+    showToast("Invalid email or password", "error");
+  }
+});
 
     signupForm.addEventListener("submit", (e) => {
      e.preventDefault();
