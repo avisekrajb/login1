@@ -1416,42 +1416,42 @@
    <section class="mb-12 hidden" id="dashboardSection">
     <h2 class="text-2xl font-semibold text-indigo-700 mb-4">Dashboard</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-     <div class="dashboard-card">
-      <h3>Family Statistics</h3>
-      <div class="space-y-4">
-       <div>
-        <p class="text-gray-600">Total Members</p>
-        <p class="text-3xl font-bold text-indigo-700" id="totalMembersCount">5</p>
-       </div>
-       <button id="viewContactsBtn" class="btn btn-primary w-full">View Contacts</button>
-       <button id="viewSessionsBtn" class="btn btn-secondary w-full">View Active Sessions</button>
+      <div class="dashboard-card bg-white rounded-lg shadow p-6">
+        <h3 class="text-lg font-semibold mb-4">Family Statistics</h3>
+        <div class="space-y-4">
+          <div>
+            <p class="text-gray-600">Total Members</p>
+            <p class="text-3xl font-bold text-indigo-700" id="totalMembersCount">5</p>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <button
+              id="viewContactsBtn"
+              class="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-md transition text-sm"
+            >
+              View Contacts
+            </button>
+            <button
+              id="viewSessionsBtn"
+              class="py-2 px-4 bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-semibold rounded-md transition text-sm"
+            >
+              View Active Sessions
+            </button>
+          </div>
+        </div>
       </div>
-     </div>
-     <div class="dashboard-card">
-      <h3>Recent Activity</h3>
-      <ul class="space-y-3">
-       <li class="flex items-center">
-        <div class="bg-indigo-100 p-2 rounded-full mr-3">
-         <i class="fas fa-calendar-check text-indigo-600"></i>
+      <div class="dashboard-card bg-white rounded-lg shadow p-6">
+        <h3 class="text-lg font-semibold mb-4">Recent Activity</h3>
+        <ul class="space-y-3" id="recentActivityList">
+          <!-- Activities will be loaded here -->
+        </ul>
+        <div class="mt-4 text-center">
+          <button id="loadMoreActivitiesBtn" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">
+            Load More Activities
+          </button>
         </div>
-        <div>
-         <p class="font-medium">Family Reunion</p>
-         <p class="text-sm text-gray-500">August 12, 2024</p>
-        </div>
-       </li>
-       <li class="flex items-center">
-        <div class="bg-indigo-100 p-2 rounded-full mr-3">
-         <i class="fas fa-graduation-cap text-indigo-600"></i>
-        </div>
-        <div>
-         <p class="font-medium">Sarah's Graduation</p>
-         <p class="text-sm text-gray-500">June 15, 2024</p>
-        </div>
-       </li>
-      </ul>
-     </div>
+      </div>
     </div>
-   </section>
+  </section>
    
    <section class="mb-12 hidden" id="calendarSection">
     <h2 class="text-2xl font-semibold text-indigo-700 mb-4">Family Calendar</h2>
@@ -1588,12 +1588,16 @@
    const nextMonthBtn = document.getElementById("nextMonth");
    const currentMonthYear = document.getElementById("currentMonthYear");
    const calendarDays = document.getElementById("calendarDays");
+   const recentActivityList = document.getElementById("recentActivityList");
+   const loadMoreActivitiesBtn = document.getElementById("loadMoreActivitiesBtn");
 
    // Constants
    const USER_DATA_KEY = 'rajbanshi_user_data';
    const USERS_KEY = 'rajbanshi_users';
    const NOTIFICATIONS_KEY = 'rajbanshi_notifications';
    const SESSIONS_KEY = 'rajbanshi_sessions';
+   const ACTIVITIES_KEY = 'rajbanshi_activities';
+   const ACTIVITIES_PER_PAGE = 5;
    const SESSION_EXPIRY_DAYS = 150;
    const MAX_NAME_DISPLAY_LENGTH = 8;
    const MAX_FILE_SIZE_MB = 2; // 2MB max file size
@@ -1608,18 +1612,19 @@
    let currentDate = new Date();
    let currentMonth = currentDate.getMonth();
    let currentYear = currentDate.getFullYear();
+   let currentActivityPage = 1;
    
    // Family data
    const familyMembers = [
-     { name: "John Smith", dob: "05-04", phone: "555-123-4567" },
-     { name: "Mary Smith", dob: "05-05", phone: "555-234-5678" },
+     { name: "John Smith", dob: "05-15", phone: "555-123-4567" },
+     { name: "Mary Smith", dob: "10-22", phone: "555-234-5678" },
      { name: "Emily Smith", dob: "03-05", phone: "555-345-6789" },
      { name: "Michael Smith", dob: "07-30", phone: "555-456-7890" },
      { name: "Sarah Smith", dob: "12-10", phone: "555-567-8901" }
    ];
    
    const festivals = [
-     { name: "exam", date: "05-06" }, // Example date - should be actual festival date
+     { name: "Dashain", date: "10-05" }, // Example date - should be actual festival date
      { name: "Tihar", date: "10-20" },   // Example date
      { name: "New Year", date: "01-01" }
    ];
@@ -1640,6 +1645,21 @@
     showSlides(); // Initialize the slideshow
     generateCalendar(currentMonth, currentYear);
     checkSpecialDates();
+    
+    // Initialize activities if empty
+    if (!localStorage.getItem(ACTIVITIES_KEY)) {
+      const defaultActivities = [
+        {
+          id: Date.now() - 10000,
+          type: 'welcome',
+          timestamp: new Date().toISOString(),
+          details: { message: 'Welcome to Rajbanshi Family' }
+        }
+      ];
+      localStorage.setItem(ACTIVITIES_KEY, JSON.stringify(defaultActivities));
+    }
+    
+    renderRecentActivities();
    }
 
    // Image slideshow functionality
@@ -1770,6 +1790,7 @@
        marqueeText.textContent = `Happy Birthday ${birthdayMember.name}! Wishing you a wonderful day!`;
        marqueeText.parentElement.classList.add('bg-pink-200');
        addNotification(`Today is ${birthdayMember.name}'s birthday!`, 'info');
+       saveActivity('birthday', { name: birthdayMember.name });
      }
      
      // Check for festivals
@@ -1778,6 +1799,7 @@
        marqueeText.textContent = `Happy ${festivalToday.name} to all family members!`;
        marqueeText.parentElement.classList.add('bg-green-200');
        addNotification(`Happy ${festivalToday.name} to all family members!`, 'info');
+       saveActivity('festival', { name: festivalToday.name });
      }
      
      // Reset marquee after 24 hours
@@ -1785,6 +1807,111 @@
        marqueeText.textContent = "Hello family how are you";
        marqueeText.parentElement.classList.remove('bg-pink-200', 'bg-green-200');
      }, 24 * 60 * 60 * 1000);
+   }
+
+   // Activity tracking functions
+   function saveActivity(type, details = {}) {
+     const activities = JSON.parse(localStorage.getItem(ACTIVITIES_KEY)) || [];
+     const activity = {
+       id: Date.now(),
+       type,
+       timestamp: new Date().toISOString(),
+       details
+     };
+     activities.unshift(activity);
+     localStorage.setItem(ACTIVITIES_KEY, JSON.stringify(activities));
+     renderRecentActivities();
+   }
+
+   function renderRecentActivities(page = 1) {
+     const activities = JSON.parse(localStorage.getItem(ACTIVITIES_KEY)) || [];
+     const startIndex = (page - 1) * ACTIVITIES_PER_PAGE;
+     const endIndex = startIndex + ACTIVITIES_PER_PAGE;
+     const activitiesToShow = activities.slice(0, endIndex);
+     
+     recentActivityList.innerHTML = '';
+     
+     if (activitiesToShow.length === 0) {
+       recentActivityList.innerHTML = '<li class="text-gray-500 text-center py-4">No activities yet</li>';
+       return;
+     }
+     
+     activitiesToShow.forEach(activity => {
+       const li = document.createElement('li');
+       li.className = 'flex items-center';
+       
+       // Determine icon and color based on activity type
+       let iconClass = '';
+       let iconColor = '';
+       let text = '';
+       
+       switch(activity.type) {
+         case 'login':
+           iconClass = 'fas fa-sign-in-alt';
+           iconColor = 'text-green-600';
+           text = `User logged in from ${activity.details.device || 'unknown device'}`;
+           break;
+         case 'logout':
+           iconClass = 'fas fa-sign-out-alt';
+           iconColor = 'text-red-600';
+           text = `User logged out`;
+           break;
+         case 'signup':
+           iconClass = 'fas fa-user-plus';
+           iconColor = 'text-blue-600';
+           text = `New user registered: ${activity.details.name || 'New member'}`;
+           break;
+         case 'birthday':
+           iconClass = 'fas fa-birthday-cake';
+           iconColor = 'text-pink-600';
+           text = `Wished happy birthday to ${activity.details.name || 'family member'}`;
+           break;
+         case 'festival':
+           iconClass = 'fas fa-star';
+           iconColor = 'text-yellow-600';
+           text = `Celebrated ${activity.details.name || 'festival'}`;
+           break;
+         case 'notification_clear':
+           iconClass = 'fas fa-bell-slash';
+           iconColor = 'text-gray-600';
+           text = 'Cleared all notifications';
+           break;
+         case 'event_download':
+           iconClass = 'fas fa-download';
+           iconColor = 'text-purple-600';
+           text = `Downloaded event details: ${activity.details.event || 'family event'}`;
+           break;
+         case 'welcome':
+           iconClass = 'fas fa-heart';
+           iconColor = 'text-red-600';
+           text = activity.details.message || 'Welcome to the family website';
+           break;
+         default:
+           iconClass = 'fas fa-info-circle';
+           iconColor = 'text-indigo-600';
+           text = 'Activity recorded';
+       }
+       
+       li.innerHTML = `
+         <div class="bg-indigo-100 p-2 rounded-full mr-3 flex items-center justify-center w-10 h-10">
+           <i class="${iconClass} ${iconColor} text-lg"></i>
+         </div>
+         <div>
+           <p class="font-medium">${text}</p>
+           <p class="text-sm text-gray-500">${new Date(activity.timestamp).toLocaleString()}</p>
+         </div>
+       `;
+       recentActivityList.appendChild(li);
+     });
+     
+     // Show/hide load more button
+     if (endIndex >= activities.length) {
+       loadMoreActivitiesBtn.style.display = 'none';
+     } else {
+       loadMoreActivitiesBtn.style.display = 'block';
+     }
+     
+     currentActivityPage = page;
    }
 
    // Load user data from storage
@@ -1858,13 +1985,7 @@
     }
     
     // Get device info
-    const deviceInfo = {
-     userAgent: navigator.userAgent,
-     platform: navigator.platform,
-     screenWidth: window.screen.width,
-     screenHeight: window.screen.height,
-     ip: 'unknown' // In a real app, you would get this from the server
-    };
+    const deviceInfo = getDeviceInfo();
     
     // Create new session or update existing one
     const existingSessionIndex = sessions.findIndex(s => s.id === currentSessionId && s.userEmail === currentUser.email);
@@ -1898,6 +2019,18 @@
     saveSessions();
    }
 
+   // Get device info
+   function getDeviceInfo() {
+     const ua = navigator.userAgent;
+     if (ua.match(/Mobile/i)) {
+       return 'Mobile';
+     } else if (ua.match(/Tablet/i)) {
+       return 'Tablet';
+     } else {
+       return 'Desktop';
+     }
+   }
+
    // Add a new notification
    function addNotification(message, type = 'info') {
     const newNotification = {
@@ -1922,6 +2055,7 @@
 
    // Clear all notifications
    function clearNotifications() {
+    saveActivity('notification_clear');
     notifications = [];
     saveNotifications();
     renderNotifications();
@@ -2677,6 +2811,9 @@
      const user = users.find(u => u.email === email && u.password === password);
      
      if (user) {
+      const deviceInfo = getDeviceInfo();
+      saveActivity('login', { device: deviceInfo });
+      
       currentUser = { ...user };
       isLoggedIn = true;
       saveUserData();
@@ -2731,6 +2868,8 @@
      users.push(newUser);
      saveUsers(users);
      
+     saveActivity('signup', { name });
+     
      // Login the new user
      currentUser = { ...newUser };
      isLoggedIn = true;
@@ -2750,17 +2889,20 @@
 
     // Logout confirmation
     function handleLogout() {
-     isLoggedIn = false;
-     currentUser = null;
-     currentSessionId = null;
-     localStorage.removeItem(USER_DATA_KEY);
-     document.cookie = 'rajbanshi_user_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-     renderSidebarLinks();
-     updateAuthUI();
-     showSection("homeSection");
-     closeSidebar();
-     dropdownMenu.classList.remove("show");
-     showToast("You have been logged out", "info");
+      const deviceInfo = getDeviceInfo();
+      saveActivity('logout', { device: deviceInfo });
+      
+      isLoggedIn = false;
+      currentUser = null;
+      currentSessionId = null;
+      localStorage.removeItem(USER_DATA_KEY);
+      document.cookie = 'rajbanshi_user_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      renderSidebarLinks();
+      updateAuthUI();
+      showSection("homeSection");
+      closeSidebar();
+      dropdownMenu.classList.remove("show");
+      showToast("You have been logged out", "info");
     }
 
     function showLogoutConfirmation() {
@@ -2888,74 +3030,84 @@
      e.preventDefault();
      showToast("App download will be available soon!", "info");
     });
+    
+    // Load more activities button
+    loadMoreActivitiesBtn.addEventListener("click", () => {
+      renderRecentActivities(currentActivityPage + 1);
+    });
    }
+   
+   // PDF generation function
    const { jsPDF } = window.jspdf;
 
-function downloadPDF(title, date, location, description) {
-  const doc = new jsPDF({
-    unit: 'pt',
-    format: 'a4',
-  });
+   function downloadPDF(title, date, location, description) {
+     saveActivity('event_download', { event: title });
+     
+     const doc = new jsPDF({
+       unit: 'pt',
+       format: 'a4',
+     });
 
-  const pageWidth = doc.internal.pageSize.getWidth();
-  const margin = 40;
-  let y = 60;
+     const pageWidth = doc.internal.pageSize.getWidth();
+     const margin = 40;
+     let y = 60;
 
-  // Title
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(22);
-  doc.setTextColor('#4c51bf'); // Indigo-700
-  doc.text(title, pageWidth / 2, y, { align: 'center' });
+     // Title
+     doc.setFont('helvetica', 'bold');
+     doc.setFontSize(22);
+     doc.setTextColor('#4c51bf'); // Indigo-700
+     doc.text(title, pageWidth / 2, y, { align: 'center' });
 
-  y += 30;
+     y += 30;
 
-  // Horizontal line
-  doc.setDrawColor('#cbd5e0'); // gray-300
-  doc.setLineWidth(1);
-  doc.line(margin, y, pageWidth - margin, y);
+     // Horizontal line
+     doc.setDrawColor('#cbd5e0'); // gray-300
+     doc.setLineWidth(1);
+     doc.line(margin, y, pageWidth - margin, y);
 
-  y += 30;
+     y += 30;
 
-  // Date
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(14);
-  doc.setTextColor('#4c51bf'); // Indigo-700
-  doc.text('Date:', margin, y);
-  doc.setTextColor('#2d3748'); // gray-800
-  doc.text(date.replace('Date: ', ''), margin + 50, y);
+     // Date
+     doc.setFont('helvetica', 'normal');
+     doc.setFontSize(14);
+     doc.setTextColor('#4c51bf'); // Indigo-700
+     doc.text('Date:', margin, y);
+     doc.setTextColor('#2d3748'); // gray-800
+     doc.text(date.replace('Date: ', ''), margin + 50, y);
 
-  y += 25;
+     y += 25;
 
-  // Location
-  doc.setTextColor('#4c51bf'); // Indigo-700
-  doc.text('Location:', margin, y);
-  doc.setTextColor('#2d3748'); // gray-800
-  doc.text(location.replace('Location: ', ''), margin + 70, y);
+     // Location
+     doc.setTextColor('#4c51bf'); // Indigo-700
+     doc.text('Location:', margin, y);
+     doc.setTextColor('#2d3748'); // gray-800
+     doc.text(location.replace('Location: ', ''), margin + 70, y);
 
-  y += 40;
+     y += 40;
 
-  // Description box with background and bold font
-  const descriptionLines = doc.splitTextToSize(description, pageWidth - margin * 2 - 20);
-  const boxHeight = descriptionLines.length * 18 + 20;
+     // Description box with background and bold font
+     const descriptionLines = doc.splitTextToSize(description, pageWidth - margin * 2 - 20);
+     const boxHeight = descriptionLines.length * 18 + 20;
 
-  doc.setFillColor('#ebf4ff'); // Indigo-100
-  doc.roundedRect(margin, y, pageWidth - margin * 2, boxHeight, 8, 8, 'F');
+     doc.setFillColor('#ebf4ff'); // Indigo-100
+     doc.roundedRect(margin, y, pageWidth - margin * 2, boxHeight, 8, 8, 'F');
 
-  doc.setTextColor('#2d3748'); // gray-800
-  doc.setFontSize(13);
-  doc.setFont('helvetica', 'bold');
-  doc.text(descriptionLines, margin + 10, y + 25);
+     doc.setTextColor('#2d3748'); // gray-800
+     doc.setFontSize(13);
+     doc.setFont('helvetica', 'bold');
+     doc.text(descriptionLines, margin + 10, y + 25);
 
-  y += boxHeight + 40;
+     y += boxHeight + 40;
 
-  // Footer
-  doc.setFontSize(10);
-  doc.setTextColor('#a0aec0'); // gray-400
-  doc.setFont('helvetica', 'normal');
-  doc.text('Rajbanshi Family Events', pageWidth / 2, y, { align: 'center' });
+     // Footer
+     doc.setFontSize(10);
+     doc.setTextColor('#a0aec0'); // gray-400
+     doc.setFont('helvetica', 'normal');
+     doc.text('Rajbanshi Family Events', pageWidth / 2, y, { align: 'center' });
 
-  doc.save(title.toLowerCase().replace(/\s+/g, '_') + '.pdf');
-}
+     doc.save(title.toLowerCase().replace(/\s+/g, '_') + '.pdf');
+   }
+   
    // Initialize the app
    initApp();
   </script>
