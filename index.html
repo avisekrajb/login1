@@ -1032,739 +1032,416 @@
     </div>
    </section>
    
-<section class="mb-12" id="gallerySection">
-    <h2 class="text-3xl font-bold text-indigo-800 mb-8 text-center">Family Memories Gallery</h2>
-    
-    <!-- Gallery Controls -->
-    <div class="flex flex-wrap justify-between items-center mb-8 gap-4">
-        <!-- Categories Navigation -->
-        <div class="flex flex-wrap gap-3">
-            <button class="category-btn px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200 transition-all" data-category="all">All</button>
-            <button class="category-btn px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200 transition-all" data-category="father">Father</button>
-            <button class="category-btn px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200 transition-all" data-category="mother">Mother</button>
-            <button class="category-btn px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200 transition-all" data-category="sister">Sister</button>
-            <button class="category-btn px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200 transition-all" data-category="brother">Brother</button>
-            <button class="category-btn px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200 transition-all" data-category="videos">Videos</button>
-        </div>
-
-        <!-- View Options -->
-        <div class="flex items-center gap-3">
-            <button id="viewTimelineBtn" class="px-3 py-1 text-sm bg-indigo-100 rounded-md hover:bg-indigo-200">Timeline View</button>
-            <button id="viewGridBtn" class="px-3 py-1 text-sm bg-gray-100 rounded-md hover:bg-gray-200">Grid View</button>
+<section class="mb-12 relative" id="gallerySection">
+    <!-- Music Player -->
+    <div class="bg-indigo-50 rounded-xl p-4 mb-6 flex items-center gap-4">
+        <button id="musicToggle" class="bg-indigo-600 text-white rounded-full p-3 hover:bg-indigo-700 transition">
+            <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        </button>
+        <div class="flex-1">
+            <p class="font-medium text-indigo-800">Family Memories Theme</p>
+            <audio id="bgMusic" loop>
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            </audio>
         </div>
     </div>
 
-    <!-- Slideshow Controls -->
-    <div id="slideshowControls" class="mb-6 p-4 bg-indigo-50 rounded-lg transition-all duration-300 ease-in-out">
-        <div class="flex items-center gap-4">
-            <button id="startSlideshowBtn" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">Start Slideshow</button>
-            <div class="flex items-center gap-2">
-                <span class="text-sm text-gray-700">Speed:</span>
-                <select id="slideshowSpeed" class="text-sm border rounded px-2 py-1 transition-all">
-                    <option value="3000">Slow</option>
-                    <option value="2000" selected>Normal</option>
-                    <option value="1000">Fast</option>
-                </select>
+    <!-- Categories Navigation with Swipe Indicators -->
+    <div class="relative mb-6">
+        <div class="flex overflow-x-auto scrollbar-hide pb-2 gap-2" id="categoryTabs">
+            <button class="category-btn flex-shrink-0 px-4 py-2 rounded-full bg-indigo-600 text-white font-medium" data-category="all">All</button>
+            <button class="category-btn flex-shrink-0 px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200" data-category="father">Father</button>
+            <button class="category-btn flex-shrink-0 px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200" data-category="mother">Mother</button>
+            <button class="category-btn flex-shrink-0 px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200" data-category="sister">Sister</button>
+            <button class="category-btn flex-shrink-0 px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200" data-category="brother">Brother</button>
+            <button class="category-btn flex-shrink-0 px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200" data-category="uncle">Uncle</button>
+            <button class="category-btn flex-shrink-0 px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200" data-category="videos">Videos</button>
+        </div>
+        <div class="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
+    </div>
+
+    <!-- Gallery Content with Swipe Support -->
+    <div class="relative overflow-hidden">
+        <div id="galleryContainer" class="transition-transform duration-300 ease-out">
+            <!-- All Content -->
+            <div class="gallery-category" data-category="all">
+                <!-- Father -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Father</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?father,man">
+                            <img src="https://source.unsplash.com/random/400x400/?father,man" alt="Father" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?father,portrait">
+                            <img src="https://source.unsplash.com/random/400x400/?father,portrait" alt="Father" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?father,working">
+                            <img src="https://source.unsplash.com/random/400x400/?father,working" alt="Father" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?father,smiling">
+                            <img src="https://source.unsplash.com/random/400x400/?father,smiling" alt="Father" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mother -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Mother</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?mother,woman">
+                            <img src="https://source.unsplash.com/random/400x400/?mother,woman" alt="Mother" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?mother,cooking">
+                            <img src="https://source.unsplash.com/random/400x400/?mother,cooking" alt="Mother" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?mother,smiling">
+                            <img src="https://source.unsplash.com/random/400x400/?mother,smiling" alt="Mother" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?mother,garden">
+                            <img src="https://source.unsplash.com/random/400x400/?mother,garden" alt="Mother" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sister -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Sister</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?sister,girl">
+                            <img src="https://source.unsplash.com/random/400x400/?sister,girl" alt="Sister" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?sister,playing">
+                            <img src="https://source.unsplash.com/random/400x400/?sister,playing" alt="Sister" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?sister,school">
+                            <img src="https://source.unsplash.com/random/400x400/?sister,school" alt="Sister" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?sister,dancing">
+                            <img src="https://source.unsplash.com/random/400x400/?sister,dancing" alt="Sister" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Brother -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Brother</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?brother,boy">
+                            <img src="https://source.unsplash.com/random/400x400/?brother,boy" alt="Brother" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?brother,sports">
+                            <img src="https://source.unsplash.com/random/400x400/?brother,sports" alt="Brother" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?brother,studying">
+                            <img src="https://source.unsplash.com/random/400x400/?brother,studying" alt="Brother" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?brother,playing">
+                            <img src="https://source.unsplash.com/random/400x400/?brother,playing" alt="Brother" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Uncle -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Uncle</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?uncle,man">
+                            <img src="https://source.unsplash.com/random/400x400/?uncle,man" alt="Uncle" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?uncle,smiling">
+                            <img src="https://source.unsplash.com/random/400x400/?uncle,smiling" alt="Uncle" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?uncle,working">
+                            <img src="https://source.unsplash.com/random/400x400/?uncle,working" alt="Uncle" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?uncle,family">
+                            <img src="https://source.unsplash.com/random/400x400/?uncle,family" alt="Uncle" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Videos -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Videos</h3>
+                    <div class="space-y-4">
+                        <video controls class="w-full rounded-lg family-video">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4">
+                        </video>
+                        <video controls class="w-full rounded-lg family-video">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                        </video>
+                        <video controls class="w-full rounded-lg family-video">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
             </div>
-            <div class="flex items-center gap-2">
-                <span class="text-sm text-gray-700">Transition:</span>
-                <select id="slideshowTransition" class="text-sm border rounded px-2 py-1 transition-all">
-                    <option value="fade">Fade</option>
-                    <option value="slide" selected>Slide</option>
-                    <option value="zoom">Zoom</option>
-                </select>
+            
+            <!-- Individual Categories (hidden by default) -->
+            <div class="gallery-category hidden" data-category="father">
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?father,man">
+                        <img src="https://source.unsplash.com/random/400x400/?father,man" alt="Father" class="w-full h-48 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?father,portrait">
+                        <img src="https://source.unsplash.com/random/400x400/?father,portrait" alt="Father" class="w-full h-48 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?father,working">
+                        <img src="https://source.unsplash.com/random/400x400/?father,working" alt="Father" class="w-full h-48 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?father,smiling">
+                        <img src="https://source.unsplash.com/random/400x400/?father,smiling" alt="Father" class="w-full h-48 object-cover rounded-lg">
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Loading Skeleton -->
-    <div id="loadingSkeleton" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-8">
-        <div class="bg-gray-200 rounded-lg h-48 animate-pulse"></div>
-        <div class="bg-gray-200 rounded-lg h-48 animate-pulse"></div>
-        <div class="bg-gray-200 rounded-lg h-48 animate-pulse"></div>
-        <div class="bg-gray-200 rounded-lg h-48 animate-pulse"></div>
-    </div>
-
-    <!-- Gallery Content -->
-    <div id="galleryContent" class="transition-opacity duration-500 ease-in-out">
-        <!-- Will be populated by JavaScript -->
-    </div>
-
-    <!-- Timeline View Container -->
-    <div id="timelineView" class="hidden transition-opacity duration-500 ease-in-out">
-        <!-- Will be populated by JavaScript -->
-    </div>
-
-    <!-- Lightbox/Popup Viewer -->
-    <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden items-center justify-center p-4 transition-opacity duration-300 ease-in-out">
-        <button id="closeLightbox" class="absolute top-4 right-4 text-white text-3xl hover:text-indigo-300 transition-colors">&times;</button>
-        <button id="prevBtn" class="absolute left-4 text-white text-3xl bg-black bg-opacity-50 rounded-full h-12 w-12 flex items-center justify-center hover:bg-indigo-600 transition-all">&lt;</button>
-        <div class="relative max-w-full max-h-full transform transition-transform duration-500 ease-in-out">
-            <img id="lightboxImage" class="max-w-full max-h-screen transition-opacity duration-500 ease-in-out" src="" alt="">
-            <video id="lightboxVideo" class="max-w-full max-h-screen hidden transition-opacity duration-500 ease-in-out" controls></video>
-            <div id="lightboxCaption" class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-4 transition-opacity duration-300">
-                <div class="flex flex-wrap gap-1 mt-1">
-                    <!-- Tags will be inserted here -->
+            
+            <!-- Other categories (mother, sister, brother, uncle) would follow same pattern -->
+            
+            <!-- Videos Category -->
+            <div class="gallery-category hidden" data-category="videos">
+                <div class="space-y-4">
+                    <video controls class="w-full rounded-lg family-video">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4">
+                    </video>
+                    <video controls class="w-full rounded-lg family-video">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                    </video>
+                    <video controls class="w-full rounded-lg family-video">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
         </div>
-        <button id="nextBtn" class="absolute right-4 text-white text-3xl bg-black bg-opacity-50 rounded-full h-12 w-12 flex items-center justify-center hover:bg-indigo-600 transition-all">&gt;</button>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center hidden">
+        <div class="relative max-w-4xl w-full p-4">
+            <button id="closeLightbox" class="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            
+            <div class="relative">
+                <img id="lightboxImage" src="" alt="" class="w-full max-h-screen object-contain rounded-lg">
+                
+                <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-4">
+                    <button id="downloadBtn" class="bg-white text-indigo-600 px-4 py-2 rounded-full flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download
+                    </button>
+                    <button id="shareBtn" class="bg-white text-indigo-600 px-4 py-2 rounded-full flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                        </svg>
+                        Share
+                    </button>
+                    <button id="likeBtn" class="bg-white text-indigo-600 px-4 py-2 rounded-full flex items-center gap-2">
+                        <svg id="likeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                        <span id="likeText">Like</span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <style>
-        .category-section:not([data-category="all"]) {
+        .scrollbar-hide::-webkit-scrollbar {
             display: none;
         }
-        .active-category {
-            background-color: #4f46e5 !important;
-            color: white !important;
-        }
-        .download-btn {
-            transition: all 0.2s ease;
-        }
-        .download-btn:hover {
-            transform: scale(1.1);
-            background-color: white !important;
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
         .gallery-item {
-            transition: all 0.3s ease;
+            transition: transform 0.2s ease;
         }
         .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform: scale(0.98);
         }
-        .image-container {
-            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
-        }
-        .timeline-year {
-            position: relative;
-            padding-left: 2rem;
-            animation: fadeIn 0.5s ease-out;
-        }
-        .timeline-year::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: #4f46e5;
-            border-radius: 2px;
-        }
-        .tag {
-            display: inline-block;
-            background-color: rgba(79, 70, 229, 0.2);
-            color: #4f46e5;
-            padding: 0.2rem 0.5rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            margin-right: 0.25rem;
-            margin-bottom: 0.25rem;
-            transition: all 0.2s ease;
-        }
-        .tag:hover {
-            background-color: rgba(79, 70, 229, 0.3);
-            transform: scale(1.05);
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-transition {
-            transition: opacity 0.5s ease;
-        }
-        .slide-transition {
-            transition: transform 0.5s ease, opacity 0.5s ease;
-        }
-        .zoom-transition {
-            transition: transform 0.5s ease, opacity 0.5s ease;
+        .gallery-category {
+            transition: opacity 0.3s ease;
         }
     </style>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Sample gallery data with dates and tags
-            const galleryData = {
-                father: [
-                    { 
-                        src: "https://source.unsplash.com/random/600x600/?father,man,portrait", 
-                        alt: "Father at work conference", 
-                        date: "2019-06-15",
-                        tags: ["work", "conference", "business"]
-                    },
-                    { 
-                        src: "https://source.unsplash.com/random/600x600/?father,fishing", 
-                        alt: "Father fishing at lake", 
-                        date: "2020-08-22",
-                        tags: ["vacation", "hobby", "outdoors"]
-                    },
-                    { 
-                        src: "https://source.unsplash.com/random/600x600/?father,reading", 
-                        alt: "Father reading newspaper", 
-                        date: "2021-03-10",
-                        tags: ["home", "relaxing", "morning"]
-                    },
-                    { 
-                        src: "https://source.unsplash.com/random/600x600/?father,gardening", 
-                        alt: "Father gardening in backyard", 
-                        date: "2022-05-05",
-                        tags: ["home", "hobby", "garden"]
-                    }
-                ],
-                mother: [
-                    { 
-                        src: "https://source.unsplash.com/random/600x600/?mother,cooking", 
-                        alt: "Mother cooking family dinner", 
-                        date: "2018-12-24",
-                        tags: ["holiday", "family", "dinner"]
-                    },
-                    { 
-                        src: "https://source.unsplash.com/random/600x600/?mother,painting", 
-                        alt: "Mother painting artwork", 
-                        date: "2019-04-15",
-                        tags: ["hobby", "art", "creative"]
-                    },
-                    { 
-                        src: "https://source.unsplash.com/random/600x600/?mother,flowers", 
-                        alt: "Mother with flowers in garden", 
-                        date: "2020-07-08",
-                        tags: ["garden", "spring", "flowers"]
-                    },
-                    { 
-                        src: "https://source.unsplash.com/random/600x600/?mother,reading", 
-                        alt: "Mother reading bedtime story", 
-                        date: "2021-11-20",
-                        tags: ["family", "kids", "bedtime"]
-                    }
-                ],
-                sister: [
-                    { 
-                        src: "https://source.unsplash.com/random/600x600/?sister,dancing", 
-                        alt: "Sister at dance recital", 
-                        date: "2018-05-12",
-                        tags: ["performance", "dance", "recital"]
-                    },
-                    { 
-                        src: "https://source.unsplash.com/random/600x600/?sister,school", 
-                        alt: "Sister's first day of school", 
-                        date: "2019-09-03",
-                        tags: ["school", "education", "first day"]
-                    },
-                    { 
-                        src: "https://source.unsplash.com/random/600x600/?sister,playing", 
-                        alt: "Sister playing soccer", 
-                        date: "2020-10-15",
-                        tags: ["sports", "activity", "soccer"]
-                    },
-                    { 
-                        src: "https://source.unsplash.com/random/600x600/?sister,pets", 
-                        alt: "Sister with our new puppy", 
-                        date: "2022-02-14",
-                        tags: ["pets", "family", "dog"]
-                    }
-                ],
-                brother: [
-                    { 
-                        src: "https://source.unsplash.com/random/600x600/?brother,soccer", 
-                        alt: "Brother's soccer championship", 
-                        date: "2018-11-10",
-                        tags: ["sports", "achievement", "championship"]
-                    },
-                    { 
-                        src: "https://source.unsplash.com/random/600x600/?brother,studying", 
-                        alt: "Brother studying for exams", 
-                        date: "2019-12-05",
-                        tags: ["school", "education", "studying"]
-                    },
-                    { 
-                        src: "https://source.unsplash.com/random/600x600/?brother,cycling", 
-                        alt: "Brother cycling in the park", 
-                        date: "2020-06-20",
-                        tags: ["sports", "outdoors", "biking"]
-                    },
-                    { 
-                        src: "https://source.unsplash.com/random/600x600/?brother,friends", 
-                        alt: "Brother with his friends", 
-                        date: "2021-08-30",
-                        tags: ["friends", "summer", "hangout"]
-                    }
-                ],
-                videos: [
-                    { 
-                        src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4", 
-                        title: "Beach Vacation 2018", 
-                        date: "2018-07-15",
-                        tags: ["vacation", "summer", "beach"]
-                    },
-                    { 
-                        src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", 
-                        title: "Mother's Birthday", 
-                        date: "2019-05-22",
-                        tags: ["celebration", "family", "birthday"]
-                    },
-                    { 
-                        src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", 
-                        title: "Family Reunion", 
-                        date: "2020-08-10",
-                        tags: ["family", "reunion", "gathering"]
-                    },
-                    { 
-                        src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4", 
-                        title: "Christmas Celebration", 
-                        date: "2021-12-25",
-                        tags: ["holiday", "winter", "christmas"]
-                    }
-                ]
-            };
-
-            // Initialize variables
-            let currentView = 'grid';
-            let currentMediaIndex = 0;
-            let mediaItems = [];
-            let slideshowInterval;
-            let observer;
-
-            // DOM elements
-            const galleryContent = document.getElementById('galleryContent');
-            const loadingSkeleton = document.getElementById('loadingSkeleton');
-            const timelineView = document.getElementById('timelineView');
+            // Music Player
+            const musicToggle = document.getElementById('musicToggle');
+            const bgMusic = document.getElementById('bgMusic');
+            const playIcon = document.getElementById('playIcon');
+            const pauseIcon = document.getElementById('pauseIcon');
+            
+            musicToggle.addEventListener('click', function() {
+                if (bgMusic.paused) {
+                    bgMusic.play();
+                    playIcon.classList.add('hidden');
+                    pauseIcon.classList.remove('hidden');
+                    
+                    // Pause all videos when music plays
+                    document.querySelectorAll('.family-video').forEach(video => {
+                        video.pause();
+                    });
+                } else {
+                    bgMusic.pause();
+                    playIcon.classList.remove('hidden');
+                    pauseIcon.classList.add('hidden');
+                }
+            });
+            
+            // Category Switching
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const galleryCategories = document.querySelectorAll('.gallery-category');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Update active button
+                    categoryBtns.forEach(b => b.classList.remove('bg-indigo-600', 'text-white'));
+                    categoryBtns.forEach(b => b.classList.add('bg-indigo-100', 'text-indigo-700'));
+                    this.classList.remove('bg-indigo-100', 'text-indigo-700');
+                    this.classList.add('bg-indigo-600', 'text-white');
+                    
+                    // Show selected category
+                    const category = this.dataset.category;
+                    galleryCategories.forEach(cat => cat.classList.add('hidden'));
+                    document.querySelector(`.gallery-category[data-category="${category}"]`).classList.remove('hidden');
+                });
+            });
+            
+            // Lightbox functionality
             const lightbox = document.getElementById('lightbox');
             const lightboxImage = document.getElementById('lightboxImage');
-            const lightboxVideo = document.getElementById('lightboxVideo');
-            const lightboxCaption = document.getElementById('lightboxCaption');
-
-            // Initialize the gallery
-            initGallery();
-
-            function initGallery() {
-                // Show loading skeleton
-                loadingSkeleton.style.display = 'grid';
-                galleryContent.style.display = 'none';
-                timelineView.style.display = 'none';
-
-                // Simulate loading
-                setTimeout(() => {
-                    renderGallery();
-                    loadingSkeleton.style.display = 'none';
-                    updateView();
-                    initEventListeners();
+            const closeLightbox = document.getElementById('closeLightbox');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const shareBtn = document.getElementById('shareBtn');
+            const likeBtn = document.getElementById('likeBtn');
+            const likeIcon = document.getElementById('likeIcon');
+            const likeText = document.getElementById('likeText');
+            
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const imgSrc = this.getAttribute('data-src');
+                    lightboxImage.src = imgSrc;
+                    lightboxImage.alt = this.querySelector('img').alt;
+                    lightbox.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
                     
-                    // Initialize Intersection Observer for lazy loading
-                    initIntersectionObserver();
-                }, 800);
-            }
-
-            function renderGallery() {
-                let html = '';
-
-                // Flatten all media items for lightbox navigation
-                mediaItems = [];
-
-                // Render photos for each category
-                for (const category in galleryData) {
-                    if (category === 'videos') continue;
-
-                    html += `
-                        <div class="category-section" data-category="${category}">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-4 border-b-2 border-indigo-200 pb-2">${category.charAt(0).toUpperCase() + category.slice(1)}</h3>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-8">
-                                ${galleryData[category].map((item, index) => {
-                                    mediaItems.push({ ...item, type: 'image', category });
-                                    return `
-                                        <div class="relative group gallery-item" data-index="${mediaItems.length - 1}">
-                                            <div class="image-container rounded-lg overflow-hidden h-48">
-                                                <img class="w-full h-full object-cover lazyload" 
-                                                     data-src="${item.src}" 
-                                                     src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                                     alt="${item.alt}"
-                                                     onerror="this.onerror=null;this.src='https://source.unsplash.com/random/600x600/?${category},family';this.alt='Family photo'">
-                                            </div>
-                                            <button class="download-btn absolute top-2 right-2 bg-white/80 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity" 
-                                                    data-src="${item.src}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                                </svg>
-                                            </button>
-                                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <p class="text-white text-sm truncate">${item.alt}</p>
-                                                ${item.tags ? `<div class="flex flex-wrap gap-1 mt-1">${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>` : ''}
-                                            </div>
-                                        </div>
-                                    `;
-                                }).join('')}
-                            </div>
-                        </div>
-                    `;
-                }
-
-                // Render videos
-                html += `
-                    <div class="category-section" data-category="videos">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-4 border-b-2 border-indigo-200 pb-2">Videos</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            ${galleryData.videos.map((video, index) => {
-                                mediaItems.push({ ...video, type: 'video', category: 'videos' });
-                                return `
-                                    <div class="bg-gray-100 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow gallery-item" data-index="${mediaItems.length - 1}">
-                                        <video class="w-full h-64 object-cover family-video lazyload" data-src="${video.src}" poster="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
-                                            <source src="${video.src}" type="video/mp4">
-                                            Your browser does not support the video tag.
-                                        </video>
-                                        <div class="p-4">
-                                            <h4 class="font-medium text-gray-800">${video.title}</h4>
-                                            ${video.tags ? `<div class="flex flex-wrap gap-1 mt-1">${video.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>` : ''}
-                                        </div>
-                                    </div>
-                                `;
-                            }).join('')}
-                        </div>
-                    </div>
-                `;
-
-                galleryContent.innerHTML = html;
-
-                // Render timeline view
-                renderTimelineView();
-            }
-
-            function renderTimelineView() {
-                // Group media items by year
-                const itemsByYear = {};
-                [...galleryData.father, ...galleryData.mother, ...galleryData.sister, ...galleryData.brother, ...galleryData.videos].forEach(item => {
-                    const year = item.date ? item.date.split('-')[0] : 'Unknown';
-                    if (!itemsByYear[year]) {
-                        itemsByYear[year] = [];
-                    }
-                    itemsByYear[year].push(item);
-                });
-
-                // Sort years in descending order
-                const sortedYears = Object.keys(itemsByYear).sort((a, b) => b - a);
-
-                let timelineHtml = '';
-                sortedYears.forEach(year => {
-                    timelineHtml += `
-                        <div class="timeline-year mb-8">
-                            <h3 class="text-2xl font-bold text-indigo-700 mb-4">${year}</h3>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                                ${itemsByYear[year].map(item => {
-                                    const index = mediaItems.findIndex(mi => mi.src === item.src);
-                                    return `
-                                        <div class="relative group gallery-item" data-index="${index}">
-                                            ${item.type === 'video' ? `
-                                                <div class="bg-gray-100 rounded-lg overflow-hidden h-48 flex items-center justify-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                    </svg>
-                                                </div>
-                                            ` : `
-                                                <div class="image-container rounded-lg overflow-hidden h-48">
-                                                    <img class="w-full h-full object-cover" 
-                                                         src="${item.src}" 
-                                                         alt="${item.alt}"
-                                                         onerror="this.onerror=null;this.src='https://source.unsplash.com/random/600x600/?family';this.alt='Family photo'">
-                                                </div>
-                                            `}
-                                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <p class="text-white text-sm">${item.alt}</p>
-                                                ${item.tags ? `<div class="flex flex-wrap gap-1 mt-1">${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>` : ''}
-                                            </div>
-                                        </div>
-                                    `;
-                                }).join('')}
-                            </div>
-                        </div>
-                    `;
-                });
-
-                timelineView.innerHTML = timelineHtml;
-            }
-
-            function initEventListeners() {
-                // Category filtering
-                const buttons = document.querySelectorAll('.category-btn');
-                buttons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        buttons.forEach(btn => btn.classList.remove('active-category'));
-                        this.classList.add('active-category');
-                        
-                        const category = this.dataset.category;
-                        
-                        // Show/hide sections based on view
-                        if (currentView === 'grid') {
-                            document.querySelectorAll('.category-section').forEach(section => {
-                                if (category === 'all' || section.dataset.category === category) {
-                                    section.style.display = 'block';
-                                } else {
-                                    section.style.display = 'none';
-                                }
+                    // Set download attribute
+                    downloadBtn.onclick = function() {
+                        const a = document.createElement('a');
+                        a.href = imgSrc;
+                        a.download = imgSrc.split('/').pop().split('?')[0] || 'family-photo.jpg';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                    };
+                    
+                    // Set share functionality
+                    shareBtn.onclick = function() {
+                        if (navigator.share) {
+                            navigator.share({
+                                title: 'Family Photo',
+                                text: 'Check out this family memory!',
+                                url: imgSrc,
+                            }).catch(err => {
+                                console.log('Error sharing:', err);
                             });
+                        } else {
+                            // Fallback for browsers that don't support Web Share API
+                            alert('Sharing is not supported in your browser. You can download and share manually.');
                         }
-                    });
-                });
-                
-                // View toggles
-                document.getElementById('viewGridBtn').addEventListener('click', () => {
-                    currentView = 'grid';
-                    updateView();
-                });
-                
-                document.getElementById('viewTimelineBtn').addEventListener('click', () => {
-                    currentView = 'timeline';
-                    updateView();
-                });
-                
-                // Slideshow controls
-                document.getElementById('startSlideshowBtn').addEventListener('click', startSlideshow);
-                
-                // Lightbox events
-                document.getElementById('closeLightbox').addEventListener('click', closeLightbox);
-                document.getElementById('prevBtn').addEventListener('click', showPrevMedia);
-                document.getElementById('nextBtn').addEventListener('click', showNextMedia);
-                
-                // Gallery item clicks (delegated)
-                document.addEventListener('click', function(e) {
-                    // Lightbox open
-                    const galleryItem = e.target.closest('.gallery-item');
-                    if (galleryItem) {
-                        const index = parseInt(galleryItem.getAttribute('data-index'));
-                        openLightbox(index);
+                    };
+                    
+                    // Set like functionality
+                    const likedPhotos = JSON.parse(localStorage.getItem('likedPhotos') || '{}');
+                    if (likedPhotos[imgSrc]) {
+                        likeIcon.classList.add('fill-red-500', 'text-red-500');
+                        likeIcon.classList.remove('fill-none');
+                        likeText.textContent = 'Liked';
                     }
                     
-                    // Download button
-                    const downloadBtn = e.target.closest('.download-btn');
-                    if (downloadBtn) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const imageUrl = downloadBtn.getAttribute('data-src');
-                        downloadMedia(imageUrl);
-                    }
-                });
-                
-                // Keyboard navigation in lightbox
-                document.addEventListener('keydown', function(e) {
-                    if (!lightbox.classList.contains('hidden')) {
-                        if (e.key === 'Escape') {
-                            closeLightbox();
-                        } else if (e.key === 'ArrowLeft') {
-                            showPrevMedia();
-                        } else if (e.key === 'ArrowRight') {
-                            showNextMedia();
+                    likeBtn.onclick = function() {
+                        if (likedPhotos[imgSrc]) {
+                            delete likedPhotos[imgSrc];
+                            likeIcon.classList.add('fill-none');
+                            likeIcon.classList.remove('fill-red-500', 'text-red-500');
+                            likeText.textContent = 'Like';
+                        } else {
+                            likedPhotos[imgSrc] = true;
+                            likeIcon.classList.add('fill-red-500', 'text-red-500');
+                            likeIcon.classList.remove('fill-none');
+                            likeText.textContent = 'Liked';
                         }
-                    }
+                        localStorage.setItem('likedPhotos', JSON.stringify(likedPhotos));
+                    };
                 });
-            }
-
-            function initIntersectionObserver() {
-                // Set up lazy loading with Intersection Observer
-                if ('IntersectionObserver' in window) {
-                    observer = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                const lazyElement = entry.target;
-                                if (lazyElement.tagName === 'IMG') {
-                                    lazyElement.src = lazyElement.dataset.src;
-                                } else if (lazyElement.tagName === 'VIDEO') {
-                                    lazyElement.querySelector('source').src = lazyElement.dataset.src;
-                                    lazyElement.load();
-                                }
-                                observer.unobserve(lazyElement);
-                            }
-                        });
-                    }, {
-                        rootMargin: '100px 0px',
-                        threshold: 0.1
-                    });
-
-                    document.querySelectorAll('.lazyload').forEach(lazyElement => {
-                        observer.observe(lazyElement);
-                    });
-                } else {
-                    // Fallback for browsers without IntersectionObserver
-                    document.querySelectorAll('.lazyload').forEach(lazyElement => {
-                        if (lazyElement.tagName === 'IMG') {
-                            lazyElement.src = lazyElement.dataset.src;
-                        } else if (lazyElement.tagName === 'VIDEO') {
-                            lazyElement.querySelector('source').src = lazyElement.dataset.src;
-                            lazyElement.load();
-                        }
-                    });
-                }
-            }
-
-            function updateView() {
-                // Update view buttons
-                document.getElementById('viewGridBtn').classList.toggle('bg-indigo-100', currentView === 'grid');
-                document.getElementById('viewTimelineBtn').classList.toggle('bg-indigo-100', currentView === 'timeline');
-                
-                // Show/hide views with animation
-                if (currentView === 'grid') {
-                    timelineView.style.display = 'none';
-                    galleryContent.style.display = 'block';
-                    slideshowControls.classList.remove('hidden');
-                } else {
-                    galleryContent.style.display = 'none';
-                    timelineView.style.display = 'block';
-                    slideshowControls.classList.add('hidden');
-                }
-            }
-
-            function openLightbox(index) {
-                currentMediaIndex = index;
-                const mediaItem = mediaItems[index];
-                
-                // Show appropriate media in lightbox
-                if (mediaItem.type === 'image') {
-                    lightboxImage.src = mediaItem.src;
-                    lightboxImage.alt = mediaItem.alt;
-                    lightboxImage.classList.remove('hidden');
-                    lightboxVideo.classList.add('hidden');
-                } else {
-                    lightboxVideo.querySelector('source').src = mediaItem.src;
-                    lightboxVideo.load();
-                    lightboxVideo.classList.remove('hidden');
-                    lightboxImage.classList.add('hidden');
-                }
-                
-                // Update caption and tags
-                lightboxCaption.innerHTML = '';
-                if (mediaItem.tags && mediaItem.tags.length > 0) {
-                    const tagsContainer = document.createElement('div');
-                    tagsContainer.className = 'flex flex-wrap gap-1 mt-1';
-                    mediaItem.tags.forEach(tag => {
-                        const tagElement = document.createElement('span');
-                        tagElement.className = 'tag';
-                        tagElement.textContent = tag;
-                        tagsContainer.appendChild(tagElement);
-                    });
-                    lightboxCaption.appendChild(tagsContainer);
-                }
-                
-                // Show lightbox with animation
-                lightbox.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeLightbox() {
-                // Pause video if playing
-                if (!lightboxVideo.paused) {
-                    lightboxVideo.pause();
-                }
-                
-                // Hide lightbox
+            });
+            
+            closeLightbox.addEventListener('click', function() {
                 lightbox.classList.add('hidden');
-                document.body.style.overflow = '';
-                
-                // Stop slideshow if running
-                if (slideshowInterval) {
-                    clearInterval(slideshowInterval);
-                    slideshowInterval = null;
-                }
-            }
-
-            function showPrevMedia() {
-                currentMediaIndex = (currentMediaIndex - 1 + mediaItems.length) % mediaItems.length;
-                applyTransition('out', () => {
-                    openLightbox(currentMediaIndex);
-                    applyTransition('in');
-                });
-            }
-
-            function showNextMedia() {
-                currentMediaIndex = (currentMediaIndex + 1) % mediaItems.length;
-                applyTransition('out', () => {
-                    openLightbox(currentMediaIndex);
-                    applyTransition('in');
-                });
-            }
-
-            function applyTransition(direction, callback) {
-                const transitionType = document.getElementById('slideshowTransition').value;
-                const mediaElement = mediaItems[currentMediaIndex].type === 'image' ? lightboxImage : lightboxVideo;
-                
-                if (transitionType === 'fade') {
-                    if (direction === 'out') {
-                        mediaElement.style.opacity = '0';
-                        setTimeout(callback, 300);
-                    } else {
-                        mediaElement.style.opacity = '1';
-                    }
-                } 
-                else if (transitionType === 'slide') {
-                    mediaElement.classList.add('slide-transition');
-                    if (direction === 'out') {
-                        mediaElement.style.transform = 'translateX(-100%)';
-                        mediaElement.style.opacity = '0';
-                        setTimeout(callback, 300);
-                    } else {
-                        mediaElement.style.transform = 'translateX(0)';
-                        mediaElement.style.opacity = '1';
-                    }
-                }
-                else if (transitionType === 'zoom') {
-                    mediaElement.classList.add('zoom-transition');
-                    if (direction === 'out') {
-                        mediaElement.style.transform = 'scale(0.8)';
-                        mediaElement.style.opacity = '0';
-                        setTimeout(callback, 300);
-                    } else {
-                        mediaElement.style.transform = 'scale(1)';
-                        mediaElement.style.opacity = '1';
-                    }
-                }
-            }
-
-            function downloadMedia(url) {
-                const fileName = url.split('/').pop().split('?')[0] || 'family-memory.jpg';
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = fileName;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-            }
-
-            function startSlideshow() {
-                // Stop any existing slideshow
-                if (slideshowInterval) {
-                    clearInterval(slideshowInterval);
-                }
-                
-                // Get current category
-                const activeCategory = document.querySelector('.category-btn.active-category').dataset.category;
-                let items = [];
-                
-                if (activeCategory === 'all') {
-                    items = [...document.querySelectorAll('.gallery-item')];
-                } else {
-                    items = [...document.querySelectorAll(`.category-section[data-category="${activeCategory}"] .gallery-item`)];
-                }
-                
-                if (items.length === 0) return;
-                
-                // Get slideshow settings
-                const speed = parseInt(document.getElementById('slideshowSpeed').value);
-                const transition = document.getElementById('slideshowTransition').value;
-                
-                let currentSlide = 0;
-                
-                // Open first item in lightbox
-                const firstIndex = parseInt(items[0].getAttribute('data-index'));
-                openLightbox(firstIndex);
-                
-                // Start slideshow
-                slideshowInterval = setInterval(() => {
-                    currentSlide = (currentSlide + 1) % items.length;
-                    const index = parseInt(items[currentSlide].getAttribute('data-index'));
-                    
-                    // Apply transition before changing media
-                    applyTransition('out', () => {
-                        openLightbox(index);
-                        applyTransition('in');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Video playback control
+            document.querySelectorAll('.family-video').forEach(video => {
+                video.addEventListener('play', function() {
+                    // Pause other videos
+                    document.querySelectorAll('.family-video').forEach(v => {
+                        if (v !== video) v.pause();
                     });
-                }, speed);
+                    
+                    // Pause background music
+                    if (!bgMusic.paused) {
+                        bgMusic.pause();
+                        playIcon.classList.remove('hidden');
+                        pauseIcon.classList.add('hidden');
+                    }
+                });
+            });
+            
+            // Touch swipe for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            const galleryContainer = document.getElementById('galleryContainer');
+            
+            galleryContainer.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+            
+            galleryContainer.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+            
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) {
+                    // Swipe left - next category
+                    const currentBtn = document.querySelector('.category-btn.bg-indigo-600');
+                    const nextBtn = currentBtn.nextElementSibling || categoryBtns[0];
+                    if (nextBtn) nextBtn.click();
+                }
+                
+                if (touchEndX > touchStartX + 50) {
+                    // Swipe right - previous category
+                    const currentBtn = document.querySelector('.category-btn.bg-indigo-600');
+                    const prevBtn = currentBtn.previousElementSibling || categoryBtns[categoryBtns.length - 1];
+                    if (prevBtn) prevBtn.click();
+                }
             }
+            
+            // Initialize
+            document.querySelector('.category-btn[data-category="all"]').click();
         });
     </script>
 </section>
