@@ -1032,306 +1032,423 @@
     </div>
    </section>
    
-<section class="mb-12 relative" id="gallerySection">
-    <!-- Music Player -->
-    <div class="bg-indigo-50 rounded-xl p-4 mb-6 flex items-center gap-4">
-        <button id="musicToggle" class="bg-indigo-600 text-white rounded-full p-3 hover:bg-indigo-700 transition">
-            <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+<section class="mb-12 relative px-4 sm:px-6 lg:px-8" id="gallerySection">
+  <!-- Hero Header -->
+  <div class="text-center mb-12">
+    <h1 class="text-4xl md:text-5xl font-bold text-indigo-800 mb-4">Family Memories Gallery</h1>
+    <p class="text-xl text-gray-600 max-w-3xl mx-auto">Cherish the moments that matter most with our family's precious memories</p>
+  </div>
+
+  <!-- Music Player with Improved Styling -->
+  <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl p-4 mb-8 flex items-center gap-4 max-w-4xl mx-auto shadow-lg">
+    <button aria-label="Toggle background music" class="bg-white text-indigo-600 rounded-full p-3 hover:bg-indigo-50 transition flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600" id="musicToggle">
+      <svg aria-hidden="true" class="h-6 w-6" fill="none" id="playIcon" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      <svg aria-hidden="true" class="h-6 w-6 hidden" fill="none" id="pauseIcon" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+    </button>
+    <div class="flex-1 min-w-0">
+      <p class="font-medium text-white truncate text-lg">Family Memories Theme</p>
+      <p class="text-indigo-100 text-sm">Background Music</p>
+    </div>
+    <audio id="bgMusic" loop>
+      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <!-- Categories Navigation with Enhanced Styling -->
+  <div class="relative mb-8 max-w-4xl mx-auto">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-2xl font-bold text-gray-800">Browse Memories</h2>
+      <span class="text-sm text-indigo-600 hidden sm:block">Swipe or use arrows →</span>
+    </div>
+    
+    <div class="relative">
+      <div aria-label="Memory categories" class="flex overflow-x-auto scrollbar-hide pb-4 gap-3" id="categoryTabs" role="tablist">
+        <button aria-selected="true" class="category-btn flex-shrink-0 px-6 py-3 rounded-xl bg-indigo-600 text-white font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 shadow-md hover:shadow-lg transition-all" data-category="all" role="tab" tabindex="0">
+          <i class="fas fa-images mr-2"></i> All Memories
         </button>
-        <div class="flex-1">
-            <p class="font-medium text-indigo-800">Family Memories Theme</p>
-            <audio id="bgMusic" loop>
-                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-            </audio>
-        </div>
+        <button aria-selected="false" class="category-btn flex-shrink-0 px-6 py-3 rounded-xl bg-white text-indigo-700 font-medium hover:bg-indigo-50 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 border border-indigo-100 shadow-sm hover:shadow-md transition-all" data-category="father" role="tab" tabindex="-1">
+          <i class="fas fa-male mr-2"></i> Father
+        </button>
+        <button aria-selected="false" class="category-btn flex-shrink-0 px-6 py-3 rounded-xl bg-white text-indigo-700 font-medium hover:bg-indigo-50 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 border border-indigo-100 shadow-sm hover:shadow-md transition-all" data-category="mother" role="tab" tabindex="-1">
+          <i class="fas fa-female mr-2"></i> Mother
+        </button>
+        <button aria-selected="false" class="category-btn flex-shrink-0 px-6 py-3 rounded-xl bg-white text-indigo-700 font-medium hover:bg-indigo-50 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 border border-indigo-100 shadow-sm hover:shadow-md transition-all" data-category="sister" role="tab" tabindex="-1">
+          <i class="fas fa-child mr-2"></i> Sister
+        </button>
+        <button aria-selected="false" class="category-btn flex-shrink-0 px-6 py-3 rounded-xl bg-white text-indigo-700 font-medium hover:bg-indigo-50 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 border border-indigo-100 shadow-sm hover:shadow-md transition-all" data-category="brother" role="tab" tabindex="-1">
+          <i class="fas fa-child mr-2"></i> Brother
+        </button>
+        <button aria-selected="false" class="category-btn flex-shrink-0 px-6 py-3 rounded-xl bg-white text-indigo-700 font-medium hover:bg-indigo-50 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 border border-indigo-100 shadow-sm hover:shadow-md transition-all" data-category="uncle" role="tab" tabindex="-1">
+          <i class="fas fa-user-tie mr-2"></i> Uncle
+        </button>
+        <button aria-selected="false" class="category-btn flex-shrink-0 px-6 py-3 rounded-xl bg-white text-indigo-700 font-medium hover:bg-indigo-50 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 border border-indigo-100 shadow-sm hover:shadow-md transition-all" data-category="videos" role="tab" tabindex="-1">
+          <i class="fas fa-video mr-2"></i> Videos
+        </button>
+      </div>
+      <div class="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
+      <div class="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
     </div>
+  </div>
 
-    <!-- Gallery Content -->
-    <div class="relative overflow-hidden">
-        <div id="galleryContainer">
-            <!-- Father -->
-            <div class="mb-8">
-                <h3 class="text-xl font-semibold text-gray-800 mb-4">Father</h3>
-                <div class="grid grid-cols-2 gap-2">
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?father,man">
-                        <img src="https://source.unsplash.com/random/400x400/?father,man" alt="Father" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?father,portrait">
-                        <img src="https://source.unsplash.com/random/400x400/?father,portrait" alt="Father" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?father,working">
-                        <img src="https://source.unsplash.com/random/400x400/?father,working" alt="Father" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?father,smiling">
-                        <img src="https://source.unsplash.com/random/400x400/?father,smiling" alt="Father" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                </div>
+  <!-- Gallery Content with Enhanced Layout -->
+  <div class="relative overflow-hidden max-w-6xl mx-auto">
+    <div aria-atomic="true" aria-live="polite" class="transition-transform duration-300 ease-out" id="galleryContainer" tabindex="0">
+      <!-- All Content -->
+      <div aria-label="All Memories category content" class="gallery-category" data-category="all" role="tabpanel" tabindex="0">
+        <!-- Father -->
+        <div class="mb-12">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-gray-800 flex items-center">
+              <i class="fas fa-male text-indigo-600 mr-3"></i> Father's Memories
+            </h3>
+            <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">View All</a>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <img alt="Portrait of a father, a middle-aged man with a warm smile, wearing a casual shirt, standing outdoors in a sunny park" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/c68d62ec-f611-4454-7e4c-f2b335946b51.jpg">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <p class="text-white font-medium">Father's Day 2022</p>
+              </div>
             </div>
-            
-            <!-- Mother -->
-            <div class="mb-8">
-                <h3 class="text-xl font-semibold text-gray-800 mb-4">Mother</h3>
-                <div class="grid grid-cols-2 gap-2">
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?mother,woman">
-                        <img src="https://source.unsplash.com/random/400x400/?mother,woman" alt="Mother" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?mother,cooking">
-                        <img src="https://source.unsplash.com/random/400x400/?mother,cooking" alt="Mother" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?mother,smiling">
-                        <img src="https://source.unsplash.com/random/400x400/?mother,smiling" alt="Mother" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?mother,garden">
-                        <img src="https://source.unsplash.com/random/400x400/?mother,garden" alt="Mother" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                </div>
+            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <img alt="Close-up portrait of a father, a man with short hair and glasses, smiling gently, indoor setting with soft lighting" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/a76151c8-db93-4754-ed9a-bd7e6ae0a3dd.jpg">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <p class="text-white font-medium">Birthday Celebration</p>
+              </div>
             </div>
-            
-            <!-- Sister -->
-            <div class="mb-8">
-                <h3 class="text-xl font-semibold text-gray-800 mb-4">Sister</h3>
-                <div class="grid grid-cols-2 gap-2">
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?sister,girl">
-                        <img src="https://source.unsplash.com/random/400x400/?sister,girl" alt="Sister" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?sister,playing">
-                        <img src="https://source.unsplash.com/random/400x400/?sister,playing" alt="Sister" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?sister,school">
-                        <img src="https://source.unsplash.com/random/400x400/?sister,school" alt="Sister" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?sister,dancing">
-                        <img src="https://source.unsplash.com/random/400x400/?sister,dancing" alt="Sister" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                </div>
+            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <img alt="Father working at a desk, focused expression, wearing a button-up shirt, with a laptop and papers around, home office environment" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/3701550a-7c4a-4fcc-e33c-d57ef4ed0553.jpg">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <p class="text-white font-medium">Working From Home</p>
+              </div>
             </div>
-            
-            <!-- Brother -->
-            <div class="mb-8">
-                <h3 class="text-xl font-semibold text-gray-800 mb-4">Brother</h3>
-                <div class="grid grid-cols-2 gap-2">
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?brother,boy">
-                        <img src="https://source.unsplash.com/random/400x400/?brother,boy" alt="Brother" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?brother,sports">
-                        <img src="https://source.unsplash.com/random/400x400/?brother,sports" alt="Brother" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?brother,studying">
-                        <img src="https://source.unsplash.com/random/400x400/?brother,studying" alt="Brother" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?brother,playing">
-                        <img src="https://source.unsplash.com/random/400x400/?brother,playing" alt="Brother" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                </div>
+            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <img alt="Father smiling broadly, outdoors with green trees in background, casual clothing, joyful and relaxed mood" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/c797302e-b75b-440e-8b18-bb7505ac75c1.jpg">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <p class="text-white font-medium">Weekend Getaway</p>
+              </div>
             </div>
-            
-            <!-- Uncle -->
-            <div class="mb-8">
-                <h3 class="text-xl font-semibold text-gray-800 mb-4">Uncle</h3>
-                <div class="grid grid-cols-2 gap-2">
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?uncle,man">
-                        <img src="https://source.unsplash.com/random/400x400/?uncle,man" alt="Uncle" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?uncle,smiling">
-                        <img src="https://source.unsplash.com/random/400x400/?uncle,smiling" alt="Uncle" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?uncle,working">
-                        <img src="https://source.unsplash.com/random/400x400/?uncle,working" alt="Uncle" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?uncle,family">
-                        <img src="https://source.unsplash.com/random/400x400/?uncle,family" alt="Uncle" class="w-full h-40 object-cover rounded-lg">
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Videos -->
-            <div class="mb-8">
-                <h3 class="text-xl font-semibold text-gray-800 mb-4">Videos</h3>
-                <div class="space-y-4">
-                    <video controls class="w-full rounded-lg family-video">
-                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4">
-                    </video>
-                    <video controls class="w-full rounded-lg family-video">
-                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
-                    </video>
-                    <video controls class="w-full rounded-lg family-video">
-                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
-                    </video>
-                </div>
-            </div>
+          </div>
         </div>
-    </div>
 
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center hidden">
-        <div class="relative max-w-4xl w-full p-4">
-            <button id="closeLightbox" class="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 z-10">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-            
-            <div class="relative">
-                <img id="lightboxImage" src="" alt="" class="w-full max-h-screen object-contain rounded-lg">
-                
-                <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-4">
-                    <button id="downloadBtn" class="bg-white text-indigo-600 px-4 py-2 rounded-full flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                        </svg>
-                        Download
-                    </button>
-                    <button id="shareBtn" class="bg-white text-indigo-600 px-4 py-2 rounded-full flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                        </svg>
-                        Share
-                    </button>
-                    <button id="likeBtn" class="bg-white text-indigo-600 px-4 py-2 rounded-full flex items-center gap-2">
-                        <svg id="likeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>
-                        <span id="likeText">Like</span>
-                    </button>
-                </div>
+        <!-- Mother -->
+        <div class="mb-12">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-gray-800 flex items-center">
+              <i class="fas fa-female text-pink-600 mr-3"></i> Mother's Memories
+            </h3>
+            <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">View All</a>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <img alt="Portrait of a mother, a woman with long hair, smiling gently, wearing a colorful blouse, indoor cozy home setting" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/bc7a529d-6af8-4c45-1d7e-2929358f4167.jpg">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <p class="text-white font-medium">Family Gathering</p>
+              </div>
             </div>
+            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <img alt="Mother cooking in a bright kitchen, wearing an apron, stirring a pot on the stove, warm and inviting atmosphere" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/7342750b-84ea-481e-a675-eda798d4de7c.jpg">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <p class="text-white font-medium">Sunday Dinner</p>
+              </div>
+            </div>
+            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <img alt="Mother smiling warmly, sitting in a garden surrounded by flowers, casual summer dress, natural sunlight" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/68b2c0e2-e27d-4216-992d-046f02ad3f80.jpg">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <p class="text-white font-medium">Spring Garden</p>
+              </div>
+            </div>
+            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <img alt="Mother tending to plants in a garden, wearing gardening gloves and hat, focused and happy expression" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/37463ffb-f94d-43c8-bfa3-f402e2905a26.jpg">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <p class="text-white font-medium">Gardening Day</p>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
 
-    <style>
-        .gallery-item {
-            transition: transform 0.2s ease;
+        <!-- Sister -->
+        <div class="mb-12">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-gray-800 flex items-center">
+              <i class="fas fa-child text-purple-600 mr-3"></i> Sister's Memories
+            </h3>
+            <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">View All</a>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <img alt="Portrait of a sister, a teenage girl with long hair, smiling softly, wearing casual clothes, outdoor park background" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/7d7d427e-f177-44b0-24bb-0ef7b72d4772.jpg">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <p class="text-white font-medium">School Picnic</p>
+              </div>
+            </div>
+            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <img alt="Sister playing with friends in a playground, joyful expression, colorful clothes, sunny day" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/e283fa69-ce93-4dad-11e1-d0386ea60557.jpg">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <p class="text-white font-medium">Playground Fun</p>
+              </div>
+            </div>
+            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <img alt="Sister studying at a desk with books and laptop, focused and determined, indoor study room" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/54bd2b13-af7f-48cb-d74f-b1d121414f00.jpg">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <p class="text-white font-medium">Study Time</p>
+              </div>
+            </div>
+            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <img alt="Sister dancing gracefully in a studio, wearing dance attire, expressive and energetic pose" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/1c9db178-c06b-46aa-b18f-381f1d06c5a7.jpg">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <p class="text-white font-medium">Dance Recital</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Videos Section -->
+        <div class="mb-12">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-gray-800 flex items-center">
+              <i class="fas fa-video text-red-600 mr-3"></i> Family Videos
+            </h3>
+            <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">View All</a>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+              <video aria-label="Family video of joyful rides in a park" class="w-full rounded-t-lg family-video" controls poster="https://storage.googleapis.com/a1aa/image/7d7d427e-f177-44b0-24bb-0ef7b72d4772.jpg">
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4">
+              </video>
+              <div class="p-4">
+                <h4 class="font-bold text-lg mb-1">Park Adventure</h4>
+                <p class="text-gray-600 text-sm">Summer 2021 • 2:45 min</p>
+              </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+              <video aria-label="Family video of exciting fire blazes" class="w-full rounded-t-lg family-video" controls poster="https://storage.googleapis.com/a1aa/image/68b2c0e2-e27d-4216-992d-046f02ad3f80.jpg">
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+              </video>
+              <div class="p-4">
+                <h4 class="font-bold text-lg mb-1">Beach Vacation</h4>
+                <p class="text-gray-600 text-sm">Winter 2020 • 1:30 min</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Individual Category Views (simplified for brevity) -->
+      <!-- Father Category -->
+      <div aria-label="Father category content" class="gallery-category hidden" data-category="father" role="tabpanel" tabindex="0">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+            <img alt="Father portrait" class="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/c68d62ec-f611-4454-7e4c-f2b335946b51.jpg">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+              <p class="text-white font-medium">Father's Day 2022</p>
+            </div>
+          </div>
+          <!-- More father images with same enhanced styling -->
+        </div>
+      </div>
+
+      <!-- Other categories with similar enhanced styling -->
+      <!-- ... -->
+
+    </div>
+  </div>
+
+  <!-- Family Quote Section -->
+  <div class="max-w-4xl mx-auto mt-16 mb-12 bg-indigo-50 rounded-2xl p-8 text-center">
+    <i class="fas fa-quote-left text-indigo-300 text-4xl mb-4"></i>
+    <p class="text-xl md:text-2xl font-medium text-gray-800 mb-4">"Family is not an important thing. It's everything."</p>
+    <p class="text-indigo-600 font-medium">— Michael J. Fox</p>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Enhanced Music Player with Local Storage
+      const musicToggle = document.getElementById('musicToggle');
+      const bgMusic = document.getElementById('bgMusic');
+      const playIcon = document.getElementById('playIcon');
+      const pauseIcon = document.getElementById('pauseIcon');
+
+      // Check localStorage for music preference
+      if (localStorage.getItem('musicPlaying') === 'true') {
+        bgMusic.play();
+        playIcon.classList.add('hidden');
+        pauseIcon.classList.remove('hidden');
+      }
+
+      musicToggle.addEventListener('click', function() {
+        if (bgMusic.paused) {
+          bgMusic.play();
+          playIcon.classList.add('hidden');
+          pauseIcon.classList.remove('hidden');
+          localStorage.setItem('musicPlaying', 'true');
+          
+          // Pause all videos when music plays
+          document.querySelectorAll('.family-video').forEach(video => {
+            video.pause();
+          });
+        } else {
+          bgMusic.pause();
+          playIcon.classList.remove('hidden');
+          pauseIcon.classList.add('hidden');
+          localStorage.setItem('musicPlaying', 'false');
         }
-        .gallery-item:hover {
-            transform: scale(0.98);
-        }
-    </style>
+      });
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Music Player
-            const musicToggle = document.getElementById('musicToggle');
-            const bgMusic = document.getElementById('bgMusic');
-            const playIcon = document.getElementById('playIcon');
-            const pauseIcon = document.getElementById('pauseIcon');
-            
-            musicToggle.addEventListener('click', function() {
-                if (bgMusic.paused) {
-                    bgMusic.play();
-                    playIcon.classList.add('hidden');
-                    pauseIcon.classList.remove('hidden');
-                    
-                    // Pause all videos when music plays
-                    document.querySelectorAll('.family-video').forEach(video => {
-                        video.pause();
-                    });
-                } else {
-                    bgMusic.pause();
-                    playIcon.classList.remove('hidden');
-                    pauseIcon.classList.add('hidden');
-                }
-            });
-            
-            // Lightbox functionality
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImage = document.getElementById('lightboxImage');
-            const closeLightbox = document.getElementById('closeLightbox');
-            const downloadBtn = document.getElementById('downloadBtn');
-            const shareBtn = document.getElementById('shareBtn');
-            const likeBtn = document.getElementById('likeBtn');
-            const likeIcon = document.getElementById('likeIcon');
-            const likeText = document.getElementById('likeText');
-            
-            document.querySelectorAll('.gallery-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const imgSrc = this.getAttribute('data-src');
-                    lightboxImage.src = imgSrc;
-                    lightboxImage.alt = this.querySelector('img').alt;
-                    lightbox.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden';
-                    
-                    // Set download attribute
-                    downloadBtn.onclick = function() {
-                        const a = document.createElement('a');
-                        a.href = imgSrc;
-                        a.download = imgSrc.split('/').pop().split('?')[0] || 'family-photo.jpg';
-                        document.body.appendChild(a);
-                        a.click();
-                        document.body.removeChild(a);
-                    };
-                    
-                    // Set share functionality
-                    shareBtn.onclick = function() {
-                        if (navigator.share) {
-                            navigator.share({
-                                title: 'Family Photo',
-                                text: 'Check out this family memory!',
-                                url: imgSrc,
-                            }).catch(err => {
-                                console.log('Error sharing:', err);
-                            });
-                        } else {
-                            // Fallback for browsers that don't support Web Share API
-                            alert('Sharing is not supported in your browser. You can download and share manually.');
-                        }
-                    };
-                    
-                    // Set like functionality
-                    const likedPhotos = JSON.parse(localStorage.getItem('likedPhotos') || '{}');
-                    if (likedPhotos[imgSrc]) {
-                        likeIcon.classList.add('fill-red-500', 'text-red-500');
-                        likeIcon.classList.remove('fill-none');
-                        likeText.textContent = 'Liked';
-                    }
-                    
-                    likeBtn.onclick = function() {
-                        if (likedPhotos[imgSrc]) {
-                            delete likedPhotos[imgSrc];
-                            likeIcon.classList.add('fill-none');
-                            likeIcon.classList.remove('fill-red-500', 'text-red-500');
-                            likeText.textContent = 'Like';
-                        } else {
-                            likedPhotos[imgSrc] = true;
-                            likeIcon.classList.add('fill-red-500', 'text-red-500');
-                            likeIcon.classList.remove('fill-none');
-                            likeText.textContent = 'Liked';
-                        }
-                        localStorage.setItem('likedPhotos', JSON.stringify(likedPhotos));
-                    };
-                });
-            });
-            
-            closeLightbox.addEventListener('click', function() {
-                lightbox.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            });
-            
-            // Video playback control
-            document.querySelectorAll('.family-video').forEach(video => {
-                video.addEventListener('play', function() {
-                    // Pause other videos
-                    document.querySelectorAll('.family-video').forEach(v => {
-                        if (v !== video) v.pause();
-                    });
-                    
-                    // Pause background music
-                    if (!bgMusic.paused) {
-                        bgMusic.pause();
-                        playIcon.classList.remove('hidden');
-                        pauseIcon.classList.add('hidden');
-                    }
-                });
-            });
+      // Enhanced Category Switching with Smooth Transitions
+      const categoryBtns = document.querySelectorAll('.category-btn');
+      const galleryCategories = document.querySelectorAll('.gallery-category');
+
+      categoryBtns.forEach((btn, index) => {
+        btn.addEventListener('click', function() {
+          // Update active button with animation
+          categoryBtns.forEach((b, i) => {
+            b.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
+            b.classList.add('bg-white', 'text-indigo-700', 'shadow-sm');
+            b.setAttribute('aria-selected', 'false');
+            b.setAttribute('tabindex', '-1');
+          });
+          this.classList.remove('bg-white', 'text-indigo-700', 'shadow-sm');
+          this.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
+          this.setAttribute('aria-selected', 'true');
+          this.setAttribute('tabindex', '0');
+          this.focus();
+
+          // Show selected category with fade effect
+          const category = this.dataset.category;
+          galleryCategories.forEach(cat => {
+            cat.style.opacity = '0';
+            setTimeout(() => {
+              cat.classList.add('hidden');
+            }, 300);
+          });
+          
+          const activePanel = document.querySelector(`.gallery-category[data-category="${category}"]`);
+          if (activePanel) {
+            activePanel.classList.remove('hidden');
+            setTimeout(() => {
+              activePanel.style.opacity = '1';
+            }, 50);
+            activePanel.focus();
+          }
         });
-    </script>
+
+        // Enhanced Keyboard navigation for tabs
+        btn.addEventListener('keydown', e => {
+          let newIndex = null;
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            newIndex = (index + 1) % categoryBtns.length;
+          } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            newIndex = (index - 1 + categoryBtns.length) % categoryBtns.length;
+          } else if (e.key === 'Home') {
+            e.preventDefault();
+            newIndex = 0;
+          } else if (e.key === 'End') {
+            e.preventDefault();
+            newIndex = categoryBtns.length - 1;
+          }
+          if (newIndex !== null) {
+            categoryBtns[newIndex].click();
+            categoryBtns[newIndex].scrollIntoView({
+              behavior: 'smooth',
+              block: 'nearest',
+              inline: 'center'
+            });
+          }
+        });
+      });
+
+      // Enhanced Video playback control
+      document.querySelectorAll('.family-video').forEach(video => {
+        video.addEventListener('play', function() {
+          // Pause other videos
+          document.querySelectorAll('.family-video').forEach(v => {
+            if (v !== video) v.pause();
+          });
+
+          // Pause background music
+          if (!bgMusic.paused) {
+            bgMusic.pause();
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            localStorage.setItem('musicPlaying', 'false');
+          }
+        });
+      });
+
+      // Enhanced Touch gesture for category navigation
+      let touchStartX = 0;
+      let touchEndX = 0;
+      const galleryContainer = document.getElementById('galleryContainer');
+
+      galleryContainer.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, false);
+
+      galleryContainer.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleCategorySwipe();
+      }, false);
+
+      function handleCategorySwipe() {
+        if (touchEndX < touchStartX - 50) {
+          // Swipe left - next category
+          const currentBtn = document.querySelector('.category-btn.bg-indigo-600');
+          const nextBtn = currentBtn.nextElementSibling || categoryBtns[0];
+          if (nextBtn) {
+            nextBtn.click();
+            nextBtn.scrollIntoView({
+              behavior: 'smooth',
+              block: 'nearest',
+              inline: 'center'
+            });
+          }
+        }
+
+        if (touchEndX > touchStartX + 50) {
+          // Swipe right - previous category
+          const currentBtn = document.querySelector('.category-btn.bg-indigo-600');
+          const prevBtn = currentBtn.previousElementSibling || categoryBtns[categoryBtns.length - 1];
+          if (prevBtn) {
+            prevBtn.click();
+            prevBtn.scrollIntoView({
+              behavior: 'smooth',
+              block: 'nearest',
+              inline: 'center'
+            });
+          }
+        }
+      }
+
+      // Initialize
+      document.querySelector('.category-btn[data-category="all"]').click();
+      
+      // Add intersection observer for lazy loading
+      if ('IntersectionObserver' in window) {
+        const lazyLoadObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.src = img.dataset.src;
+              lazyLoadObserver.unobserve(img);
+            }
+          });
+        });
+
+        document.querySelectorAll('img[data-src]').forEach(img => {
+          lazyLoadObserver.observe(img);
+        });
+      }
+    });
+  </script>
 </section>
-   
    <section class="mb-12 hidden" id="newsSection">
     <h2 class="text-2xl font-semibold text-indigo-700 mb-4">News</h2>
     <ul class="space-y-6 text-gray-700" id="newsList">
