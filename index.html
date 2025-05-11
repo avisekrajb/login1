@@ -1052,7 +1052,7 @@
         </div>
     </div>
 
-    <!-- Categories Navigation with Horizontal Scroll -->
+    <!-- Categories Navigation -->
     <div class="relative mb-6">
         <div class="flex overflow-x-auto scrollbar-hide pb-2 gap-2" id="categoryTabs">
             <button class="category-btn flex-shrink-0 px-4 py-2 rounded-full bg-indigo-600 text-white font-medium whitespace-nowrap" data-category="all">All Memories</button>
@@ -1068,7 +1068,7 @@
 
     <!-- Gallery Content -->
     <div class="relative overflow-hidden">
-        <div id="galleryContainer" class="transition-transform duration-300 ease-out">
+        <div id="galleryContainer" class="transition-transform duration-300 ease-out touch-none">
             <!-- All Content -->
             <div class="gallery-category" data-category="all">
                 <!-- Father -->
@@ -1153,7 +1153,7 @@
                 </div>
             </div>
             
-            <!-- Other categories (mother, sister, brother, uncle) would follow same pattern -->
+            <!-- Other categories would follow same pattern -->
             
             <!-- Videos Category -->
             <div class="gallery-category hidden" data-category="videos">
@@ -1179,6 +1179,16 @@
         .scrollbar-hide {
             -ms-overflow-style: none;
             scrollbar-width: none;
+        }
+        
+        /* Improved touch response */
+        .touch-none {
+            touch-action: none;
+        }
+        
+        /* Smooth transitions */
+        .gallery-category {
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
     </style>
 
@@ -1221,8 +1231,18 @@
                     
                     // Show selected category
                     const category = this.dataset.category;
-                    galleryCategories.forEach(cat => cat.classList.add('hidden'));
-                    document.querySelector(`.gallery-category[data-category="${category}"]`).classList.remove('hidden');
+                    galleryCategories.forEach(cat => {
+                        cat.classList.add('hidden');
+                        cat.style.opacity = '0';
+                        cat.style.transform = 'translateX(20px)';
+                    });
+                    
+                    const activeCategory = document.querySelector(`.gallery-category[data-category="${category}"]`);
+                    activeCategory.classList.remove('hidden');
+                    setTimeout(() => {
+                        activeCategory.style.opacity = '1';
+                        activeCategory.style.transform = 'translateX(0)';
+                    }, 10);
                 });
             });
             
@@ -1243,35 +1263,51 @@
                 });
             });
             
-            // Touch gesture for category navigation
+            // Enhanced Touch Gestures for Category Navigation
+            const galleryContainer = document.getElementById('galleryContainer');
             let touchStartX = 0;
             let touchEndX = 0;
-            const galleryContainer = document.getElementById('galleryContainer');
+            let isSwiping = false;
             
-            galleryContainer.addEventListener('touchstart', e => {
-                touchStartX = e.changedTouches[0].screenX;
-            }, false);
+            galleryContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                isSwiping = true;
+            }, { passive: true });
             
-            galleryContainer.addEventListener('touchend', e => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleCategorySwipe();
-            }, false);
-            
-            function handleCategorySwipe() {
-                if (touchEndX < touchStartX - 50) {
-                    // Swipe left - next category
-                    const currentBtn = document.querySelector('.category-btn.bg-indigo-600');
-                    const nextBtn = currentBtn.nextElementSibling || categoryBtns[0];
-                    if (nextBtn) nextBtn.click();
-                }
+            galleryContainer.addEventListener('touchmove', (e) => {
+                if (!isSwiping) return;
+                touchEndX = e.touches[0].clientX;
                 
-                if (touchEndX > touchStartX + 50) {
-                    // Swipe right - previous category
-                    const currentBtn = document.querySelector('.category-btn.bg-indigo-600');
-                    const prevBtn = currentBtn.previousElementSibling || categoryBtns[categoryBtns.length - 1];
-                    if (prevBtn) prevBtn.click();
+                // Prevent scrolling while swiping
+                if (Math.abs(touchEndX - touchStartX) > 10) {
+                    e.preventDefault();
                 }
-            }
+            }, { passive: false });
+            
+            galleryContainer.addEventListener('touchend', () => {
+                if (!isSwiping) return;
+                isSwiping = false;
+                
+                const threshold = 50; // Minimum swipe distance
+                const swipeDistance = touchEndX - touchStartX;
+                
+                if (Math.abs(swipeDistance) > threshold) {
+                    const currentBtn = document.querySelector('.category-btn.bg-indigo-600');
+                    let targetBtn;
+                    
+                    if (swipeDistance > 0) {
+                        // Swiped right - previous category
+                        targetBtn = currentBtn.previousElementSibling || categoryBtns[categoryBtns.length - 1];
+                    } else {
+                        // Swiped left - next category
+                        targetBtn = currentBtn.nextElementSibling || categoryBtns[0];
+                    }
+                    
+                    if (targetBtn) {
+                        targetBtn.click();
+                    }
+                }
+            }, { passive: true });
             
             // Initialize
             document.querySelector('.category-btn[data-category="all"]').click();
