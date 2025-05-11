@@ -1052,111 +1052,107 @@
         </div>
     </div>
 
-    <!-- Categories Navigation -->
-    <div class="relative mb-6">
-        <div class="flex overflow-x-auto scrollbar-hide pb-2 gap-2" id="categoryTabs">
-            <button class="category-btn flex-shrink-0 px-4 py-2 rounded-full bg-indigo-600 text-white font-medium whitespace-nowrap" data-category="all">All Memories</button>
-            <button class="category-btn flex-shrink-0 px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200 whitespace-nowrap" data-category="father">Father</button>
-            <button class="category-btn flex-shrink-0 px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200 whitespace-nowrap" data-category="mother">Mother</button>
-            <button class="category-btn flex-shrink-0 px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200 whitespace-nowrap" data-category="sister">Sister</button>
-            <button class="category-btn flex-shrink-0 px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200 whitespace-nowrap" data-category="brother">Brother</button>
-            <button class="category-btn flex-shrink-0 px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200 whitespace-nowrap" data-category="uncle">Uncle</button>
-            <button class="category-btn flex-shrink-0 px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200 whitespace-nowrap" data-category="videos">Videos</button>
-        </div>
-        <div class="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
-    </div>
-
     <!-- Gallery Content -->
     <div class="relative overflow-hidden">
-        <div id="galleryContainer" class="transition-transform duration-300 ease-out touch-none">
-            <!-- All Content -->
-            <div class="gallery-category" data-category="all">
-                <!-- Father -->
-                <div class="mb-8">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Father</h3>
-                    <div class="grid grid-cols-2 gap-2">
+        <div id="galleryContainer">
+            <!-- Father -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Father</h3>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?father,man">
                         <img src="https://source.unsplash.com/random/400x400/?father,man" alt="Father" class="w-full h-40 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?father,portrait">
                         <img src="https://source.unsplash.com/random/400x400/?father,portrait" alt="Father" class="w-full h-40 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?father,working">
                         <img src="https://source.unsplash.com/random/400x400/?father,working" alt="Father" class="w-full h-40 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?father,smiling">
                         <img src="https://source.unsplash.com/random/400x400/?father,smiling" alt="Father" class="w-full h-40 object-cover rounded-lg">
                     </div>
                 </div>
-                
-                <!-- Mother -->
-                <div class="mb-8">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Mother</h3>
-                    <div class="grid grid-cols-2 gap-2">
+            </div>
+            
+            <!-- Mother -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Mother</h3>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?mother,woman">
                         <img src="https://source.unsplash.com/random/400x400/?mother,woman" alt="Mother" class="w-full h-40 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?mother,cooking">
                         <img src="https://source.unsplash.com/random/400x400/?mother,cooking" alt="Mother" class="w-full h-40 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?mother,smiling">
                         <img src="https://source.unsplash.com/random/400x400/?mother,smiling" alt="Mother" class="w-full h-40 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?mother,garden">
                         <img src="https://source.unsplash.com/random/400x400/?mother,garden" alt="Mother" class="w-full h-40 object-cover rounded-lg">
                     </div>
                 </div>
-                
-                <!-- Sister -->
-                <div class="mb-8">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Sister</h3>
-                    <div class="grid grid-cols-2 gap-2">
+            </div>
+            
+            <!-- Sister -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Sister</h3>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?sister,girl">
                         <img src="https://source.unsplash.com/random/400x400/?sister,girl" alt="Sister" class="w-full h-40 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?sister,playing">
                         <img src="https://source.unsplash.com/random/400x400/?sister,playing" alt="Sister" class="w-full h-40 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?sister,school">
                         <img src="https://source.unsplash.com/random/400x400/?sister,school" alt="Sister" class="w-full h-40 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?sister,dancing">
                         <img src="https://source.unsplash.com/random/400x400/?sister,dancing" alt="Sister" class="w-full h-40 object-cover rounded-lg">
                     </div>
                 </div>
-                
-                <!-- Brother -->
-                <div class="mb-8">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Brother</h3>
-                    <div class="grid grid-cols-2 gap-2">
+            </div>
+            
+            <!-- Brother -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Brother</h3>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?brother,boy">
                         <img src="https://source.unsplash.com/random/400x400/?brother,boy" alt="Brother" class="w-full h-40 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?brother,sports">
                         <img src="https://source.unsplash.com/random/400x400/?brother,sports" alt="Brother" class="w-full h-40 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?brother,studying">
                         <img src="https://source.unsplash.com/random/400x400/?brother,studying" alt="Brother" class="w-full h-40 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?brother,playing">
                         <img src="https://source.unsplash.com/random/400x400/?brother,playing" alt="Brother" class="w-full h-40 object-cover rounded-lg">
                     </div>
                 </div>
-                
-                <!-- Uncle -->
-                <div class="mb-8">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Uncle</h3>
-                    <div class="grid grid-cols-2 gap-2">
+            </div>
+            
+            <!-- Uncle -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Uncle</h3>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?uncle,man">
                         <img src="https://source.unsplash.com/random/400x400/?uncle,man" alt="Uncle" class="w-full h-40 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?uncle,smiling">
                         <img src="https://source.unsplash.com/random/400x400/?uncle,smiling" alt="Uncle" class="w-full h-40 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?uncle,working">
                         <img src="https://source.unsplash.com/random/400x400/?uncle,working" alt="Uncle" class="w-full h-40 object-cover rounded-lg">
+                    </div>
+                    <div class="gallery-item" data-src="https://source.unsplash.com/random/800x800/?uncle,family">
                         <img src="https://source.unsplash.com/random/400x400/?uncle,family" alt="Uncle" class="w-full h-40 object-cover rounded-lg">
                     </div>
                 </div>
-                
-                <!-- Videos -->
-                <div class="mb-8">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Videos</h3>
-                    <div class="space-y-4">
-                        <video controls class="w-full rounded-lg family-video">
-                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4">
-                        </video>
-                        <video controls class="w-full rounded-lg family-video">
-                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
-                        </video>
-                        <video controls class="w-full rounded-lg family-video">
-                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
             </div>
             
-            <!-- Individual Categories (hidden by default) -->
-            <div class="gallery-category hidden" data-category="father">
-                <div class="grid grid-cols-2 gap-2">
-                    <img src="https://source.unsplash.com/random/400x400/?father,man" alt="Father" class="w-full h-48 object-cover rounded-lg">
-                    <img src="https://source.unsplash.com/random/400x400/?father,portrait" alt="Father" class="w-full h-48 object-cover rounded-lg">
-                    <img src="https://source.unsplash.com/random/400x400/?father,working" alt="Father" class="w-full h-48 object-cover rounded-lg">
-                    <img src="https://source.unsplash.com/random/400x400/?father,smiling" alt="Father" class="w-full h-48 object-cover rounded-lg">
-                </div>
-            </div>
-            
-            <!-- Other categories would follow same pattern -->
-            
-            <!-- Videos Category -->
-            <div class="gallery-category hidden" data-category="videos">
+            <!-- Videos -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Videos</h3>
                 <div class="space-y-4">
                     <video controls class="w-full rounded-lg family-video">
                         <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4">
@@ -1172,23 +1168,48 @@
         </div>
     </div>
 
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center hidden">
+        <div class="relative max-w-4xl w-full p-4">
+            <button id="closeLightbox" class="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            
+            <div class="relative">
+                <img id="lightboxImage" src="" alt="" class="w-full max-h-screen object-contain rounded-lg">
+                
+                <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-4">
+                    <button id="downloadBtn" class="bg-white text-indigo-600 px-4 py-2 rounded-full flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download
+                    </button>
+                    <button id="shareBtn" class="bg-white text-indigo-600 px-4 py-2 rounded-full flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                        </svg>
+                        Share
+                    </button>
+                    <button id="likeBtn" class="bg-white text-indigo-600 px-4 py-2 rounded-full flex items-center gap-2">
+                        <svg id="likeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                        <span id="likeText">Like</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <style>
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
+        .gallery-item {
+            transition: transform 0.2s ease;
         }
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        
-        /* Improved touch response */
-        .touch-none {
-            touch-action: none;
-        }
-        
-        /* Smooth transitions */
-        .gallery-category {
-            transition: opacity 0.3s ease, transform 0.3s ease;
+        .gallery-item:hover {
+            transform: scale(0.98);
         }
     </style>
 
@@ -1217,33 +1238,78 @@
                 }
             });
             
-            // Category Switching
-            const categoryBtns = document.querySelectorAll('.category-btn');
-            const galleryCategories = document.querySelectorAll('.gallery-category');
+            // Lightbox functionality
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const closeLightbox = document.getElementById('closeLightbox');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const shareBtn = document.getElementById('shareBtn');
+            const likeBtn = document.getElementById('likeBtn');
+            const likeIcon = document.getElementById('likeIcon');
+            const likeText = document.getElementById('likeText');
             
-            categoryBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Update active button
-                    categoryBtns.forEach(b => b.classList.remove('bg-indigo-600', 'text-white'));
-                    categoryBtns.forEach(b => b.classList.add('bg-indigo-100', 'text-indigo-700'));
-                    this.classList.remove('bg-indigo-100', 'text-indigo-700');
-                    this.classList.add('bg-indigo-600', 'text-white');
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const imgSrc = this.getAttribute('data-src');
+                    lightboxImage.src = imgSrc;
+                    lightboxImage.alt = this.querySelector('img').alt;
+                    lightbox.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
                     
-                    // Show selected category
-                    const category = this.dataset.category;
-                    galleryCategories.forEach(cat => {
-                        cat.classList.add('hidden');
-                        cat.style.opacity = '0';
-                        cat.style.transform = 'translateX(20px)';
-                    });
+                    // Set download attribute
+                    downloadBtn.onclick = function() {
+                        const a = document.createElement('a');
+                        a.href = imgSrc;
+                        a.download = imgSrc.split('/').pop().split('?')[0] || 'family-photo.jpg';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                    };
                     
-                    const activeCategory = document.querySelector(`.gallery-category[data-category="${category}"]`);
-                    activeCategory.classList.remove('hidden');
-                    setTimeout(() => {
-                        activeCategory.style.opacity = '1';
-                        activeCategory.style.transform = 'translateX(0)';
-                    }, 10);
+                    // Set share functionality
+                    shareBtn.onclick = function() {
+                        if (navigator.share) {
+                            navigator.share({
+                                title: 'Family Photo',
+                                text: 'Check out this family memory!',
+                                url: imgSrc,
+                            }).catch(err => {
+                                console.log('Error sharing:', err);
+                            });
+                        } else {
+                            // Fallback for browsers that don't support Web Share API
+                            alert('Sharing is not supported in your browser. You can download and share manually.');
+                        }
+                    };
+                    
+                    // Set like functionality
+                    const likedPhotos = JSON.parse(localStorage.getItem('likedPhotos') || '{}');
+                    if (likedPhotos[imgSrc]) {
+                        likeIcon.classList.add('fill-red-500', 'text-red-500');
+                        likeIcon.classList.remove('fill-none');
+                        likeText.textContent = 'Liked';
+                    }
+                    
+                    likeBtn.onclick = function() {
+                        if (likedPhotos[imgSrc]) {
+                            delete likedPhotos[imgSrc];
+                            likeIcon.classList.add('fill-none');
+                            likeIcon.classList.remove('fill-red-500', 'text-red-500');
+                            likeText.textContent = 'Like';
+                        } else {
+                            likedPhotos[imgSrc] = true;
+                            likeIcon.classList.add('fill-red-500', 'text-red-500');
+                            likeIcon.classList.remove('fill-none');
+                            likeText.textContent = 'Liked';
+                        }
+                        localStorage.setItem('likedPhotos', JSON.stringify(likedPhotos));
+                    };
                 });
+            });
+            
+            closeLightbox.addEventListener('click', function() {
+                lightbox.classList.add('hidden');
+                document.body.style.overflow = 'auto';
             });
             
             // Video playback control
@@ -1262,55 +1328,6 @@
                     }
                 });
             });
-            
-            // Enhanced Touch Gestures for Category Navigation
-            const galleryContainer = document.getElementById('galleryContainer');
-            let touchStartX = 0;
-            let touchEndX = 0;
-            let isSwiping = false;
-            
-            galleryContainer.addEventListener('touchstart', (e) => {
-                touchStartX = e.touches[0].clientX;
-                isSwiping = true;
-            }, { passive: true });
-            
-            galleryContainer.addEventListener('touchmove', (e) => {
-                if (!isSwiping) return;
-                touchEndX = e.touches[0].clientX;
-                
-                // Prevent scrolling while swiping
-                if (Math.abs(touchEndX - touchStartX) > 10) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-            
-            galleryContainer.addEventListener('touchend', () => {
-                if (!isSwiping) return;
-                isSwiping = false;
-                
-                const threshold = 50; // Minimum swipe distance
-                const swipeDistance = touchEndX - touchStartX;
-                
-                if (Math.abs(swipeDistance) > threshold) {
-                    const currentBtn = document.querySelector('.category-btn.bg-indigo-600');
-                    let targetBtn;
-                    
-                    if (swipeDistance > 0) {
-                        // Swiped right - previous category
-                        targetBtn = currentBtn.previousElementSibling || categoryBtns[categoryBtns.length - 1];
-                    } else {
-                        // Swiped left - next category
-                        targetBtn = currentBtn.nextElementSibling || categoryBtns[0];
-                    }
-                    
-                    if (targetBtn) {
-                        targetBtn.click();
-                    }
-                }
-            }, { passive: true });
-            
-            // Initialize
-            document.querySelector('.category-btn[data-category="all"]').click();
         });
     </script>
 </section>
