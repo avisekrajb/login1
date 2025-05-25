@@ -1032,292 +1032,318 @@
     </div>
    </section>
    
-<section class="mb-12 relative px-4 sm:px-6 lg:px-8" id="gallerySection">
-  <style>
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    /* Hide scrollbar for IE, Edge and Firefox */
-    .scrollbar-hide {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
-    }
+<section class="mb-12" id="gallerySection" aria-labelledby="galleryHeading">
+    <h2 id="galleryHeading" class="text-2xl font-semibold text-indigo-700 mb-4 sr-only">Gallery</h2>
     
-    /* Additional styles for the section */
-    #gallerySection {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    .family-video {
-      aspect-ratio: 16/9;
-    }
-    .gallery-category {
-      transition: opacity 0.3s ease;
-    }
-    .gallery-category.hidden {
-      display: none;
-    }
-  </style>
-
-  <!-- Hero Header -->
-  <div class="text-center mb-12">
-    <h1 class="text-4xl md:text-5xl font-bold text-indigo-800 mb-4">
-      Family Memories Gallery
-    </h1>
-  </div>
-  
-  <!-- Music Player with Improved Styling -->
-  <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl p-4 mb-8 flex items-center gap-4 max-w-4xl mx-auto shadow-lg">
-    <button aria-label="Toggle background music" class="bg-white text-indigo-600 rounded-full p-3 hover:bg-indigo-50 transition flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600" id="musicToggle">
-      <svg aria-hidden="true" class="h-6 w-6" fill="none" id="playIcon" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-        <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-      </svg>
-      <svg aria-hidden="true" class="h-6 w-6 hidden" fill="none" id="pauseIcon" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-      </svg>
-    </button>
-    <div class="flex-1 min-w-0">
-      <p class="font-medium text-white truncate text-lg">Family Memories Theme</p>
-      <p class="text-indigo-100 text-sm">Background Music</p>
-    </div>
-    <audio id="bgMusic" loop="">
-      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"/>
-    </audio>
-  </div>
-  
-  <!-- Categories Navigation with Enhanced Styling -->
-  <div class="relative mb-8 max-w-4xl mx-auto">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-2xl font-bold text-gray-800">Browse Memories</h2>
-      <span class="text-sm text-indigo-600 hidden sm:block">Swipe or use arrows →</span>
-    </div>
-    <div class="relative">
-      <!-- Removed category buttons as requested -->
-      <div class="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
-      <div class="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
-    </div>
-  </div>
-  
-  <!-- Gallery Content with Enhanced Layout -->
-  <div class="relative overflow-hidden max-w-6xl mx-auto">
-    <div aria-atomic="true" aria-live="polite" class="transition-transform duration-300 ease-out" id="galleryContainer" tabindex="0">
-      <!-- All Content -->
-      <div aria-label="All Memories category content" class="gallery-category" data-category="all" role="tabpanel" tabindex="0">
-        <!-- Father -->
-        <div class="mb-12">
-          <div class="flex items-center justify-between mb-6">
-            <h3 class="text-2xl font-bold text-gray-800 flex items-center">
-              <i class="fas fa-male text-indigo-600 mr-3"></i>
-              Father's Memories
-            </h3>
-            <a class="text-indigo-600 hover:text-indigo-800 text-sm font-medium" href="#">View All</a>
-          </div>
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <img alt="Portrait of a father, a middle-aged man with a warm smile, wearing a casual shirt, standing outdoors in a sunny park" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/c68d62ec-f611-4454-7e4c-f2b335946b51.jpg"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p class="text-white font-medium">Father's Day 2022</p>
-              </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Hero Header with improved semantics -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-indigo-800 mb-4">
+                Family Memories Gallery
+            </h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                A collection of cherished moments with our loved ones
+            </p>
+        </header>
+        
+        <!-- Enhanced Music Player with ARIA attributes -->
+        <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl p-4 mb-8 flex items-center gap-4 max-w-4xl mx-auto shadow-lg" role="region" aria-label="Background music player">
+            <button aria-label="Toggle background music" class="bg-white text-indigo-600 rounded-full p-3 hover:bg-indigo-50 transition flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600" id="musicToggle" aria-pressed="false">
+                <svg aria-hidden="true" class="h-6 w-6" fill="none" id="playIcon" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <svg aria-hidden="true" class="h-6 w-6 hidden" fill="none" id="pauseIcon" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+            </button>
+            <div class="flex-1 min-w-0">
+                <p class="font-medium text-white truncate text-lg">Family Memories Theme</p>
+                <p class="text-indigo-100 text-sm">Background Music</p>
             </div>
-            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <img alt="Close-up portrait of a father, a man with short hair and glasses, smiling gently, indoor setting with soft lighting" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/a76151c8-db93-4754-ed9a-bd7e6ae0a3dd.jpg"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p class="text-white font-medium">Birthday Celebration</p>
-              </div>
-            </div>
-            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <img alt="Father working at a desk, focused expression, wearing a button-up shirt, with a laptop and papers around, home office environment" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/3701550a-7c4a-4fcc-e33c-d57ef4ed0553.jpg"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p class="text-white font-medium">Working From Home</p>
-              </div>
-            </div>
-            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <img alt="Father smiling broadly, outdoors with green trees in background, casual clothing, joyful and relaxed mood" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/c797302e-b75b-440e-8b18-bb7505ac75c1.jpg"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p class="text-white font-medium">Weekend Getaway</p>
-              </div>
-            </div>
-          </div>
+            <audio id="bgMusic" loop preload="metadata">
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
         </div>
         
-        <!-- Mother -->
-        <div class="mb-12">
-          <div class="flex items-center justify-between mb-6">
-            <h3 class="text-2xl font-bold text-gray-800 flex items-center">
-              <i class="fas fa-female text-pink-600 mr-3"></i>
-              Mother's Memories
-            </h3>
-            <a class="text-indigo-600 hover:text-indigo-800 text-sm font-medium" href="#">View All</a>
-          </div>
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <img alt="Portrait of a mother, a woman with long hair, smiling gently, wearing a colorful blouse, indoor cozy home setting" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/bc7a529d-6af8-4c45-1d7e-2929358f4167.jpg"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p class="text-white font-medium">Family Gathering</p>
-              </div>
-            </div>
-            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <img alt="Mother cooking in a bright kitchen, wearing an apron, stirring a pot on the stove, warm and inviting atmosphere" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/7342750b-84ea-481e-a675-eda798d4de7c.jpg"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p class="text-white font-medium">Sunday Dinner</p>
-              </div>
-            </div>
-            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <img alt="Mother smiling warmly, sitting in a garden surrounded by flowers, casual summer dress, natural sunlight" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/68b2c0e2-e27d-4216-992d-046f02ad3f80.jpg"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p class="text-white font-medium">Spring Garden</p>
-              </div>
-            </div>
-            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <img alt="Mother tending to plants in a garden, wearing gardening gloves and hat, focused and happy expression" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/37463ffb-f94d-43c8-bfa3-f402e2905a26.jpg"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p class="text-white font-medium">Gardening Day</p>
-              </div>
-            </div>
-          </div>
+        <!-- Main Gallery Content -->
+        <div class="space-y-12">
+            <!-- Father's Section -->
+            <section aria-labelledby="fatherSection">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 id="fatherSection" class="text-2xl font-bold text-gray-800 flex items-center">
+                        <svg class="w-6 h-6 text-indigo-600 mr-3" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                        </svg>
+                        Father's Memories
+                    </h2>
+                    <a class="text-indigo-600 hover:text-indigo-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded" href="#">View All</a>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" role="list">
+                    <!-- Image 1 -->
+                    <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300" role="listitem">
+                        <img alt="Portrait of a father, a middle-aged man with a warm smile, wearing a casual shirt, standing outdoors in a sunny park" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/c68d62ec-f611-4454-7e4c-f2b335946b51.jpg" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <p class="text-white font-medium">Father's Day 2022</p>
+                        </div>
+                    </div>
+                    <!-- Image 2 -->
+                    <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300" role="listitem">
+                        <img alt="Close-up portrait of a father, a man with short hair and glasses, smiling gently, indoor setting with soft lighting" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/a76151c8-db93-4754-ed9a-bd7e6ae0a3dd.jpg" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <p class="text-white font-medium">Birthday Celebration</p>
+                        </div>
+                    </div>
+                    <!-- Image 3 -->
+                    <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300" role="listitem">
+                        <img alt="Father working at a desk, focused expression, wearing a button-up shirt, with a laptop and papers around, home office environment" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/3701550a-7c4a-4fcc-e33c-d57ef4ed0553.jpg" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <p class="text-white font-medium">Working From Home</p>
+                        </div>
+                    </div>
+                    <!-- Image 4 -->
+                    <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300" role="listitem">
+                        <img alt="Father smiling broadly, outdoors with green trees in background, casual clothing, joyful and relaxed mood" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/c797302e-b75b-440e-8b18-bb7505ac75c1.jpg" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <p class="text-white font-medium">Weekend Getaway</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Mother's Section -->
+            <section aria-labelledby="motherSection">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 id="motherSection" class="text-2xl font-bold text-gray-800 flex items-center">
+                        <svg class="w-6 h-6 text-pink-600 mr-3" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                        </svg>
+                        Mother's Memories
+                    </h2>
+                    <a class="text-indigo-600 hover:text-indigo-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded" href="#">View All</a>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" role="list">
+                    <!-- Image 1 -->
+                    <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300" role="listitem">
+                        <img alt="Portrait of a mother, a woman with long hair, smiling gently, wearing a colorful blouse, indoor cozy home setting" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/bc7a529d-6af8-4c45-1d7e-2929358f4167.jpg" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <p class="text-white font-medium">Family Gathering</p>
+                        </div>
+                    </div>
+                    <!-- Image 2 -->
+                    <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300" role="listitem">
+                        <img alt="Mother cooking in a bright kitchen, wearing an apron, stirring a pot on the stove, warm and inviting atmosphere" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/7342750b-84ea-481e-a675-eda798d4de7c.jpg" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <p class="text-white font-medium">Sunday Dinner</p>
+                        </div>
+                    </div>
+                    <!-- Image 3 -->
+                    <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300" role="listitem">
+                        <img alt="Mother smiling warmly, sitting in a garden surrounded by flowers, casual summer dress, natural sunlight" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/68b2c0e2-e27d-4216-992d-046f02ad3f80.jpg" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <p class="text-white font-medium">Spring Garden</p>
+                        </div>
+                    </div>
+                    <!-- Image 4 -->
+                    <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300" role="listitem">
+                        <img alt="Mother tending to plants in a garden, wearing gardening gloves and hat, focused and happy expression" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/37463ffb-f94d-43c8-bfa3-f402e2905a26.jpg" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <p class="text-white font-medium">Gardening Day</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Sister's Section -->
+            <section aria-labelledby="sisterSection">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 id="sisterSection" class="text-2xl font-bold text-gray-800 flex items-center">
+                        <svg class="w-6 h-6 text-purple-600 mr-3" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                        </svg>
+                        Sister's Memories
+                    </h2>
+                    <a class="text-indigo-600 hover:text-indigo-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded" href="#">View All</a>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" role="list">
+                    <!-- Image 1 -->
+                    <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300" role="listitem">
+                        <img alt="Portrait of a sister, a teenage girl with long hair, smiling softly, wearing casual clothes, outdoor park background" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/7d7d427e-f177-44b0-24bb-0ef7b72d4772.jpg" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <p class="text-white font-medium">School Picnic</p>
+                        </div>
+                    </div>
+                    <!-- Image 2 -->
+                    <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300" role="listitem">
+                        <img alt="Sister playing with friends in a playground, joyful expression, colorful clothes, sunny day" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/e283fa69-ce93-4dad-11e1-d0386ea60557.jpg" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <p class="text-white font-medium">Playground Fun</p>
+                        </div>
+                    </div>
+                    <!-- Image 3 -->
+                    <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300" role="listitem">
+                        <img alt="Sister studying at a desk with books and laptop, focused and determined, indoor study room" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/54bd2b13-af7f-48cb-d74f-b1d121414f00.jpg" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <p class="text-white font-medium">Study Time</p>
+                        </div>
+                    </div>
+                    <!-- Image 4 -->
+                    <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300" role="listitem">
+                        <img alt="Sister dancing gracefully in a studio, wearing dance attire, expressive and energetic pose" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/1c9db178-c06b-46aa-b18f-381f1d06c5a7.jpg" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <p class="text-white font-medium">Dance Recital</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Videos Section -->
+            <section aria-labelledby="videosSection">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 id="videosSection" class="text-2xl font-bold text-gray-800 flex items-center">
+                        <svg class="w-6 h-6 text-red-600 mr-3" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+                        </svg>
+                        Family Videos
+                    </h2>
+                    <a class="text-indigo-600 hover:text-indigo-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded" href="#">View All</a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" role="list">
+                    <!-- Video 1 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden" role="listitem">
+                        <video aria-label="Family video of joyful rides in a park" class="w-full rounded-t-lg family-video" controls preload="metadata" poster="https://storage.googleapis.com/a1aa/image/7d7d427e-f177-44b0-24bb-0ef7b72d4772.jpg">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-1">Park Adventure</h3>
+                            <p class="text-gray-600 text-sm">Summer 2021 • 2:45 min</p>
+                        </div>
+                    </div>
+                    <!-- Video 2 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden" role="listitem">
+                        <video aria-label="Family video of exciting fire blazes" class="w-full rounded-t-lg family-video" controls preload="metadata" poster="https://storage.googleapis.com/a1aa/image/68b2c0e2-e27d-4216-992d-046f02ad3f80.jpg">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-1">Beach Vacation</h3>
+                            <p class="text-gray-600 text-sm">Winter 2020 • 1:30 min</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
         
-        <!-- Sister -->
-        <div class="mb-12">
-          <div class="flex items-center justify-between mb-6">
-            <h3 class="text-2xl font-bold text-gray-800 flex items-center">
-              <i class="fas fa-child text-purple-600 mr-3"></i>
-              Sister's Memories
-            </h3>
-            <a class="text-indigo-600 hover:text-indigo-800 text-sm font-medium" href="#">View All</a>
-          </div>
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <img alt="Portrait of a sister, a teenage girl with long hair, smiling softly, wearing casual clothes, outdoor park background" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/7d7d427e-f177-44b0-24bb-0ef7b72d4772.jpg"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p class="text-white font-medium">School Picnic</p>
-              </div>
-            </div>
-            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <img alt="Sister playing with friends in a playground, joyful expression, colorful clothes, sunny day" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/e283fa69-ce93-4dad-11e1-d0386ea60557.jpg"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p class="text-white font-medium">Playground Fun</p>
-              </div>
-            </div>
-            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <img alt="Sister studying at a desk with books and laptop, focused and determined, indoor study room" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/54bd2b13-af7f-48cb-d74f-b1d121414f00.jpg"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p class="text-white font-medium">Study Time</p>
-              </div>
-            </div>
-            <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <img alt="Sister dancing gracefully in a studio, wearing dance attire, expressive and energetic pose" class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/1c9db178-c06b-46aa-b18f-381f1d06c5a7.jpg"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p class="text-white font-medium">Dance Recital</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Videos Section -->
-        <div class="mb-12">
-          <div class="flex items-center justify-between mb-6">
-            <h3 class="text-2xl font-bold text-gray-800 flex items-center">
-              <i class="fas fa-video text-red-600 mr-3"></i>
-              Family Videos
-            </h3>
-            <a class="text-indigo-600 hover:text-indigo-800 text-sm font-medium" href="#">View All</a>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white rounded-xl shadow-md overflow-hidden">
-              <video aria-label="Family video of joyful rides in a park" class="w-full rounded-t-lg family-video" controls="" poster="https://storage.googleapis.com/a1aa/image/7d7d427e-f177-44b0-24bb-0ef7b72d4772.jpg">
-                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4"/>
-              </video>
-              <div class="p-4">
-                <h4 class="font-bold text-lg mb-1">Park Adventure</h4>
-                <p class="text-gray-600 text-sm">Summer 2021 • 2:45 min</p>
-              </div>
-            </div>
-            <div class="bg-white rounded-xl shadow-md overflow-hidden">
-              <video aria-label="Family video of exciting fire blazes" class="w-full rounded-t-lg family-video" controls="" poster="https://storage.googleapis.com/a1aa/image/68b2c0e2-e27d-4216-992d-046f02ad3f80.jpg">
-                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4"/>
-              </video>
-              <div class="p-4">
-                <h4 class="font-bold text-lg mb-1">Beach Vacation</h4>
-                <p class="text-gray-600 text-sm">Winter 2020 • 1:30 min</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Father Category (hidden) -->
-      <div aria-label="Father category content" class="gallery-category hidden" data-category="father" role="tabpanel" tabindex="0">
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          <div class="relative group overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-            <img alt="Portrait of a father, a middle-aged man with a warm smile, wearing a casual shirt, standing outdoors in a sunny park" class="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/c68d62ec-f611-4454-7e4c-f2b335946b51.jpg"/>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-              <p class="text-white font-medium">Father's Day 2022</p>
-            </div>
-          </div>
-        </div>
-      </div>
+        <!-- Family Quote Section with semantic markup -->
+        <figure class="max-w-4xl mx-auto mt-16 mb-12 bg-indigo-50 rounded-2xl p-8 text-center">
+            <blockquote class="mb-4">
+                <i class="fas fa-quote-left text-indigo-300 text-4xl mb-4" aria-hidden="true"></i>
+                <p class="text-xl md:text-2xl font-medium text-gray-800">
+                    "Family is not an important thing. It's everything."
+                </p>
+            </blockquote>
+            <figcaption class="text-indigo-600 font-medium">
+                — Michael J. Fox
+            </figcaption>
+        </figure>
     </div>
-  </div>
-  
-  <!-- Family Quote Section -->
-  <div class="max-w-4xl mx-auto mt-16 mb-12 bg-indigo-50 rounded-2xl p-8 text-center">
-    <i class="fas fa-quote-left text-indigo-300 text-4xl mb-4"></i>
-    <p class="text-xl md:text-2xl font-medium text-gray-800 mb-4">
-      "Family is not an important thing. It's everything."
-    </p>
-    <p class="text-indigo-600 font-medium">— Michael J. Fox</p>
-  </div>
 
-  <script>
-    // Music toggle functionality
-    const musicToggle = document.getElementById('musicToggle');
-    const bgMusic = document.getElementById('bgMusic');
-    const playIcon = document.getElementById('playIcon');
-    const pauseIcon = document.getElementById('pauseIcon');
-
-    // Initialize music state
-    bgMusic.volume = 0.3; // Set lower volume by default
-    
-    musicToggle.addEventListener('click', () => {
-      if (bgMusic.paused) {
-        bgMusic.play()
-          .then(() => {
-            playIcon.classList.add('hidden');
-            pauseIcon.classList.remove('hidden');
-          })
-          .catch(error => {
-            console.error('Audio playback failed:', error);
-          });
-      } else {
-        bgMusic.pause();
-        playIcon.classList.remove('hidden');
-        pauseIcon.classList.add('hidden');
-      }
-    });
-
-    // Pause music when tab becomes inactive
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        bgMusic.pause();
-        playIcon.classList.remove('hidden');
-        pauseIcon.classList.add('hidden');
-      }
-    });
-
-    // Video play/pause handling
-    document.querySelectorAll('.family-video').forEach(video => {
-      video.addEventListener('play', () => {
-        // Pause other videos when one plays
-        document.querySelectorAll('.family-video').forEach(otherVideo => {
-          if (otherVideo !== video && !otherVideo.paused) {
-            otherVideo.pause();
-          }
+    <script>
+        // Enhanced Music Player with better state management
+        document.addEventListener('DOMContentLoaded', function() {
+            const musicToggle = document.getElementById('musicToggle');
+            const bgMusic = document.getElementById('bgMusic');
+            const playIcon = document.getElementById('playIcon');
+            const pauseIcon = document.getElementById('pauseIcon');
+            
+            // Initialize music state
+            bgMusic.volume = 0.3;
+            
+            // Check if music was playing before page refresh
+            const wasPlaying = localStorage.getItem('musicPlaying') === 'true';
+            if (wasPlaying) {
+                bgMusic.play().catch(error => {
+                    console.error('Autoplay prevented:', error);
+                });
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                musicToggle.setAttribute('aria-pressed', 'true');
+            }
+            
+            musicToggle.addEventListener('click', function() {
+                if (bgMusic.paused) {
+                    bgMusic.play()
+                        .then(() => {
+                            playIcon.classList.add('hidden');
+                            pauseIcon.classList.remove('hidden');
+                            musicToggle.setAttribute('aria-pressed', 'true');
+                            localStorage.setItem('musicPlaying', 'true');
+                        })
+                        .catch(error => {
+                            console.error('Audio playback failed:', error);
+                        });
+                } else {
+                    bgMusic.pause();
+                    playIcon.classList.remove('hidden');
+                    pauseIcon.classList.add('hidden');
+                    musicToggle.setAttribute('aria-pressed', 'false');
+                    localStorage.setItem('musicPlaying', 'false');
+                }
+            });
+            
+            // Pause music when tab becomes inactive
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden && !bgMusic.paused) {
+                    bgMusic.pause();
+                    playIcon.classList.remove('hidden');
+                    pauseIcon.classList.add('hidden');
+                    musicToggle.setAttribute('aria-pressed', 'false');
+                }
+            });
+            
+            // Video play/pause handling
+            document.querySelectorAll('.family-video').forEach(video => {
+                video.addEventListener('play', function() {
+                    // Pause other videos when one plays
+                    document.querySelectorAll('.family-video').forEach(otherVideo => {
+                        if (otherVideo !== video && !otherVideo.paused) {
+                            otherVideo.pause();
+                        }
+                    });
+                });
+            });
+            
+            // Lazy loading for images
+            if ('loading' in HTMLImageElement.prototype) {
+                // Native lazy loading is supported
+                const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+                lazyImages.forEach(img => {
+                    img.addEventListener('load', function() {
+                        img.classList.add('opacity-100');
+                    }, { once: true });
+                });
+            } else {
+                // Fallback for browsers without native lazy loading
+                const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+                const lazyImageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src || img.src;
+                            img.removeAttribute('data-src');
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(img => {
+                    lazyImageObserver.observe(img);
+                });
+            }
         });
-      });
-    });
-  </script>
+    </script>
 </section>
    <section class="mb-12 hidden" id="newsSection">
     <h2 class="text-2xl font-semibold text-indigo-700 mb-4">News</h2>
