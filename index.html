@@ -959,12 +959,485 @@
           Explore upcoming events and mark your calendar.
         </p>
       </section>
-      <section id="news" class="mb-8 hidden">
-        <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 mb-3">News</h2>
-        <p class="text-gray-700 max-w-3xl mb-4">
-          Stay updated with the latest news and announcements.
-        </p>
-      </section>
+    <section id="news" class="mb-8 hidden">
+      
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   News Section
+  </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Roboto', sans-serif;
+    }
+   /* Hide scrollbar but allow scrolling */
+   .no-scrollbar::-webkit-scrollbar {
+     display: none;
+   }
+   .no-scrollbar {
+     -ms-overflow-style: none;
+     scrollbar-width: none;
+   }
+  </style>
+ </head>
+ <body class="bg-gray-50 text-gray-900">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+   <h2 class="text-3xl font-extrabold mb-8 text-center">
+    Latest News
+   </h2>
+   <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col" data-id="news1">
+     <div class="relative w-full h-48 overflow-hidden rounded-t-lg">
+      <div class="flex space-x-2 overflow-x-auto no-scrollbar h-full">
+       <img alt="City skyline at sunset with orange and purple sky and tall buildings" class="flex-shrink-0 w-full h-48 object-cover rounded-t-lg news-image" height="400" src="https://storage.googleapis.com/a1aa/image/d85121ae-ef27-42ee-1ba6-21d81e66fff5.jpg" style="min-width: 100%;" width="600"/>
+       <img alt="City skyline at dusk with illuminated buildings and a river reflecting lights" class="flex-shrink-0 w-full h-48 object-cover rounded-t-lg news-image" height="400" src="https://storage.googleapis.com/a1aa/image/8afb2bc0-29a5-490d-9473-919491290b11.jpg" style="min-width: 100%;" width="600"/>
+       <img alt="Aerial view of city skyline with skyscrapers and cloudy sky during golden hour" class="flex-shrink-0 w-full h-48 object-cover rounded-t-lg news-image" height="400" src="https://storage.googleapis.com/a1aa/image/c0cef256-c7ec-49b9-ccfe-9f2f2fef38c2.jpg" style="min-width: 100%;" width="600"/>
+      </div>
+     </div>
+     <div class="p-6 flex flex-col flex-grow">
+      <h3 class="text-xl font-semibold mb-2 news-headline">
+       City Skyline Transforms at Sunset
+      </h3>
+      <p class="text-gray-700 flex-grow description" data-full="The city skyline glows with vibrant colors as the sun sets, creating a breathtaking view for residents and visitors alike. This daily spectacle highlights the architectural beauty and dynamic atmosphere of the urban landscape, inspiring photographers and artists to capture its fleeting moments." data-short="The city skyline glows with vibrant colors as the sun sets, creating a breathtaking view for residents and visitors alike.">
+       The city skyline glows with vibrant colors as the sun sets, creating a breathtaking view for residents and visitors alike.
+      </p>
+      <a class="mt-4 inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold cursor-pointer select-none read-more" tabindex="0">
+       Read more
+       <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+      <div class="mt-4 flex justify-between items-center">
+       <time class="text-sm text-gray-500 flex items-center" datetime="2024-06-01">
+        <i class="fas fa-calendar-alt mr-2"></i>
+        June 1, 2024
+       </time>
+       <button aria-label="Love this news" class="love-btn text-gray-400 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 rounded" tabindex="0">
+        <i class="fa-lg far fa-heart"></i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col" data-id="news2">
+     <img alt="Technology conference stage with large screens and audience in a modern convention center" class="w-full h-48 object-cover news-image" height="400" src="https://storage.googleapis.com/a1aa/image/dd2cb95e-9336-429c-a42d-9cc73cce3bc9.jpg" width="600"/>
+     <div class="p-6 flex flex-col flex-grow">
+      <h3 class="text-xl font-semibold mb-2 news-headline">
+       Annual Tech Conference Kicks Off
+      </h3>
+      <p class="text-gray-700 flex-grow description" data-full="Industry leaders gather to discuss the latest innovations and trends in technology at the annual conference held downtown. The event features keynote speeches, panel discussions, and hands-on workshops, providing attendees with valuable insights into emerging technologies such as AI, blockchain, and green tech." data-short="Industry leaders gather to discuss the latest innovations and trends in technology at the annual conference held downtown.">
+       Industry leaders gather to discuss the latest innovations and trends in technology at the annual conference held downtown.
+      </p>
+      <a class="mt-4 inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold cursor-pointer select-none read-more" tabindex="0">
+       Read more
+       <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+      <div class="mt-4 flex justify-between items-center">
+       <time class="text-sm text-gray-500 flex items-center" datetime="2024-05-28">
+        <i class="fas fa-calendar-alt mr-2"></i>
+        May 28, 2024
+       </time>
+       <button aria-label="Love this news" class="love-btn text-gray-400 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 rounded" tabindex="0">
+        <i class="fa-lg far fa-heart"></i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col" data-id="news3">
+     <img alt="Farmers market stall with fresh colorful fruits and vegetables displayed in baskets" class="w-full h-48 object-cover news-image" height="400" src="https://storage.googleapis.com/a1aa/image/718281e7-4c14-44c5-c99b-1533ed74d8aa.jpg" width="600"/>
+     <div class="p-6 flex flex-col flex-grow">
+      <h3 class="text-xl font-semibold mb-2 news-headline">
+       Local Farmers Market Opens for Summer
+      </h3>
+      <p class="text-gray-700 flex-grow description" data-full="Fresh, organic produce and handmade goods are now available every weekend at the city's popular farmers market. Visitors can enjoy seasonal fruits, vegetables, artisanal breads, and homemade jams, supporting local farmers and small businesses while enjoying a lively community atmosphere." data-short="Fresh, organic produce and handmade goods are now available every weekend at the city's popular farmers market.">
+       Fresh, organic produce and handmade goods are now available every weekend at the city's popular farmers market.
+      </p>
+      <a class="mt-4 inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold cursor-pointer select-none read-more" tabindex="0">
+       Read more
+       <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+      <div class="mt-4 flex justify-between items-center">
+       <time class="text-sm text-gray-500 flex items-center" datetime="2024-06-03">
+        <i class="fas fa-calendar-alt mr-2"></i>
+        June 3, 2024
+       </time>
+       <button aria-label="Love this news" class="love-btn text-gray-400 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 rounded" tabindex="0">
+        <i class="fa-lg far fa-heart"></i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col" data-id="news4">
+     <img alt="Marathon runners crossing the finish line with cheering crowd and banners" class="w-full h-48 object-cover news-image" height="400" src="https://storage.googleapis.com/a1aa/image/54d02340-6715-4eba-5e7d-469dbe7eaa09.jpg" width="600"/>
+     <div class="p-6 flex flex-col flex-grow">
+      <h3 class="text-xl font-semibold mb-2 news-headline">
+       City Marathon Draws Record Participants
+      </h3>
+      <p class="text-gray-700 flex-grow description" data-full="Thousands of runners took part in this year's marathon, celebrating health, community, and endurance. The event featured various race categories, including a 5K, 10K, and full marathon, attracting athletes of all skill levels and raising funds for local charities." data-short="Thousands of runners took part in this year's marathon, celebrating health, community, and endurance.">
+       Thousands of runners took part in this year's marathon, celebrating health, community, and endurance.
+      </p>
+      <a class="mt-4 inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold cursor-pointer select-none read-more" tabindex="0">
+       Read more
+       <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+      <div class="mt-4 flex justify-between items-center">
+       <time class="text-sm text-gray-500 flex items-center" datetime="2024-05-30">
+        <i class="fas fa-calendar-alt mr-2"></i>
+        May 30, 2024
+       </time>
+       <button aria-label="Love this news" class="love-btn text-gray-400 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 rounded" tabindex="0">
+        <i class="fa-lg far fa-heart"></i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col" data-id="news5">
+     <img alt="Modern art exhibit with colorful abstract paintings displayed in a bright gallery" class="w-full h-48 object-cover news-image" height="400" src="https://storage.googleapis.com/a1aa/image/ccdd7520-76df-4813-a51b-4cfe76d36c47.jpg" width="600"/>
+     <div class="p-6 flex flex-col flex-grow">
+      <h3 class="text-xl font-semibold mb-2 news-headline">
+       New Art Exhibit Opens Downtown
+      </h3>
+      <p class="text-gray-700 flex-grow description" data-full="The downtown gallery unveils a new collection of contemporary art pieces from emerging local artists. The exhibit showcases a variety of mediums including painting, sculpture, and digital art, inviting visitors to explore innovative expressions and creative perspectives." data-short="The downtown gallery unveils a new collection of contemporary art pieces from emerging local artists.">
+       The downtown gallery unveils a new collection of contemporary art pieces from emerging local artists.
+      </p>
+      <a class="mt-4 inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold cursor-pointer select-none read-more" tabindex="0">
+       Read more
+       <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+      <div class="mt-4 flex justify-between items-center">
+       <time class="text-sm text-gray-500 flex items-center" datetime="2024-06-02">
+        <i class="fas fa-calendar-alt mr-2"></i>
+        June 2, 2024
+       </time>
+       <button aria-label="Love this news" class="love-btn text-gray-400 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 rounded" tabindex="0">
+        <i class="fa-lg far fa-heart"></i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col" data-id="news6">
+     <img alt="Volunteers planting flowers and vegetables in a community garden on a sunny day" class="w-full h-48 object-cover news-image" height="400" src="https://storage.googleapis.com/a1aa/image/bf68e645-ca2d-4800-f0ae-66ee6bb8e323.jpg" width="600"/>
+     <div class="p-6 flex flex-col flex-grow">
+      <h3 class="text-xl font-semibold mb-2 news-headline">
+       Community Garden Project Flourishes
+      </h3>
+      <p class="text-gray-700 flex-grow description" data-full="Local volunteers have transformed an empty lot into a thriving garden, promoting sustainability and neighborhood pride. The project includes planting seasonal flowers, vegetables, and herbs, and hosts educational workshops on gardening and environmental stewardship." data-short="Local volunteers have transformed an empty lot into a thriving garden, promoting sustainability and neighborhood pride.">
+       Local volunteers have transformed an empty lot into a thriving garden, promoting sustainability and neighborhood pride.
+      </p>
+      <a class="mt-4 inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold cursor-pointer select-none read-more" tabindex="0">
+       Read more
+       <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+      <div class="mt-4 flex justify-between items-center">
+       <time class="text-sm text-gray-500 flex items-center" datetime="2024-05-29">
+        <i class="fas fa-calendar-alt mr-2"></i>
+        May 29, 2024
+       </time>
+       <button aria-label="Love this news" class="love-btn text-gray-400 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 rounded" tabindex="0">
+        <i class="fa-lg far fa-heart"></i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col" data-id="news7">
+     <img alt="Electric vehicle charging station with cars plugged in and green energy signage" class="w-full h-48 object-cover news-image" height="400" src="https://storage.googleapis.com/a1aa/image/01025f93-72d0-44e8-02d4-e6429f53c7bd.jpg" width="600"/>
+     <div class="p-6 flex flex-col flex-grow">
+      <h3 class="text-xl font-semibold mb-2 news-headline">
+       City Installs New EV Charging Stations
+      </h3>
+      <p class="text-gray-700 flex-grow description" data-full="To support sustainable transportation, new electric vehicle charging stations have been installed across the city. These stations offer fast charging capabilities and are conveniently located near shopping centers, parks, and public transit hubs to encourage wider adoption of electric vehicles." data-short="To support sustainable transportation, new electric vehicle charging stations have been installed across the city.">
+       To support sustainable transportation, new electric vehicle charging stations have been installed across the city.
+      </p>
+      <a class="mt-4 inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold cursor-pointer select-none read-more" tabindex="0">
+       Read more
+       <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+      <div class="mt-4 flex justify-between items-center">
+       <time class="text-sm text-gray-500 flex items-center" datetime="2024-06-04">
+        <i class="fas fa-calendar-alt mr-2"></i>
+        June 4, 2024
+       </time>
+       <button aria-label="Love this news" class="love-btn text-gray-400 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 rounded" tabindex="0">
+        <i class="fa-lg far fa-heart"></i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col" data-id="news8">
+     <img alt="Modern library interior with bookshelves, reading areas, and natural light" class="w-full h-48 object-cover news-image" height="400" src="https://storage.googleapis.com/a1aa/image/bed23b62-6fde-49fd-89ee-16250e70af97.jpg" width="600"/>
+     <div class="p-6 flex flex-col flex-grow">
+      <h3 class="text-xl font-semibold mb-2 news-headline">
+       Local Library Renovation Completed
+      </h3>
+      <p class="text-gray-700 flex-grow description" data-full="The city's main library reopens after extensive renovations, offering new technology and community spaces. Upgrades include digital media labs, comfortable reading lounges, and expanded children's areas, making it a vibrant hub for learning and social engagement." data-short="The city's main library reopens after extensive renovations, offering new technology and community spaces.">
+       The city's main library reopens after extensive renovations, offering new technology and community spaces.
+      </p>
+      <a class="mt-4 inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold cursor-pointer select-none read-more" tabindex="0">
+       Read more
+       <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+      <div class="mt-4 flex justify-between items-center">
+       <time class="text-sm text-gray-500 flex items-center" datetime="2024-06-05">
+        <i class="fas fa-calendar-alt mr-2"></i>
+        June 5, 2024
+       </time>
+       <button aria-label="Love this news" class="love-btn text-gray-400 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 rounded" tabindex="0">
+        <i class="fa-lg far fa-heart"></i>
+       </button>
+      </div>
+     </div>
+    </article>
+   </div>
+  </section>
+
+  <!-- Modal -->
+  <div id="headline-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+   <div class="bg-white rounded-lg max-w-lg w-full p-6 relative">
+    <button id="modal-close" aria-label="Close modal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 focus:outline-none">
+     <i class="fas fa-times fa-lg"></i>
+    </button>
+    <h3 id="modal-headline" class="text-xl font-semibold text-gray-900"></h3>
+   </div>
+  </div>
+
+  <script>
+   // Modal elements
+   const modal = document.getElementById('headline-modal');
+   const modalHeadline = document.getElementById('modal-headline');
+   const modalClose = document.getElementById('modal-close');
+
+   // Close modal function
+   function closeModal() {
+     modal.classList.add('hidden');
+     modalHeadline.textContent = '';
+   }
+
+   modalClose.addEventListener('click', closeModal);
+   modal.addEventListener('click', (e) => {
+     if (e.target === modal) {
+       closeModal();
+     }
+   });
+
+   // Close modal on Escape key
+   document.addEventListener('keydown', (e) => {
+     if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+       closeModal();
+     }
+   });
+
+   // Add double click event to all news images
+   document.querySelectorAll('.news-image').forEach(img => {
+     img.addEventListener('dblclick', () => {
+       // Find the closest article
+       const article = img.closest('article');
+       if (!article) return;
+       // Find the headline inside the article
+       const headlineEl = article.querySelector('.news-headline');
+       if (!headlineEl) return;
+       // Set modal headline text and show modal
+       modalHeadline.textContent = headlineEl.textContent.trim();
+       modal.classList.remove('hidden');
+     });
+   });
+
+   // Read more toggle with only one open at a time
+   document.querySelectorAll('.read-more').forEach(button => {
+     button.addEventListener('click', () => {
+       const currentContainer = button.closest('div.p-6');
+       const currentDesc = currentContainer.querySelector('.description');
+       const currentShortText = currentDesc.getAttribute('data-short');
+       const currentFullText = currentDesc.getAttribute('data-full');
+       const currentArticle = button.closest('article');
+       const currentId = currentArticle ? currentArticle.getAttribute('data-id') : null;
+       const loveBtn = currentArticle ? currentArticle.querySelector('.love-btn') : null;
+       const icon = loveBtn ? loveBtn.querySelector('i') : null;
+
+       // Close all other expanded descriptions
+       document.querySelectorAll('.description').forEach(desc => {
+         if (desc !== currentDesc) {
+           const container = desc.closest('div.p-6');
+           const readMoreBtn = container.querySelector('.read-more');
+           const shortText = desc.getAttribute('data-short');
+           if (desc.textContent !== shortText) {
+             desc.textContent = shortText;
+             if (readMoreBtn) {
+               readMoreBtn.innerHTML = 'Read more <i class="fas fa-arrow-right ml-2"></i>';
+             }
+           }
+         }
+       });
+
+       // Toggle current description
+       if (currentDesc.textContent === currentShortText) {
+         currentDesc.textContent = currentFullText;
+         button.innerHTML = 'Show less <i class="fas fa-arrow-left ml-2"></i>';
+
+         // If user expands (edits) and love status is null (empty), auto set broken heart and store
+         if (currentId && loveBtn && icon) {
+           const LOVE_STORAGE_KEY = 'newsLoveStatus';
+           const LOVE_EXPIRY_DAYS = 150;
+
+           function getLoveData() {
+             const data = localStorage.getItem(LOVE_STORAGE_KEY);
+             if (!data) return {};
+             try {
+               const parsed = JSON.parse(data);
+               const now = Date.now();
+               for (const key in parsed) {
+                 if (parsed[key].expiry < now) {
+                   delete parsed[key];
+                 }
+               }
+               return parsed;
+             } catch {
+               return {};
+             }
+           }
+
+           function saveLoveData(data) {
+             localStorage.setItem(LOVE_STORAGE_KEY, JSON.stringify(data));
+           }
+
+           function setLoveStatus(id, status) {
+             const data = getLoveData();
+             const now = Date.now();
+             const expiry = now + LOVE_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
+             if (status) {
+               data[id] = { status, expiry };
+             } else {
+               delete data[id];
+             }
+             saveLoveData(data);
+           }
+
+           function getLoveStatus(id) {
+             const data = getLoveData();
+             return data[id] ? data[id].status : null;
+           }
+
+           const currentStatus = getLoveStatus(currentId);
+           if (currentStatus === null || currentStatus === undefined) {
+             icon.classList.remove('far', 'fa-heart');
+             icon.classList.add('fas', 'fa-heart-broken');
+             loveBtn.classList.add('text-red-600');
+             setLoveStatus(currentId, 'broken');
+           }
+         }
+       } else {
+         currentDesc.textContent = currentShortText;
+         button.innerHTML = 'Read more <i class="fas fa-arrow-right ml-2"></i>';
+       }
+     });
+     button.addEventListener('keydown', (e) => {
+       if (e.key === 'Enter' || e.key === ' ') {
+         e.preventDefault();
+         button.click();
+       }
+     });
+   });
+
+   // Love button logic with localStorage for 150 days
+   const LOVE_STORAGE_KEY = 'newsLoveStatus';
+   const LOVE_EXPIRY_DAYS = 150;
+
+   function getLoveData() {
+     const data = localStorage.getItem(LOVE_STORAGE_KEY);
+     if (!data) return {};
+     try {
+       const parsed = JSON.parse(data);
+       const now = Date.now();
+       for (const key in parsed) {
+         if (parsed[key].expiry < now) {
+           delete parsed[key];
+         }
+       }
+       return parsed;
+     } catch {
+       return {};
+     }
+   }
+
+   function saveLoveData(data) {
+     localStorage.setItem(LOVE_STORAGE_KEY, JSON.stringify(data));
+   }
+
+   function setLoveStatus(id, status) {
+     const data = getLoveData();
+     const now = Date.now();
+     const expiry = now + LOVE_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
+     if (status) {
+       data[id] = { status, expiry };
+     } else {
+       delete data[id];
+     }
+     saveLoveData(data);
+   }
+
+   function getLoveStatus(id) {
+     const data = getLoveData();
+     return data[id] ? data[id].status : null;
+   }
+
+   document.querySelectorAll('.love-btn').forEach(button => {
+     const article = button.closest('article');
+     if (!article) return;
+     const id = article.getAttribute('data-id');
+     if (!id) return;
+     const icon = button.querySelector('i');
+
+     // Initialize from localStorage
+     const savedStatus = getLoveStatus(id);
+     if (savedStatus === 'full') {
+       icon.classList.remove('far', 'fa-heart-broken');
+       icon.classList.add('fas', 'fa-heart');
+       button.classList.add('text-red-600');
+     } else if (savedStatus === 'broken') {
+       icon.classList.remove('far', 'fa-heart');
+       icon.classList.add('fas', 'fa-heart-broken');
+       button.classList.add('text-red-600');
+     } else {
+       icon.classList.remove('fas', 'fa-heart', 'fa-heart-broken');
+       icon.classList.add('far', 'fa-heart');
+       button.classList.remove('text-red-600');
+     }
+
+     button.addEventListener('click', () => {
+       const currentStatus = getLoveStatus(id);
+       if (currentStatus === 'full' || currentStatus === 'broken') {
+         return;
+       }
+       if (icon.classList.contains('far')) {
+         icon.classList.remove('far', 'fa-heart-broken');
+         icon.classList.add('fas', 'fa-heart');
+         button.classList.add('text-red-600');
+         setLoveStatus(id, 'full');
+       } else if (icon.classList.contains('fas') && icon.classList.contains('fa-heart')) {
+         icon.classList.remove('fas', 'fa-heart');
+         icon.classList.add('fas', 'fa-heart-broken');
+         button.classList.add('text-red-600');
+         setLoveStatus(id, 'broken');
+       } else if (icon.classList.contains('fas') && icon.classList.contains('fa-heart-broken')) {
+         icon.classList.remove('fas', 'fa-heart-broken');
+         icon.classList.add('far', 'fa-heart');
+         button.classList.remove('text-red-600');
+         setLoveStatus(id, null);
+       }
+     });
+
+     button.addEventListener('keydown', (e) => {
+       if (e.key === 'Enter' || e.key === ' ') {
+         e.preventDefault();
+         button.click();
+       }
+     });
+   });
+  </script>
+ </body>
+</html>
+</section>
       <section id="dashboard" class="mb-8 hidden">
         <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 mb-3">Dashboard</h2>
         <p class="text-gray-700 max-w-3xl mb-4">
